@@ -11,7 +11,10 @@
 - deploy.ps1语法与git diff --check通过。稳定标识和提交SHA替换了对演示文案的部署判断。
 - GitHub CLI已经本人浏览器登录，密钥环授权有效；未发现sports-frontier同名仓库。
 
-远程建仓、首次部署及公开网址：准备执行，结果将在实际核验后补充。
-定时任务：配置保持每天北京时间08:10，尚无云端schedule触发验证记录。
+远程公开仓库已创建：https://github.com/houyuanzhu/sports-frontier 。首次push与手动workflow_dispatch运行均成功，构建、部署、最终检查全部通过。首次已验证网址：https://houyuanzhu.github.io/sports-frontier/ 。首次部署代码提交72732d57e6e3875d3f1477fb9f5788f910838a93。共21个公开内容页面HTTP200、4个缺失/旧栏目路径HTTP404及中文自定义兜底通过；health.json匹配站点标识、版本和提交，autoPublish=false。最新运行以仓库Actions记录为准。
+定时任务：远程工作流state=active，配置每天北京时间08:10；截至核验无schedule事件记录，手动运行不能当作定时触发成功。下一计划北京时间2026年11月7日08:10，平台可能延迟。
 
 仍未实现：真实数据源、实际RSS/公告抓取、人工审核发布事务、真实资讯自动发布。生产Lighthouse评分、完整无障碍认证和搜索引擎收录未验证；不虚构分数或收录。
+
+部署过程中已修复：首次HTTPS推送连接重置，改为HTTP/1.1并加入三次重试；PowerShell将ConvertFrom-Json的UTC日期重新解析造成时区偏移，改为DateTimeOffset直接比较，并用实际云端任务时间验证筛选。修正后继续完整部署验证，结果另存交付检查报告。
+

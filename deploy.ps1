@@ -72,7 +72,7 @@ if ($visibility -ne 'PUBLIC') { throw '仅允许免费公开仓库部署。' }
 if ($LASTEXITCODE -ne 0) { Invoke-Gh @('api',"repos/$repo/pages",'-X','POST','-f','build_type=workflow') | Out-Null }
 else { Invoke-Gh @('api',"repos/$repo/pages",'-X','PUT','-f','build_type=workflow') | Out-Null }
 $expectedCommit = (Invoke-Git @('rev-parse','HEAD')).Trim()
-$dispatchStarted = (Get-Date).ToUniversalTime().AddSeconds(-2)
+$dispatchStarted = [DateTimeOffset]::UtcNow.AddSeconds(-10)
 $dispatched = $false
 for ($attempt=0; $attempt -lt 6; $attempt++) {
   & gh workflow run pages.yml --repo $repo --ref main
@@ -84,7 +84,7 @@ Write-Host "已提交部署任务。运行日志：https://github.com/$repo/acti
 $runId = $null
 for ($i=0; $i -lt 12; $i++) {
   $runs = (Invoke-Gh @('run','list','--repo',$repo,'--workflow','pages.yml','--event','workflow_dispatch','--limit','10','--json','databaseId,headSha,createdAt') | Out-String) | ConvertFrom-Json
-  $matching = $runs | Where-Object { $_.headSha -eq $expectedCommit -and [DateTime]::Parse($_.createdAt).ToUniversalTime() -ge $dispatchStarted } | Select-Object -First 1
+  $matching = $runs | Where-Object { $_.headSha -eq $expectedCommit -and ([DateTimeOffset]$_.createdAt) -ge $dispatchStarted } | Select-Object -First 1
   $runId = $matching.databaseId
   if ($runId) { break }
   Start-Sleep -Seconds 5
