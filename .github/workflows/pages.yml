@@ -5,21 +5,33 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '10 0 * * *' # UTC 00:10 = 北京时间08:10
+    - cron: '10 0 * * *'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 更新或恢复历史内容快照
+        type: choice
+        options: [update, rollback]
+        default: update
+      rollback_ref:
+        description: 回滚时填写content-data分支的完整提交SHA
+        type: string
+        required: false
 permissions: {}
 concurrency:
-  group: pages-${{ github.ref }}
+  group: sports-publication-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
     outputs:
-      check_outcome: ${{ steps.check.outcome }}
       site_id: ${{ steps.identity.outputs.site_id }}
+      publication_enabled: ${{ steps.identity.outputs.publication_enabled }}
+      all_failed: ${{ steps.collect.outputs.all_failed }}
+      digest: ${{ steps.digest.outputs.digest }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,21 +41,37 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: 读取稳定站点标识
+      - name: 读取发布门禁
         id: identity
-        run: node -e "const fs=require('fs');const s=JSON.parse(fs.readFileSync('src/data/site.json'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'site_id='+s.siteId+'\n')"
-      - name: 检测内容源（适配器自动重试三次）
-        id: check
-        continue-on-error: true
-        run: npm run check:update
-      - name: 单元测试及静态构建检查
-        run: npm run verify
+        run: |
+          node --input-type=module -e "import fs from 'node:fs';const s=JSON.parse(fs.readFileSync('src/data/site.json'));const c=JSON.parse(fs.readFileSync('sources/config.json'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'site_id='+s.siteId+'\npublication_enabled='+c.autoPublish+'\n')"
+      - name: 恢复持久化历史（读取失败则停止，不用空数据覆盖历史）
+        if: steps.identity.outputs.publication_enabled == 'true' && github.event_name != 'pull_request'
         env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          ROLLBACK_REF: ${{ inputs.mode == 'rollback' && inputs.rollback_ref || '' }}
+        run: |
+          if [ '${{ inputs.mode }}' = rollback ] && [ -z "$ROLLBACK_REF" ]; then exit 1; fi
+          node scripts/content-state.mjs restore
+      - name: 真实采集、核验与去重（单源故障隔离）
+        id: collect
+        if: inputs.mode != 'rollback'
+        env:
+          ENABLED: ${{ steps.identity.outputs.publication_enabled }}
+        run: |
+          if [ "$ENABLED" = true ] && [ "$GITHUB_EVENT_NAME" != pull_request ]; then
+            node scripts/collect.mjs --publish
+          else
+            node scripts/collect.mjs
+          fi
+      - name: 单元测试、构建与全站链接检查
+        run: npm run verify
       - run: npx playwright install --with-deps chromium
-      - name: 响应式与交互测试
+      - name: 中文、响应式和交互测试
         run: npm run test:browser
-      - name: 保存检查日志
+      - name: 记录本次内容摘要
+        id: digest
+        run: node --input-type=module -e "import fs from 'node:fs';import{createHash}from'node:crypto';fs.appendFileSync(process.env.GITHUB_OUTPUT,'digest='+createHash('sha256').update(fs.readFileSync('src/data/articles.json')).digest('hex')+'\n')"
+      - name: 保存真实采集与测试报告
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -53,13 +81,41 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: steps.identity.outputs.publication_enabled == 'true' && github.event_name != 'pull_request'
+        with:
+          name: validated-content
+          path: reports/publish-bundle/
+          retention-days: 2
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:
           path: dist
-  deploy:
-    if: github.event_name != 'pull_request'
+  persist:
+    if: github.event_name != 'pull_request' && needs.build.outputs.publication_enabled == 'true'
     needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: validated-content
+          path: bundle
+      - name: 原子保存已验证快照（仅写独立数据分支）
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/content-state.mjs persist bundle
+  deploy:
+    if: always() && github.event_name != 'pull_request' && needs.build.result == 'success' && (needs.persist.result == 'success' || needs.persist.result == 'skipped')
+    needs: [build, persist]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -69,22 +125,23 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: 发布静态页面
+      - name: 发布静态页面（失败保留上一版本）
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: 验证公开网址与构建标识（网络失败重试）
+      - name: 核验公开页面、代码提交与内容摘要
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           SITE_ID: ${{ needs.build.outputs.site_id }}
           COMMIT_SHA: ${{ github.sha }}
+          DIGEST: ${{ needs.build.outputs.digest }}
         run: |
           for attempt in 1 2 3; do
             if curl --fail --location --retry 2 --max-time 30 "$PAGE_URL" -o /tmp/page.html &&
                curl --fail --location --retry 2 --max-time 30 "${PAGE_URL%/}/health.json" -o /tmp/health.json &&
                grep -Fq 'lang="zh-CN"' /tmp/page.html &&
                grep -Fq "name=\"site-id\" content=\"$SITE_ID\"" /tmp/page.html &&
-               jq -e --arg id "$SITE_ID" --arg sha "$COMMIT_SHA" '.schemaVersion == 1 and .siteId == $id and .buildCommit == $sha' /tmp/health.json; then
-              echo "公开首页与健康接口响应正常，站点标识及本次提交核验通过。" >> "$GITHUB_STEP_SUMMARY"
+               jq -e --arg id "$SITE_ID" --arg sha "$COMMIT_SHA" --arg digest "$DIGEST" '.siteId == $id and .buildCommit == $sha and .contentDigest == $digest' /tmp/health.json; then
+              echo '公开页面、当前代码与内容快照核验通过。' >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
             sleep 10
@@ -92,16 +149,18 @@ jobs:
           exit 1
   check-result:
     if: always()
-    needs: [build, deploy]
+    needs: [build, persist, deploy]
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - name: 保留内容源失败信号
+      - name: 保留失败信号，不将检查成功等同资讯更新
         env:
-          OUTCOME: ${{ needs.build.outputs.check_outcome }}
+          ALL_FAILED: ${{ needs.build.outputs.all_failed }}
           BUILD: ${{ needs.build.result }}
+          PERSIST: ${{ needs.persist.result }}
           DEPLOY: ${{ needs.deploy.result }}
         run: |
-          test "$OUTCOME" = success
           test "$BUILD" = success
+          test "$PERSIST" = success -o "$PERSIST" = skipped
           test "$DEPLOY" = success -o "$DEPLOY" = skipped
+          test "$ALL_FAILED" != true

@@ -1,0 +1,30 @@
+import {setTimeout as delay} from 'node:timers/promises';
+export function allowedUrl(value,hosts){const u=new URL(value);if(u.protocol!=='https:'||!hosts.includes(u.hostname)||u.username||u.password||u.port)throw Error('地址不在HTTPS允许列表');return u}
+export function robotsAllowed(text,url,agent='sports-frontier'){
+ const groups=[];let current=null,hasRules=false;
+ for(const raw of text.split(/\r?\n/)){const line=raw.replace(/#.*/,'').trim();if(!line||!line.includes(':'))continue;const [key,...rest]=line.split(':');const value=rest.join(':').trim();if(key.toLowerCase()==='user-agent'){if(!current||hasRules){current={agents:[],rules:[]};groups.push(current);hasRules=false}current.agents.push(value.toLowerCase())}else if(current&&['allow','disallow'].includes(key.toLowerCase())){hasRules=true;if(value)current.rules.push({allow:key.toLowerCase()==='allow',path:value})}}
+ const exact=groups.filter(g=>g.agents.some(a=>a!=='*'&&agent.includes(a)));const selected=exact.length?exact:groups.filter(g=>g.agents.includes('*'));
+ const target=new URL(url).pathname+new URL(url).search;const matching=selected.flatMap(g=>g.rules).filter(r=>{const pattern=r.path.replace(/[.+?^{}()|[\]\\]/g,'\\$&').replace(/\*/g,'.*');return new RegExp('^'+pattern).test(target)}).sort((a,b)=>b.path.length-a.path.length||Number(b.allow)-Number(a.allow));
+ return !matching.length||matching[0].allow;
+}
+export function createClient(policy){let last=0;const robots=new Map(),blocked=new Set();const stats={requests:0,retries:0};
+ async function request(value,{allow404=false}={}){
+  let url=allowedUrl(value,policy.allowedHosts).href;
+  if(blocked.has(new URL(url).hostname))throw Error('该主机已返回403，本轮停止访问，不绕过限制');
+  for(let attempt=1;attempt<=3;attempt++){
+   try{await delay(Math.max(0,policy.requestGapMs-(Date.now()-last)));last=Date.now();stats.requests++;
+    let response;
+    for(let redirect=0;redirect<=3;redirect++){
+     response=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(policy.timeoutMs),headers:{'User-Agent':'sports-frontier/3.0 (+https://github.com/houyuanzhu/sports-frontier)','Accept':'text/html,text/plain;q=0.8'}});
+     if([301,302,303,307,308].includes(response.status)){await response.body?.cancel();url=allowedUrl(new URL(response.headers.get('location'),url).href,policy.allowedHosts).href;if(redirect===3)throw Error('重定向次数超限');continue}break;
+    }
+    if(response.status===404&&allow404){await response.body?.cancel();return {status:404,text:'',url}}
+    if(!response.ok){await response.body?.cancel();if(response.status===403)blocked.add(new URL(url).hostname);const error=Error(`HTTP ${response.status}`);error.noRetry=[400,401,403,404,410].includes(response.status);throw error}
+    if(/noindex|none/i.test(response.headers.get('x-robots-tag')||'')){await response.body?.cancel();const e=Error('来源X-Robots-Tag禁止索引');e.noRetry=true;throw e}
+    const reader=response.body.getReader();const chunks=[];let length=0;try{while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>policy.maxResponseBytes)throw Error('响应体超过大小限制');chunks.push(value)}}finally{await reader.cancel()}
+    const bytes=Buffer.concat(chunks);const charset=/charset\s*=\s*([\w-]+)/i.exec(response.headers.get('content-type')||'')?.[1]||'utf-8';return {status:response.status,text:new TextDecoder(charset).decode(bytes),url,bytes:length};
+   }catch(e){if(e.noRetry||attempt===3)throw e;stats.retries++;await delay(attempt*1000)}
+  }
+ }
+ return {stats,async page(url){const origin=allowedUrl(url,policy.allowedHosts).origin;if(!robots.has(origin)){const result=await request(origin+'/robots.txt',{allow404:true});robots.set(origin,result)}const rules=robots.get(origin);if(!robotsAllowed(rules.text,url))throw Error('robots.txt禁止访问该路径');const result=await request(url);return {...result,robotsStatus:rules.status}},request};
+}

@@ -6,4 +6,4 @@ export function getStaticPaths(){return site.categories.map(category=>({params:{
 const {category}=Astro.props;
 const list=posts.filter(p=>p.category===category.slug);
 ---
-<Layout title={category.name}><div class="page-heading"><p class="eyebrow"><a href={url('categories/')}>阅读栏目</a> / 演示</p><h1>{category.name}<span>。</span></h1><p>{category.description}</p></div><div class="listing">{list.map((post,index)=><PostRow post={post} index={index}/>)}</div></Layout>
+<Layout title={category.name}><div class="page-heading"><p class="eyebrow"><a href={url('categories/')}>阅读栏目</a> / 内容索引</p><h1>{category.name}<span>。</span></h1><p>{category.description}</p></div><div class="listing">{list.map((post,index)=><PostRow post={post} index={index}/>)}{!list.length&&<p class="empty-state">本栏目暂无通过核验的内容。系统不会为填充栏目而生成资讯或原创结论。</p>}</div></Layout>

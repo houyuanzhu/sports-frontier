@@ -27,11 +27,11 @@ for(const file of files.filter(f=>f.endsWith('.html'))){
   catch{throw Error(`链接不存在：${file} → ${href}`)}
  }
 }
-assert.equal(pages,8+site.categories.length+posts.length);
-for(const c of site.categories){assert.ok(files.includes(path.join(root,`categories/${c.slug}/index.html`)));assert.ok(posts.some(p=>p.category===c.slug))}
+assert.equal(pages,9+site.categories.length+posts.length);
+for(const c of site.categories)assert.ok(files.includes(path.join(root,`categories/${c.slug}/index.html`)));
 for(const required of ['index.html','articles/index.html','categories/index.html','search/index.html','archive/index.html','about/index.html','status/index.html','404.html','sitemap-index.xml','robots.txt','health.json'])assert.ok(files.includes(path.join(root,required)),required);
 const health=JSON.parse(await readFile('dist/health.json','utf8'));
-assert.equal(health.siteId,site.siteId);assert.equal(health.buildCommit,process.env.GITHUB_SHA||'local');assert.equal(health.autoPublish,false);
+const config=JSON.parse(await readFile('sources/config.json','utf8'));assert.equal(health.siteId,site.siteId);assert.equal(health.buildCommit,process.env.GITHUB_SHA||'local');assert.equal(health.autoPublish,config.autoPublish);assert.equal(health.articleCount,posts.length);
 const css=(await Promise.all(files.filter(f=>f.endsWith('.css')).map(f=>readFile(f,'utf8')))).join('');
 assert.ok(css.includes('prefers-reduced-motion'));assert.ok(css.includes('700px'));
 console.log(`静态检查通过：${pages} 页、六大栏目、${links} 个站内资源链接；中文、SEO、健康接口及体积预算通过。`);

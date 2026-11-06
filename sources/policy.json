@@ -1,0 +1,12 @@
+{
+ "allowedHosts":["www.sport.gov.cn"],
+ "rightsMode":"metadata-only",
+ "rightsEvidence":"https://www.sport.gov.cn/n323/n10459/c24206655/content.html",
+ "rightsReview":"仅保留公开标题、发布主体、日期及原文链接；正文、图片、附件与媒体转载内容不再分发。答复要求标注原公开主体；不将该答复视为所有内容的开放许可。",
+ "trustedPublisherPattern":"体育总局|体育局|科教司|政策法规司|办公厅|办公室|群体司|竞技体育司|青少司|体育科学|体育仲裁委员会|经济司|体育信息中心",
+ "maxItemsPerSource":8,
+ "maxAgeDays":180,
+ "requestGapMs":750,
+ "maxResponseBytes":1500000,
+ "timeoutMs":15000
+}

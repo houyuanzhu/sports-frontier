@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import registry from '../../../sources/registry.json';
+import config from '../../../sources/config.json';
+import policy from '../../../sources/policy.json';
+---
+<Layout title="来源与使用规则"><div class="page-heading"><p class="eyebrow">公开来源 / 可追溯索引</p><h1>每一条线索，<br/>都有原始出处<span>。</span></h1><p>当前接入的是同一国家体育总局门户的不同栏目，不将它们描述为多个独立媒体。可访问不等于获得全文转载许可。</p></div><div class="prose"><h2>采集与发布边界</h2><p>只整理公开标题、发布主体、来源日期和原文链接，不转载正文、图片、附件，不自动撰写新闻、政策解读或趋势预测。日期按来源精度展示，未提供时分时不补造时刻。复杂解读、无可靠日期、未知发布主体和非体育主题会被跳过。</p><p>访问前检查 robots.txt；收到403后本轮停止访问该主机，不切换代理、身份或其他路径绕过限制。每个请求限速，失败重试最多三次；来源故障不删除历史资讯。</p><h2>已登记的真实来源</h2>{registry.map(source=><section class="source-entry"><h3><a href={source.url} target="_blank" rel="noopener noreferrer">{source.name} ↗</a></h3><p>方式：公开HTML元数据；未发现RSS接口。{source.phase===1?'首批接入':'扩展接入'}。{source.enabled&&source.phase<=(config.phase||1)?'当前纳入检查':'尚未纳入本阶段检查'}。实际可用性以运行状态及日志为准。</p></section>)}<h2>使用条件与署名</h2><p>{policy.rightsReview}</p><p><a class="text-link" href={policy.rightsEvidence} target="_blank" rel="noopener noreferrer">查看总局关于信息转发利用的公开答复 ↗</a></p><h2>未接入与待核验</h2><p>体育科学研究所的两个列表在测试中返回403，未绕过访问限制；自然科学基金委的连接未成功；上海市体育局部分列表可访问，但使用规则尚待充分确认。Crossref和OpenAlex公共元数据接口已探测，尚未通过中文体育内容的来源与学术质量筛选，不作为已发布研究成果来源。</p><h2>空栏目与科研机会</h2><p>没有通过核验的内容时保留空栏目，不为凑齐六栏目而生成信息。科研机会的截止日期仅在原文有唯一明确标签时记录，申报条件无法核实则留空；请始终以官方原文确认当前资格与有效期限。</p></div></Layout>

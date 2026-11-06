@@ -1,6 +1,6 @@
 ---
-import {url,dateText,categoryName} from '../lib/content.mjs';
+import {url,dateText,categoryName,contentTag} from '../lib/content.mjs';
 import Art from './Art.astro';
 const {post,index=0}=Astro.props;
 ---
-<article class="post-row"><span class="row-number">{String(index+1).padStart(2,'0')}</span><div class="row-copy"><div class="eyebrow">{categoryName(post.category)} <span>· 演示</span></div><h3><a href={url(`articles/${post.slug}/`)}>{post.title}</a></h3><p>{post.summary}</p><div class="meta"><time datetime={post.publishedAt}>{dateText(post.publishedAt)}</time><span>{post.minutes} 分钟阅读</span></div></div><a class="row-art" href={url(`articles/${post.slug}/`)} aria-label={`阅读：${post.title}`}><Art kind={post.art}/></a></article>
+<article class="post-row"><span class="row-number">{String(index+1).padStart(2,'0')}</span><div class="row-copy"><div class="eyebrow">{categoryName(post.category)} <span>· {contentTag(post)}</span></div><h3><a href={url(`articles/${post.slug}/`)}>{post.title}</a></h3><p>{post.summary}</p><div class="meta"><time datetime={post.publishedAt}>{dateText(post.publishedAt)}</time><span>{post.minutes} 分钟阅读</span></div></div><a class="row-art" href={url(`articles/${post.slug}/`)} aria-label={`阅读：${post.title}`}><Art kind={post.art}/></a></article>

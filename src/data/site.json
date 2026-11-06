@@ -2,14 +2,45 @@
   "name": "政视体育",
   "siteId": "sports-frontier",
   "tagline": "洞察体育发展，追踪科技与科研前沿",
-  "description": "政视体育：聚焦体育头条、体育政策、体育科技、运动科学、科研机会与趋势研判。当前为演示阶段，所有文章均非真实资讯。",
+  "description": "政视体育：体育头条、体育政策、体育科技、运动科学、科研机会与趋势研判。索引可核验的官方公开信息，保留原始来源与日期。",
   "demo": true,
   "categories": [
-    {"slug":"headlines","name":"体育头条","description":"以体育为中心，串联值得关注的议题与背景。","short":"重要议题与全局视野"},
-    {"slug":"policy","name":"体育政策","description":"关注体育领域的制度、公共服务与发展规划。","short":"制度变化与发展脉络"},
-    {"slug":"technology","name":"体育科技","description":"从训练场景出发，理解技术、工具与应用边界。","short":"技术工具与场景创新"},
-    {"slug":"science","name":"运动科学","description":"走近研究方法、证据质量与运动表现议题。","short":"研究证据与运动表现"},
-    {"slug":"opportunities","name":"科研机会","description":"为未来的课题、学术交流与公开研究机会保留入口。","short":"课题线索与学术交流"},
-    {"slug":"outlook","name":"趋势研判","description":"基于可核验证据，观察体育与产业的长期变化。","short":"产业观察与长期趋势"}
-  ]
+    {
+      "slug": "headlines",
+      "name": "体育头条",
+      "description": "以体育为中心，串联值得关注的议题与背景。",
+      "short": "重要议题与全局视野"
+    },
+    {
+      "slug": "policy",
+      "name": "体育政策",
+      "description": "关注体育领域的制度、公共服务与发展规划。",
+      "short": "制度变化与发展脉络"
+    },
+    {
+      "slug": "technology",
+      "name": "体育科技",
+      "description": "从训练场景出发，理解技术、工具与应用边界。",
+      "short": "技术工具与场景创新"
+    },
+    {
+      "slug": "science",
+      "name": "运动科学",
+      "description": "走近研究方法、证据质量与运动表现议题。",
+      "short": "研究证据与运动表现"
+    },
+    {
+      "slug": "opportunities",
+      "name": "科研机会",
+      "description": "为未来的课题、学术交流与公开研究机会保留入口。",
+      "short": "课题线索与学术交流"
+    },
+    {
+      "slug": "outlook",
+      "name": "趋势研判",
+      "description": "基于可核验证据，观察体育与产业的长期变化。",
+      "short": "产业观察与长期趋势"
+    }
+  ],
+  "noindex": true
 }
