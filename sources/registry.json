@@ -1,7 +1,68 @@
 [
- {"id":"sport-notices","name":"国家体育总局·通知公告","url":"https://www.sport.gov.cn/n315/n20001395/index.html","defaultCategory":"headlines","phase":1,"enabled":true},
- {"id":"sport-local","name":"国家体育总局·地方动态","url":"https://www.sport.gov.cn/n315/n20066836/index.html","defaultCategory":"headlines","phase":1,"enabled":true},
- {"id":"sport-technology","name":"国家体育总局科教司·体育科技","url":"https://www.sport.gov.cn/kjs/n5081/index.html","defaultCategory":"technology","phase":1,"enabled":true},
- {"id":"sport-education-notices","name":"国家体育总局科教司·通知公告","url":"https://www.sport.gov.cn/kjs/n5076/index.html","defaultCategory":"science","phase":2,"enabled":true},
- {"id":"sport-popular-science","name":"国家体育总局科教司·体育科普","url":"https://www.sport.gov.cn/kjs/n23361559/index.html","defaultCategory":"science","phase":2,"enabled":true}
+  {
+    "id": "sport-notices",
+    "name": "国家体育总局·通知公告",
+    "url": "https://www.sport.gov.cn/n315/n20001395/index.html",
+    "defaultCategory": "headlines",
+    "phase": 1,
+    "enabled": true
+  },
+  {
+    "id": "sport-local",
+    "name": "国家体育总局·地方动态",
+    "url": "https://www.sport.gov.cn/n315/n20066836/index.html",
+    "defaultCategory": "headlines",
+    "phase": 1,
+    "enabled": false,
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+  },
+  {
+    "id": "sport-technology",
+    "name": "国家体育总局科教司·体育科技",
+    "url": "https://www.sport.gov.cn/kjs/n5081/index.html",
+    "defaultCategory": "technology",
+    "phase": 1,
+    "enabled": false,
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+  },
+  {
+    "id": "sport-education-notices",
+    "name": "国家体育总局科教司·通知公告",
+    "url": "https://www.sport.gov.cn/kjs/n5076/index.html",
+    "defaultCategory": "science",
+    "phase": 2,
+    "enabled": false,
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+  },
+  {
+    "id": "sport-popular-science",
+    "name": "国家体育总局科教司·体育科普",
+    "url": "https://www.sport.gov.cn/kjs/n23361559/index.html",
+    "defaultCategory": "science",
+    "phase": 2,
+    "enabled": false,
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+  },
+  {
+    "id": "shanghai-policy",
+    "name": "上海市体育局·政策法规",
+    "url": "https://tyj.sh.gov.cn/fgcxxgk/index.html",
+    "defaultCategory": "policy",
+    "phase": 1,
+    "enabled": true,
+    "expectedSiteId": "3100000065",
+    "articlePathPattern": "^https://tyj.sh.gov.cn/[a-z0-9]+/\\d{8}/[a-z0-9]+\\.html$",
+    "rightsMode": "仅索引官方公开元数据，链接原文，不转载文件正文"
+  },
+  {
+    "id": "shanghai-notices",
+    "name": "上海市体育局·公告通知",
+    "url": "https://tyj.sh.gov.cn/ggtz/index.html",
+    "defaultCategory": "headlines",
+    "phase": 1,
+    "enabled": true,
+    "expectedSiteId": "3100000065",
+    "articlePathPattern": "^https://tyj.sh.gov.cn/[a-z0-9]+/\\d{8}/[a-z0-9]+\\.html$",
+    "rightsMode": "仅索引官方公开元数据，排除个人名单与行政许可明细"
+  }
 ]

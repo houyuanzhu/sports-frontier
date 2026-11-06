@@ -9,10 +9,10 @@ export function publishedDate(raw,now=new Date()){
  return {publishedAt:value,datePrecision:'day',publicationTimezone:'Asia/Shanghai',rawPublishedAt:value};
 }
 export function classify(title,fallback){
- if(/党委|党组|纪委|党建|政治|政绩观|意识形态|廉政|主题教育|巡视|干部任免|预算|决算|获奖名单|入选单位公示|招聘|采购|招标|中标/.test(title))return {reason:'非体育专业资讯或行政名单，跳过'};
+ if(/党委|党组|纪委|党建|政治|政绩观|意识形态|廉政|主题教育|巡视|干部任免|预算|决算|获奖名单|入选单位公示|拟授予|行政许可|备案统计表|招聘|采购|招标|中标/.test(title))return {reason:'非体育专业资讯或行政名单，跳过'};
  if(!/体育|运动|健身|赛事|奥运|足球|篮球|羽毛球|体质|滑雪|自行车|游泳|康复训练/.test(title))return {reason:'标题缺少明确体育相关性'};
  if(/解读|评论|研判|预测|猜想/.test(title))return {reason:'复杂解读或观点，需要人工审阅'};
- if(/申报|征集|征询|申请|招生|招募|学术会议|征文|论坛/.test(title)&&/科研|课题|研究项目|科技创新项目|博士|人才计划|学术|科学大会/.test(title))return {category:'opportunities',rule:'体育研究机会与明确征集动作'};
+ if(/申报|征集|征询|申请|招生|招募|学术会议|征文|论坛/.test(title)&&/科研|课题|研究项目|科技创新项目|博士|人才|英才计划|智库|学术|科学大会/.test(title))return {category:'opportunities',rule:'体育研究机会与明确征集动作'};
  if(/产业.*(报告|趋势|白皮书|统计)|发展报告/.test(title))return {category:'outlook',rule:'仅索引来源已发布的报告，不生成趋势结论'};
  if(/办法|条例|规划|政策|实施意见|指导意见|管理规定|标准|规范性文件/.test(title))return {category:'policy',rule:'体育制度或标准文件标题'};
  if(/人工智能|可穿戴|智能|数字化|数字体育|科技|运动数据/.test(title))return {category:'technology',rule:'体育技术主题'};

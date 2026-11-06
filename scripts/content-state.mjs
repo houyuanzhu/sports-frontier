@@ -4,7 +4,7 @@ import {publishedDate} from './ingest-core.mjs';
 const git=(args,input)=>execFileSync('git',args,{encoding:'utf8',input,stdio:['pipe','pipe','pipe']}).trim();
 export function validateSnapshot(articles,status,state){
  if(!Array.isArray(articles)||articles.length>20000||state.schemaVersion!==1||!Array.isArray(state.records))throw Error('持久化数据结构无效');
- const ids=new Set();for(const p of articles){if(p.demo!==false||!/^info-[a-f0-9]{20}$/.test(p.slug)||!p.source||!p.publishedAt||!p.collectedAt||!p.url?.startsWith('https://www.sport.gov.cn/')||!Array.isArray(p.body)||ids.has(p.slug)||!['headlines','policy','technology','science','opportunities','outlook'].includes(p.category))throw Error('历史条目安全检查失败');publishedDate(p.publishedAt);ids.add(p.slug)}
+ const ids=new Set();for(const p of articles){const u=new URL(p.url);if(p.demo!==false||!/^info-[a-f0-9]{20}$/.test(p.slug)||!p.source||!p.publishedAt||!p.collectedAt||u.protocol!=='https:'||!['www.sport.gov.cn','tyj.sh.gov.cn'].includes(u.hostname)||u.username||u.password||u.port||!Array.isArray(p.body)||ids.has(p.slug)||!['headlines','policy','technology','science','opportunities','outlook'].includes(p.category))throw Error('历史条目安全检查失败');publishedDate(p.publishedAt);ids.add(p.slug)}
  if(state.records.length!==articles.length||new Set(state.records.map(r=>r.slug)).size!==articles.length||state.records.some(r=>!ids.has(r.slug)))throw Error('去重账本与历史资讯不一致');
  if(!status.checkedAt)throw Error('状态缺少检查时间');
 }

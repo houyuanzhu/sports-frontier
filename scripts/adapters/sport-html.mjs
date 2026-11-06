@@ -2,7 +2,7 @@ import {load} from 'cheerio';
 import {clean,hash,canonicalUrl,publishedDate,classify,opportunityFields} from '../ingest-core.mjs';
 export async function collectSource(source,client,policy,now){
  const listing=await client.page(source.url);const $=load(listing.text);
- const urls=[...new Set($('a[href*="/content.html"]').toArray().map(e=>{try{return canonicalUrl(new URL($(e).attr('href'),source.url).href)}catch{return null}}).filter(Boolean))].filter(u=>new URL(u).hostname===new URL(source.url).hostname).slice(0,policy.maxItemsPerSource);
+ const urls=[...new Set($('a[href]').toArray().map(e=>{try{return canonicalUrl(new URL($(e).attr('href'),source.url).href)}catch{return null}}).filter(Boolean))].filter(u=>new URL(u).hostname===new URL(source.url).hostname&&new RegExp(source.articlePathPattern||'/content\\.html$').test(u)).slice(0,policy.maxItemsPerSource);
  if(!urls.length)throw Error('列表结构变化：未发现公开详情链接');
  const candidates=[],skipped=[];let detailErrors=0;
  for(const url of urls){try{
@@ -10,6 +10,7 @@ export async function collectSource(source,client,policy,now){
   if(/noindex|none/i.test(d('meta[name=robots]').attr('content')||''))throw Error('原文禁止搜索索引');
   const title=meta('ArticleTitle'),publisher=meta('ContentSource');
   if(!title||title.length>180||!publisher)throw Error('缺少完整标题或原公开主体');
+  if(source.expectedSiteId&&meta('SiteIDCode')!==source.expectedSiteId)throw Error('原文站点身份字段不匹配');
   if(!new RegExp(policy.trustedPublisherPattern).test(publisher))throw Error('转载或未知原公开主体，未纳入发布许可范围');
   const date=publishedDate(meta('PubDate'),now);if(now.getTime()-Date.parse(date.publishedAt)>policy.maxAgeDays*86400000)throw Error('超出首次采集时间窗口');
   const classification=classify(title,source.defaultCategory);if(!classification.category)throw Error(classification.reason);
