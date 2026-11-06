@@ -1,71 +1,86 @@
-# 中文公共资讯网站（演示工程）
+# 政视体育 · V2.0
 
-使用 Astro 5、Tailwind CSS 4、静态 JSON 与 GitHub Pages。没有服务器、数据库、付费 API、外部字体、追踪或支付配置。名称“资讯样刊”、署名、全部栏目与文章均为演示。不要将演示内容当作真实新闻。`package-lock.json` 锁定版本。
+洞察体育发展，追踪科技与科研前沿。
 
-## 当前交付与上线
+在既有 public-info-site 工程上定点升级，沿用 Astro 5.18.2、Tailwind CSS 4、GitHub Pages 与 GitHub Actions，未更换框架或部署系统。仅使用免费公开仓库、标准运行器及 github.io 子域名，不配置支付方式、收费接口或自建服务器。
 
-当前已完成本地构建与测试，**尚未创建远程仓库、尚未上线**。GitHub 连接可识别账户，但未返回可访问仓库；本机无 GitHub 命令行凭据；浏览器自动化因无法核定当前网址被工具阻止。云端权限、Actions 和公开网址均待实际上线验证。详见同目录 `VALIDATION.md`。
+## 内容与栏目
 
-Windows 最少操作（只需做一次）：
+当前全部8篇文章是明确标注的演示内容，不是真实新闻、政策、研究成果或基金公告。名称暂定为“政视体育”。没有抓取真实资讯或调用AI写稿。演示模式启用，所有HTML带有 noindex, follow，不宣称已获搜索引擎收录。
 
-1. 若没有 GitHub CLI，执行 `winget install --id GitHub.cli --exact`，重新打开 PowerShell。Git 已安装。脚本无需本地 Node，构建在免费公开仓库的标准运行器进行。
-2. 执行 `gh auth login --hostname github.com --git-protocol https --web --scopes workflow`，按提示登录。凭据由官方 CLI 保管，禁止把 token 写入仓库。
-3. 在源码目录执行 `powershell -ExecutionPolicy Bypass -File .\deploy.ps1`。默认新建公开仓库 `public-info-demo`，可用 `-RepositoryName 新仓库英文名` 更改。脚本会提交代码、配置 Pages 使用 GitHub Actions、手动触发首次运行、等待结果并请求公开页面。仅在全部成功后输出“部署成功”。现有同名远程仓库不会被覆盖。
+| 栏目 | 路由 |
+| --- | --- |
+| 体育头条 | /categories/headlines/ |
+| 体育政策 | /categories/policy/ |
+| 体育科技 | /categories/technology/ |
+| 运动科学 | /categories/science/ |
+| 科研机会 | /categories/opportunities/ |
+| 趋势研判 | /categories/outlook/ |
 
-免费地址由 GitHub 返回，形式为 `https://你的用户名.github.io/public-info-demo/`。不能把此示例地址当作已经上线的网址。脚本失败时可查看仓库 Actions 的中文步骤与日志；权限不足时，手动在仓库 Settings → Pages → Source 选择 GitHub Actions，再在 Actions 运行“网站检查与免费部署”。若账户或组织策略禁止公开仓库、Pages 或 Actions，需账户管理员处理。
+以体育为中心，向体育政策、科技、科研与产业延伸。不设置综合政治新闻栏目，不发布政治人物动态、政治关系研判与未经核实的政治传闻。全部旧栏目引用已从应用中移除，旧演示文章由新的体育演示数据替换。
 
-## 本地运行
+## 配置入口
 
-安装 Node.js 22（至少22.12）与自带 npm，执行：
+- src/data/site.json：名称、副标题、六栏目、稳定站点标识和demo开关。
+- src/data/articles.json：演示文章、摘要、所属栏目与带时区的发布时间。归档使用北京时间；系统检查不会修改文章日期。
+- src/styles/global.css：保留的基础排版；src/styles/sports.css：V2体育品牌与响应式样式。
+- src/pages/：首页、列表、文章、栏目、搜索、归档、关于、运行状态与404。
+- sources/config.json 与 scripts/adapters/：未来真实内容检测入口。
 
-```powershell
-npm ci
-npm run dev
-```
+搜索支持关键词、中文栏目、筛选、建议词、清空及URL保存查询条件，全部在浏览器本地执行。主题偏好只保存在本机，支持浅色、深色、键盘跳转、减少动效偏好和无脚本阅读。无外部字体、追踪脚本和远程图片依赖。
 
-本地默认使用 `/` 路径，canonical 使用不可访问的占位域名 `example.invalid`，避免误认部署。GitHub 上自动从 `GITHUB_REPOSITORY` 推导站点与仓库子路径。自定义部署可设置 `SITE_URL` 为站点源、`BASE_PATH` 为仓库子路径；根路径使用 `/`。无需购买域名。
+## 本地运行与检查
 
-## 修改名称、栏目与文章
+安装Node.js 22.12或以上受支持版本及自带npm：
 
-- `src/data/site.json`：名称、描述、栏目、演示模式。正式数据准备完毕后，将 `demo` 改为 `false`，取消搜索引擎 noindex；同时清理页面中所有演示说明与演示署名。
-- `src/data/articles.json`：文章 slug、标题、摘要、栏目、发布时间、正文段落。日期必须是带时区的 ISO 格式，如 `2026-11-05T09:00:00+08:00`；禁止仅填日期或缺少时区。
-- `src/styles/global.css`：排版、颜色和响应式设计。使用系统中文字体，无外部字体下载；图形为本地 CSS 绘制，视觉不依赖远程资源。
-- `src/pages/`：首页、文章列表、详情、分类、搜索、归档、关于、运行状态、404。导航在 Layout 中统一管理。
+    npm ci
+    npm run dev
 
-## 每天北京时间08:10的检查
+完整验证：
 
-`.github/workflows/pages.yml` 的 `10 0 * * *` 为 UTC 00:10，即北京时间08:10。支持 push、PR、定时和手动触发。GitHub 调度是尽力执行，繁忙时可能延迟或丢弃，不能保证准点。公共仓库60天没有活动时定时工作流可能被平台停用，需要在 Actions 中重新启用；请定期维护仓库，本站不以多余写权限或伪造文章掩盖平台限制。
+    npm run build
+    npm test
+    node scripts/verify-build.mjs
+    npx playwright install chromium
+    npm run test:browser
 
-当前来源列表为空：检查配置后显示“尚未接入内容源，无新增资讯”。`checkedAt` 表示系统执行检查的真实时间；`lastContentPublishedAt` 只表示真实已发布资讯时间，当前为 null。演示文章时间保持不变，候选内容不计作已发布。
+或者 npm run verify 执行单元、构建和静态检查。浏览器测试覆盖390px手机、768px平板、1440px桌面。CI额外测试实际仓库子路径。Node24本地也已验证；云端固定Node22。锁文件与依赖版本均保留，无框架迁移。
 
-适配器网络失败自动重试最多三次，失败后保留旧内容及发布时间，生成失败状态。检测失败仍尝试部署状态快照，最后 `check-result` 将任务标记为失败；构建或部署失败时网页保持旧版，不能反映最新故障，应查看 Actions。支持 Actions 页面 Re-run failed jobs（重新运行失败作业）或 Run workflow（运行工作流）。日志和报告保留7天。状态文件只在构建产物内改变，不提交到仓库；因此不申请 `contents: write`。
+本地默认根路径、canonical占位域名example.invalid；云端从GITHUB_REPOSITORY推导 https://用户名.github.io/仓库名/，也可显式设置SITE_URL和BASE_PATH。health.json提供稳定siteId、版本和buildCommit；本地buildCommit为local，云端为实际GITHUB_SHA。
 
-工作流顶级 `permissions: {}`；构建只读内容，deploy 仅有 Pages 写入与身份令牌权限，PR 不部署，不使用 `pull_request_target`，checkout 不保留凭据。标准公开仓库运行器免费；不使用大运行器、付费缓存或其他托管服务。后续升级依赖和 Actions 时应审阅来源与版本。
+## 首次免费上线
 
-## 自动内容接入入口
+优先复用 deploy.ps1。在源码目录完成GitHub CLI浏览器授权后执行：
 
-1. 在 `scripts/adapters/` 编写免费公共 RSS 或公开数据适配器，导出 `async check({signal,previousPublishedAt})`，返回 `{candidates:[{id,title,url,publishedAt}]}`；在 `scripts/adapters/index.mjs` 显式登记。不得导入任意外部模块。
-2. `sources/config.json` 添加 `{"adapter":"登记名称"}`，保持 `autoPublish: false`。当前不预选任何内容来源，也不请求任何付费 AI。
-3. 适配器须支持中止、固定允许的 HTTPS 域名、限制体积、安全解析 XML（禁用外部实体）、处理错误和去重；核验来源授权、保留原文链接与明确时区。当前预留接口尚未做真实 RSS 集成验证。
-4. 检测模块 `scripts/update-core.mjs` 只统计候选、不写文章，拒绝未来日期和无时区日期。真实内容的审阅、持久去重、内容清洗及发布事务需要接入时实现；**当前没有自动发布器**。开启自动发布必须另行实现审核和发布模块，不能只把 `autoPublish` 改为 true（会被脚本拒绝）。
+    gh auth login --hostname github.com --git-protocol https --web --scopes workflow
+    powershell -ExecutionPolicy Bypass -File ./deploy.ps1
 
-## 测试与维护
+默认创建公开仓库sports-frontier。若无origin且同名仓库已存在，明确报告冲突并尝试sports-frontier-v2等替代名，不覆盖已有仓库。已有origin时校验其目标与指定名称一致。可以用 -RepositoryName 指定名称。
 
-```powershell
-npm run verify
-npx playwright install chromium
-npm run test:browser
-```
+脚本检查未提交变更、提交代码、推送、启用Pages自定义Actions构建、触发工作流并等待对应提交。最终同时验证首页HTTP响应、zh-CN、稳定site-id、health.json的schemaVersion与本次提交SHA；不依赖品牌名或“演示”字样判断成功。工作流使用相同标准检查。浏览器登录及授权需本人完成，不发送或提交令牌、密码、私人数据。已安装的官方CLI将凭据保存在系统密钥环。
 
-验证中文页面、全部内部链接、唯一主标题、SEO、日期跨月、空来源/失败重试/无新增/候选不发布、工作流权限，以及手机390px、平板768px、桌面1440px的导航、搜索、主题持久化和横向溢出。含键盘焦点、跳至正文、搜索状态播报、减少动效偏好、无脚本阅读兜底。无障碍功能并不等于完整合规认证。
+部署与定时任务的实际运行结果见 VALIDATION.md，不把手动运行当作定时触发记录。日常推送main会自动测试部署；PR仅测试。
 
-项目子路径验证：设置 `GITHUB_REPOSITORY=你的用户名/仓库名`，再构建及运行测试。GitHub Actions 自动验证实际仓库子路径。404 使用绝对带子路径链接，避免嵌套路由错误。静态主页面每页限制100KB；没有做生产网络 Lighthouse 评分，不能宣称分数。
+## 每天北京时间08:10
 
-## 免费服务边界与参考
+.github/workflows/pages.yml的cron为UTC 10 0 * * *，即每天北京时间08:10。支持手动运行、最多三次适配器重试、日志、7天报告留存和最终状态检查。
 
-- [GitHub Pages 发布来源](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)：公开仓库可使用 GitHub Free 的 Pages。
-- [GitHub Actions 计划事件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)：队列延迟与公共仓库60天停用约束。
-- [GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)：标准运行器的公开仓库使用免费。
-- [Tailwind CSS 与 Astro](https://tailwindcss.com/docs/installation/framework-guides/astro)：Vite 插件集成。
+autoPublish始终为false，sources为空。当前检查只确认配置并记录真实checkedAt，newCount为0，lastContentPublishedAt保持null。系统检查成功不是资讯更新；演示时间不计入真实资讯发布。来源检查失败时尝试部署失败状态快照，最终作业仍标为失败。构建或部署失败则网页保留旧版，以Actions日志为准。
 
-服务规则未来可能变化；不填写支付信息、不升级付费方案。静态网站不需要常驻进程，但平台可用性、带宽额度与计划任务仍受 GitHub 免费服务限制。
+顶级permissions为空；build只有contents:read，deploy只有pages:write和id-token:write；checkout不保留凭据；不使用pull_request_target，不向工作流注入用户令牌。Actions仅使用公开仓库标准免费运行器。
+
+GitHub调度可能排队或延迟；公共仓库60天无活动可能停用计划任务，需要定期维护、必要时在Actions重新启用。静态网站无需常驻进程，但第三方可用性与免费额度不由本项目保证。
+
+## 后续接入真实体育资讯
+
+1. 选定并核验免费RSS、官方公告、公开科研数据源，明确转载/引用权限和栏目规则；当前未预选实际来源。
+2. 在scripts/adapters/实现带中止信号、超时、固定HTTPS域名、响应体限制和安全XML解析的适配器，在index.mjs显式登记，在sources/config.json启用。返回candidates数组，每条含id、title、url、带时区publishedAt。
+3. 补齐来源链接、原文与内容类型、研究/政策版本状态、机会截止时间核验、持久去重、内容清洗、人工审阅、更正与撤回、发布事务及失败恢复。
+4. 检测器目前只统计候选，不写文章、不自动发布；autoPublish=true会被拒绝。必须实现并验证发布器后才讨论开启自动发布。真实内容准备完毕后统一替换演示数据、标签与署名，再取消noindex。
+
+## 官方参考
+
+- [GitHub Pages发布来源](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+- [GitHub CLI登录](https://cli.github.com/manual/gh_auth_login)
+- [GitHub Pages REST接口](https://docs.github.com/en/rest/pages/pages)
+- [公共仓库定时工作流停用规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows)

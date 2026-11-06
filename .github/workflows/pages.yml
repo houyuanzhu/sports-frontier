@@ -19,6 +19,7 @@ jobs:
       contents: read
     outputs:
       check_outcome: ${{ steps.check.outcome }}
+      site_id: ${{ steps.identity.outputs.site_id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,6 +29,9 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: 读取稳定站点标识
+        id: identity
+        run: node -e "const fs=require('fs');const s=JSON.parse(fs.readFileSync('src/data/site.json'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'site_id='+s.siteId+'\n')"
       - name: 检测内容源（适配器自动重试三次）
         id: check
         continue-on-error: true
@@ -68,13 +72,19 @@ jobs:
       - name: 发布静态页面
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: 验证公开网址与中文内容（网络失败重试）
+      - name: 验证公开网址与构建标识（网络失败重试）
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          SITE_ID: ${{ needs.build.outputs.site_id }}
+          COMMIT_SHA: ${{ github.sha }}
         run: |
           for attempt in 1 2 3; do
-            if curl --fail --location --max-time 30 "$PAGE_URL" -o /tmp/page.html && grep -q 'zh-CN' /tmp/page.html && grep -q '演示' /tmp/page.html; then
-              echo "公开首页已响应，中文标记检查通过。" >> "$GITHUB_STEP_SUMMARY"
+            if curl --fail --location --retry 2 --max-time 30 "$PAGE_URL" -o /tmp/page.html &&
+               curl --fail --location --retry 2 --max-time 30 "${PAGE_URL%/}/health.json" -o /tmp/health.json &&
+               grep -Fq 'lang="zh-CN"' /tmp/page.html &&
+               grep -Fq "name=\"site-id\" content=\"$SITE_ID\"" /tmp/page.html &&
+               jq -e --arg id "$SITE_ID" --arg sha "$COMMIT_SHA" '.schemaVersion == 1 and .siteId == $id and .buildCommit == $sha' /tmp/health.json; then
+              echo "公开首页与健康接口响应正常，站点标识及本次提交核验通过。" >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
             sleep 10
