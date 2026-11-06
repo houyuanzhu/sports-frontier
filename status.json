@@ -1,16 +1,16 @@
 {
-  "checkedAt": "2026-11-06T08:50:22.345Z",
+  "checkedAt": "2026-11-06T08:57:08.196Z",
   "state": "partial",
-  "newCount": 6,
-  "candidateCount": 6,
-  "duplicateCount": 0,
+  "newCount": 0,
+  "candidateCount": 0,
+  "duplicateCount": 6,
   "attempts": 29,
   "retries": 0,
   "lastContentPublishedAt": "2026-10-13",
   "latestCandidatePublishedAt": "2026-10-13",
   "storedCount": 6,
   "autoPublish": true,
-  "message": "本次核验新增 6 条官方信息索引。",
+  "message": "检查完成，没有通过核验的新增资讯。",
   "sources": [
     {
       "sourceId": "sport-notices",
@@ -21,7 +21,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "checkedAt": "2026-11-06T08:57:08.196Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
@@ -61,7 +61,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "checkedAt": "2026-11-06T08:57:08.196Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
@@ -93,7 +93,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "checkedAt": "2026-11-06T08:57:08.196Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
