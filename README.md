@@ -1,86 +1,68 @@
-# 政视体育 · V2.0
+# 政视体育 · V3.0
 
 洞察体育发展，追踪科技与科研前沿。
 
-在既有 public-info-site 工程上定点升级，沿用 Astro 5.18.2、Tailwind CSS 4、GitHub Pages 与 GitHub Actions，未更换框架或部署系统。仅使用免费公开仓库、标准运行器及 github.io 子域名，不配置支付方式、收费接口或自建服务器。
+公开网站：https://houyuanzhu.github.io/sports-frontier/
 
-## 内容与栏目
+沿用V2的Astro、Tailwind CSS、六栏目、搜索、归档、响应式与Pages架构。全部必要服务为免费公开GitHub仓库、标准Actions运行器与github.io子域名，无收费API、模型、数据库或服务器。
 
-当前全部8篇文章是明确标注的演示内容，不是真实新闻、政策、研究成果或基金公告。名称暂定为“政视体育”。没有抓取真实资讯或调用AI写稿。演示模式启用，所有HTML带有 noindex, follow，不宣称已获搜索引擎收录。
+## 当前真实运行状态
 
-| 栏目 | 路由 |
+已完成三阶段试采集与真实数据检查，启用**只发布标题、来源、日期、链接等事实字段的官方信息索引**，不生成新闻正文、政策解读、科研结论或趋势预测。首轮云端运行42190527362采集新增6条，写入content-data分支并部署成功。原文日期为2026年5月至10月；这是首次收录历史公开信息，不宣称这些文件今天发布。
+
+V2演示数据已从公开页面移除，源码档案在archive/demo-articles-v2.json，不生成公开路由。site.demo=false，独立noindex=true仍保留；真实索引技术上线不等于全部站点合规事项或搜索引擎收录已完成。
+
+目前6条内容分为体育政策3条、科研机会3条。其余四栏目没有合格内容时保留空栏目说明，绝不填充假新闻。机会的有效性、资格条件与截止时间无法核实时留空，并提示以官方原文为准。
+
+## 真实来源
+
+| 正在检查的入口 | 本轮实际结果与边界 |
 | --- | --- |
-| 体育头条 | /categories/headlines/ |
-| 体育政策 | /categories/policy/ |
-| 体育科技 | /categories/technology/ |
-| 运动科学 | /categories/science/ |
-| 科研机会 | /categories/opportunities/ |
-| 趋势研判 | /categories/outlook/ |
+| 国家体育总局·通知公告 | 列表200，2条合格；一个详情403后停止该来源余下请求。仅已验证的官方主体元数据 |
+| 上海市体育局·政策法规 | 列表与详情200，4条合格；保留官方公开页面日期，不从URL或印发时间推断 |
+| 上海市体育局·公告通知 | 列表与详情200；本批均为名单/行政许可等，过滤后0条 |
 
-以体育为中心，向体育政策、科技、科研与产业延伸。不设置综合政治新闻栏目，不发布政治人物动态、政治关系研判与未经核实的政治传闻。全部旧栏目引用已从应用中移除，旧演示文章由新的体育演示数据替换。
+这是两个官方门户的三个栏目入口，并非三个独立媒体。四个返回403的总局栏目已停用。未发现这三个入口的RSS；使用公开HTML元数据，不声称具有专有开放API。访问前检查robots、限速、校验HTTPS允许主机；不绕过登录、403或其他限制。
 
-## 配置入口
+公开来源的可访问性不是全文转载许可。本项目不转载正文、图片、附件；保留原公开主体和链接。总局使用规则依据公开答复，上海仅做官方政府信息公开元数据链接索引。详见SOURCE-AUDIT.md和网站“来源与规则”。
 
-- src/data/site.json：名称、副标题、六栏目、稳定站点标识和demo开关。
-- src/data/articles.json：演示文章、摘要、所属栏目与带时区的发布时间。归档使用北京时间；系统检查不会修改文章日期。
-- src/styles/global.css：保留的基础排版；src/styles/sports.css：V2体育品牌与响应式样式。
-- src/pages/：首页、列表、文章、栏目、搜索、归档、关于、运行状态与404。
-- sources/config.json 与 scripts/adapters/：未来真实内容检测入口。
+## 日常自动化
 
-搜索支持关键词、中文栏目、筛选、建议词、清空及URL保存查询条件，全部在浏览器本地执行。主题偏好只保存在本机，支持浅色、深色、键盘跳转、减少动效偏好和无脚本阅读。无外部字体、追踪脚本和远程图片依赖。
+每天北京时间08:10（UTC 10 0 * * *）在GitHub Actions运行，本机和Codex关闭不影响云端任务。支持手动update与rollback。首次schedule事件是否已经发生，见运行报告，不能把push或手动运行当成定时触发。
 
-## 本地运行与检查
+build只读内容：恢复content-data历史 → 真实采集与单源故障隔离 → 日期/主题/分类/去重 → 测试构建与浏览器检查。persist单独使用contents:write，将验证后的快照原子保存到content-data。deploy只使用pages:write和id-token:write，存储成功后部署并检查代码SHA、内容摘要及公开页面。
 
-安装Node.js 22.12或以上受支持版本及自带npm：
+历史保存在Git分支，不依赖临时artifact。content-data不触发main的代码工作流，避免循环提交。没有新增时不造文章；检查状态本身可保存一个真实快照，同一包重试不重复提交。来源错误保留旧数据，所有来源失败最终标红；部分失败不阻止其他合格内容。
+
+平台调度可能延迟；长期无仓库活动可能停用计划任务，需定期维护。所有日期与时间均保留实际来源精度。未来服务规则变化应重新审查，不填写支付信息或升级付费方案。
+
+## 本地运行
+
+安装Node22.12或更新的受支持Node版本与自带npm。Git仓库检出后：
 
     npm ci
+    npm run content:restore
     npm run dev
 
-完整验证：
+main只保存代码，src/data/articles.json为空占位；真实历史在content-data，构建和运行前先恢复。压缩交付包额外附有已校验的数据快照，可离线恢复；详见交付清单。不要把自动生成数据提交回main。
 
-    npm run build
-    npm test
-    node scripts/verify-build.mjs
+    npm run collect
+
+以上为真实试采集，不发布。正式发布的三重门禁为phase=3、autoPublish=true、publicationGate=metadata-reviewed；只在已审查的来源范围内启用。不要为凑齐栏目扩大未知来源白名单。
+
+    npm run verify
     npx playwright install chromium
     npm run test:browser
 
-或者 npm run verify 执行单元、构建和静态检查。浏览器测试覆盖390px手机、768px平板、1440px桌面。CI额外测试实际仓库子路径。Node24本地也已验证；云端固定Node22。锁文件与依赖版本均保留，无框架迁移。
+测试fixture为本轮实际抓取的官方元数据，附原文URL和响应哈希；纯函数测试不代替真实连通性与云端运行验收。存储测试使用真实本地Git仓库验证事务，不伪造外部资讯。
 
-本地默认根路径、canonical占位域名example.invalid；云端从GITHUB_REPOSITORY推导 https://用户名.github.io/仓库名/，也可显式设置SITE_URL和BASE_PATH。health.json提供稳定siteId、版本和buildCommit；本地buildCommit为local，云端为实际GITHUB_SHA。
+## 配置与维护入口
 
-## 首次免费上线
+- src/data/site.json：名称、副标题、六栏目、noindex。
+- sources/registry.json：启用/停用来源；sources/policy.json：域名、署名、速率、时间窗口及元数据边界。
+- scripts/adapters/sport-html.mjs：政府公开元数据解析；scripts/source-client.mjs：请求与访问规则。
+- scripts/ingest-core.mjs：标题分类、日精度校验、保守事件去重、机会空字段。
+- scripts/content-state.mjs：读取、原子保存、幂等与历史回滚。
+- V3-OPERATIONS.md：详细流程、权限、失败处理及手动回滚方法。
 
-优先复用 deploy.ps1。在源码目录完成GitHub CLI浏览器授权后执行：
-
-    gh auth login --hostname github.com --git-protocol https --web --scopes workflow
-    powershell -ExecutionPolicy Bypass -File ./deploy.ps1
-
-默认创建公开仓库sports-frontier。若无origin且同名仓库已存在，明确报告冲突并尝试sports-frontier-v2等替代名，不覆盖已有仓库。已有origin时校验其目标与指定名称一致。可以用 -RepositoryName 指定名称。
-
-脚本检查未提交变更、提交代码、推送、启用Pages自定义Actions构建、触发工作流并等待对应提交。最终同时验证首页HTTP响应、zh-CN、稳定site-id、health.json的schemaVersion与本次提交SHA；不依赖品牌名或“演示”字样判断成功。工作流使用相同标准检查。浏览器登录及授权需本人完成，不发送或提交令牌、密码、私人数据。已安装的官方CLI将凭据保存在系统密钥环。
-
-部署与定时任务的实际运行结果见 VALIDATION.md，不把手动运行当作定时触发记录。日常推送main会自动测试部署；PR仅测试。
-
-## 每天北京时间08:10
-
-.github/workflows/pages.yml的cron为UTC 10 0 * * *，即每天北京时间08:10。支持手动运行、最多三次适配器重试、日志、7天报告留存和最终状态检查。
-
-autoPublish始终为false，sources为空。当前检查只确认配置并记录真实checkedAt，newCount为0，lastContentPublishedAt保持null。系统检查成功不是资讯更新；演示时间不计入真实资讯发布。来源检查失败时尝试部署失败状态快照，最终作业仍标为失败。构建或部署失败则网页保留旧版，以Actions日志为准。
-
-顶级permissions为空；build只有contents:read，deploy只有pages:write和id-token:write；checkout不保留凭据；不使用pull_request_target，不向工作流注入用户令牌。Actions仅使用公开仓库标准免费运行器。
-
-GitHub调度可能排队或延迟；公共仓库60天无活动可能停用计划任务，需要定期维护、必要时在Actions重新启用。静态网站无需常驻进程，但第三方可用性与免费额度不由本项目保证。
-
-## 后续接入真实体育资讯
-
-1. 选定并核验免费RSS、官方公告、公开科研数据源，明确转载/引用权限和栏目规则；当前未预选实际来源。
-2. 在scripts/adapters/实现带中止信号、超时、固定HTTPS域名、响应体限制和安全XML解析的适配器，在index.mjs显式登记，在sources/config.json启用。返回candidates数组，每条含id、title、url、带时区publishedAt。
-3. 补齐来源链接、原文与内容类型、研究/政策版本状态、机会截止时间核验、持久去重、内容清洗、人工审阅、更正与撤回、发布事务及失败恢复。
-4. 检测器目前只统计候选，不写文章、不自动发布；autoPublish=true会被拒绝。必须实现并验证发布器后才讨论开启自动发布。真实内容准备完毕后统一替换演示数据、标签与署名，再取消noindex。
-
-## 官方参考
-
-- [GitHub Pages发布来源](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [GitHub CLI登录](https://cli.github.com/manual/gh_auth_login)
-- [GitHub Pages REST接口](https://docs.github.com/en/rest/pages/pages)
-- [公共仓库定时工作流停用规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows)
+真实跨语言/大幅改写事件的语义去重、论文质量评审、复杂资格/附件解析、自动撤回及人工纠错审批仍需后续完善。当前不会因此扩写原创结论或擅自填写未知字段。
