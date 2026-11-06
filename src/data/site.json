@@ -3,7 +3,7 @@
   "siteId": "sports-frontier",
   "tagline": "洞察体育发展，追踪科技与科研前沿",
   "description": "政视体育：体育头条、体育政策、体育科技、运动科学、科研机会与趋势研判。索引可核验的官方公开信息，保留原始来源与日期。",
-  "demo": true,
+  "demo": false,
   "categories": [
     {
       "slug": "headlines",

@@ -46,7 +46,7 @@ jobs:
         run: |
           node --input-type=module -e "import fs from 'node:fs';const s=JSON.parse(fs.readFileSync('src/data/site.json'));const c=JSON.parse(fs.readFileSync('sources/config.json'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'site_id='+s.siteId+'\npublication_enabled='+c.autoPublish+'\n')"
       - name: 恢复持久化历史（读取失败则停止，不用空数据覆盖历史）
-        if: steps.identity.outputs.publication_enabled == 'true' && github.event_name != 'pull_request'
+        if: steps.identity.outputs.publication_enabled == 'true'
         env:
           ROLLBACK_REF: ${{ inputs.mode == 'rollback' && inputs.rollback_ref || '' }}
         run: |
