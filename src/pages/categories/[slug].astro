@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostRow from '../../components/PostRow.astro';
+import {site,posts,url} from '../../lib/content.mjs';
+export function getStaticPaths(){return site.categories.map(category=>({params:{slug:category.slug},props:{category}}))}
+const {category}=Astro.props;
+const list=posts.filter(p=>p.category===category.slug);
+---
+<Layout title={category.name}><div class="page-heading"><p class="eyebrow"><a href={url('categories/')}>阅读栏目</a> / 演示</p><h1>{category.name}<span>。</span></h1><p>{category.description}</p></div><div class="listing">{list.map((post,index)=><PostRow post={post} index={index}/>)}</div></Layout>

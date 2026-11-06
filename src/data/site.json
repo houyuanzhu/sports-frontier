@@ -1,0 +1,11 @@
+{
+  "name": "资讯样刊",
+  "tagline": "让信息有序，让阅读从容。",
+  "description": "中文公共资讯网站演示，名称、栏目及内容均可配置。所有文章为演示内容，不代表真实新闻。",
+  "demo": true,
+  "categories": [
+    {"slug":"observation","name":"观察","description":"从不同角度，理解信息背后的脉络。"},
+    {"slug":"ideas","name":"新知","description":"给值得理解的概念，多一点阅读时间。"},
+    {"slug":"practice","name":"实践","description":"把清晰的方法，带入日常的信息阅读。"}
+  ]
+}

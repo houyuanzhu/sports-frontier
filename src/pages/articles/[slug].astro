@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Art from '../../components/Art.astro';
+import {posts,url,dateText,categoryName} from '../../lib/content.mjs';
+export function getStaticPaths(){return posts.map(post=>({params:{slug:post.slug},props:{post}}))}
+const {post}=Astro.props;
+const related=posts.filter(p=>p.slug!==post.slug&&p.category===post.category);
+---
+<Layout title={post.title} description={post.summary} article={post}><div class="breadcrumbs"><a href={url('articles/')}>全部内容</a><span>/</span><a href={url(`categories/${post.category}/`)}>{categoryName(post.category)}</a></div><article class="article"><header><p class="eyebrow">{categoryName(post.category)} / 演示文章</p><h1>{post.title}</h1><p class="standfirst">{post.summary}</p><div class="meta"><span>演示编辑部</span><time datetime={post.publishedAt}>{dateText(post.publishedAt,true)} 发布</time><span>{post.minutes} 分钟阅读</span></div></header><Art kind={post.art} large/><div class="article-body"><div class="notice">演示内容 · 本文用于展示阅读体验，不是真实资讯报道。</div>{post.body.map(part=><section><h2>{part.heading}</h2><p>{part.text}</p></section>)}<p class="article-end">— 本文完 —</p></div></article><section class="related"><div class="section-line"><h2>继续阅读</h2><a href={url('articles/')}>返回内容列表 ↗</a></div>{related.map(p=><a href={url(`articles/${p.slug}/`)}>{p.title} ↗</a>)}</section></Layout>

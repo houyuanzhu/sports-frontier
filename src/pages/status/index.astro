@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {dateText} from '../../lib/content.mjs';
+import status from '../../data/status.json';
+---
+<Layout title="运行状态"><div class="page-heading"><p class="eyebrow">透明运行记录</p><h1>检查有记录，更新有依据<span>。</span></h1><p>本页是最近一次成功部署时的状态快照。若部署失败，本页不会自动变化，请以仓库运行日志为准。</p></div><section class="status-detail"><h2>{status.state==='failed'?'检查失败':status.state==='not_configured'?'尚未接入内容源':status.state==='pending_review'?'发现候选内容，等待审阅':'检查完成，无新内容'}</h2><p>{status.message}</p><dl><dt>系统检查时间（北京时间）</dt><dd>{dateText(status.checkedAt,true)}</dd><dt>真实资讯最近发布时间</dt><dd>{dateText(status.lastContentPublishedAt,true)}</dd><dt>本次候选内容数（未发布）</dt><dd>{status.newCount} 篇</dd><dt>本次检查尝试次数</dt><dd>{status.attempts}</dd><dt>计划检查时间</dt><dd>每天北京时间08:10（可能延迟）</dd></dl><p>演示文章不计入真实资讯。发现候选内容也不会自动生成或发布文章。</p></section></Layout>

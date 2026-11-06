@@ -1,0 +1,12 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {detect} from './update-core.mjs';
+import {adapters} from './adapters/index.mjs';
+const config=JSON.parse(await readFile('sources/config.json','utf8'));
+if(config.autoPublish!==false)throw new Error('当前版本仅允许检测，禁止自动发布');
+const previous=JSON.parse(await readFile('src/data/status.json','utf8'));
+const status=await detect({sources:config.sources,registry:adapters,previousPublishedAt:previous.lastContentPublishedAt});
+await writeFile('src/data/status.json',JSON.stringify(status,null,2)+'\n');
+await mkdir('reports',{recursive:true});await writeFile('reports/update-status.json',JSON.stringify(status,null,2));
+console.log(JSON.stringify(status,null,2));
+if(process.env.GITHUB_STEP_SUMMARY)await writeFile(process.env.GITHUB_STEP_SUMMARY,`### 系统检查记录\n\n- 状态：${status.message}\n- 系统检查时间：${status.checkedAt}\n- 真实资讯发布时间：${status.lastContentPublishedAt||'尚无记录'}\n- 尝试次数：${status.attempts}\n`,{flag:'a'});
+if(status.state==='failed')process.exitCode=1;

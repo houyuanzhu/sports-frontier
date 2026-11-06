@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {posts,url,dateText,monthKey} from '../../lib/content.mjs';
+const months=[...new Set(posts.map(p=>monthKey(p.publishedAt)))];
+---
+<Layout title="内容归档"><div class="page-heading"><p class="eyebrow">时间索引 / 演示</p><h1>让阅读，留下轨迹<span>。</span></h1><p>按文章实际发布时间归档，系统检查不改变文章日期。</p></div><div class="archive">{months.map(month=><section><h2>{month.replace('-','年')}月</h2><div>{posts.filter(p=>monthKey(p.publishedAt)===month).map(p=><a href={url(`articles/${p.slug}/`)}><time datetime={p.publishedAt}>{dateText(p.publishedAt)}</time><span>{p.title}</span><span>↗</span></a>)}</div></section>)}</div></Layout>

@@ -1,0 +1,5 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {site,posts,url} from '../../lib/content.mjs';
+---
+<Layout title="阅读栏目"><div class="page-heading"><p class="eyebrow">栏目索引 / 演示配置</p><h1>不同视角，同样好奇<span>。</span></h1><p>从感兴趣的方向，开始下一次阅读。</p></div><div class="category-grid">{site.categories.map((c,i)=><a href={url(`categories/${c.slug}/`)}><span class="eyebrow">栏目 0{i+1}</span><h2>{c.name} ↗</h2><p>{c.description}</p><small>{posts.filter(p=>p.category===c.slug).length} 篇演示文章</small></a>)}</div></Layout>

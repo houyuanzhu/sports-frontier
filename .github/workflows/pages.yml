@@ -1,0 +1,97 @@
+name: 网站检查与免费部署
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '10 0 * * *' # UTC 00:10 = 北京时间08:10
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      check_outcome: ${{ steps.check.outcome }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: 检测内容源（适配器自动重试三次）
+        id: check
+        continue-on-error: true
+        run: npm run check:update
+      - name: 单元测试及静态构建检查
+        run: npm run verify
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+      - run: npx playwright install --with-deps chromium
+      - name: 响应式与交互测试
+        run: npm run test:browser
+      - name: 保存检查日志
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-reports
+          path: |
+            reports/
+            playwright-report/
+            test-results/
+          retention-days: 7
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: dist
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 发布静态页面
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: 验证公开网址与中文内容（网络失败重试）
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for attempt in 1 2 3; do
+            if curl --fail --location --max-time 30 "$PAGE_URL" -o /tmp/page.html && grep -q 'zh-CN' /tmp/page.html && grep -q '演示' /tmp/page.html; then
+              echo "公开首页已响应，中文标记检查通过。" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          exit 1
+  check-result:
+    if: always()
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: 保留内容源失败信号
+        env:
+          OUTCOME: ${{ needs.build.outputs.check_outcome }}
+          BUILD: ${{ needs.build.result }}
+          DEPLOY: ${{ needs.deploy.result }}
+        run: |
+          test "$OUTCOME" = success
+          test "$BUILD" = success
+          test "$DEPLOY" = success -o "$DEPLOY" = skipped

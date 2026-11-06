@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostRow from '../../components/PostRow.astro';
+import {posts,site,url} from '../../lib/content.mjs';
+---
+<Layout title="全部内容"><div class="page-heading"><p class="eyebrow">内容索引 / 演示</p><h1>全部内容<span>。</span></h1><p>按发布时间，浏览每一篇演示文章。</p></div><div class="filter-links"><a aria-current="page" href={url('articles/')}>全部 · {posts.length}</a>{site.categories.map(c=><a href={url(`categories/${c.slug}/`)}>{c.name}</a>)}</div><div class="listing">{posts.map((post,index)=><PostRow post={post} index={index}/>)}</div></Layout>
