@@ -10,7 +10,7 @@ export function robotsAllowed(text,url,agent='sports-frontier'){
 export function createClient(policy){let last=0;const robots=new Map(),blocked=new Set();const stats={requests:0,retries:0};
  async function request(value,{allow404=false}={}){
   let url=allowedUrl(value,policy.allowedHosts).href;
-  if(blocked.has(new URL(url).hostname))throw Error('该主机已返回403，本轮停止访问，不绕过限制');
+  if(blocked.has(url))throw Error('该URL已返回403，本轮不再访问，不绕过限制');
   for(let attempt=1;attempt<=3;attempt++){
    try{await delay(Math.max(0,policy.requestGapMs-(Date.now()-last)));last=Date.now();stats.requests++;
     let response;
@@ -19,7 +19,7 @@ export function createClient(policy){let last=0;const robots=new Map(),blocked=n
      if([301,302,303,307,308].includes(response.status)){await response.body?.cancel();url=allowedUrl(new URL(response.headers.get('location'),url).href,policy.allowedHosts).href;if(redirect===3)throw Error('重定向次数超限');continue}break;
     }
     if(response.status===404&&allow404){await response.body?.cancel();return {status:404,text:'',url}}
-    if(!response.ok){await response.body?.cancel();if(response.status===403)blocked.add(new URL(url).hostname);const error=Error(`HTTP ${response.status}`);error.noRetry=[400,401,403,404,410].includes(response.status);throw error}
+    if(!response.ok){await response.body?.cancel();if(response.status===403)blocked.add(url);const error=Error(`HTTP ${response.status}`);error.noRetry=[400,401,403,404,410].includes(response.status);throw error}
     if(/noindex|none/i.test(response.headers.get('x-robots-tag')||'')){await response.body?.cancel();const e=Error('来源X-Robots-Tag禁止索引');e.noRetry=true;throw e}
     const reader=response.body.getReader();const chunks=[];let length=0;try{while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>policy.maxResponseBytes)throw Error('响应体超过大小限制');chunks.push(value)}}finally{await reader.cancel()}
     const bytes=Buffer.concat(chunks);const charset=/charset\s*=\s*([\w-]+)/i.exec(response.headers.get('content-type')||'')?.[1]||'utf-8';return {status:response.status,text:new TextDecoder(charset).decode(bytes),url,bytes:length};

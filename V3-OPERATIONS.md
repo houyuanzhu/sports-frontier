@@ -10,7 +10,7 @@
 
 权利依据：https://www.sport.gov.cn/n323/n10459/c24206655/content.html
 
-robots.txt本地实测返回404，表示未发现robots规则，不表示获得版权许可；每次运行仍重新检查。403立即触发该主机本轮熔断，不换身份、代理或其他路径绕过。未知访问失败、结构变化、缺少日期或主体会写日志。
+robots.txt本地实测返回404，表示未发现robots规则，不表示获得版权许可；每次运行仍重新检查。403立即触发该来源本轮熔断，不换身份、代理或其他路径绕过。未知访问失败、结构变化、缺少日期或主体会写日志。
 
 体育科学研究所列表返回403、基金委连接失败，未接入。上海体育局列表可访问但使用规则未充分确认。Crossref、OpenAlex等元数据接口可访问，但中文结果的来源/学术质量尚未通过筛选，不将其检索结果当作已核实重要成果自动发布。
 
@@ -19,9 +19,9 @@ robots.txt本地实测返回404，表示未发现robots规则，不表示获得�
 - `npm run collect`：真实试采集，仅保存reports中的候选和检查状态，不写文章。
 - `npm run collect:publish`：必须通过三项门禁才写真实索引与待验证快照。
 - `sources/registry.json`：真实入口；`sources/policy.json`：允许主机、权利边界、速率、时间窗口与发布主体规则。
-- `scripts/source-client.mjs`：HTTPS允许列表、重定向校验、robots规则、体积/超时限制、限速、三次网络重试与403熔断。
+- `scripts/source-client.mjs`：HTTPS允许列表、重定向校验、robots规则、体积/超时限制、限速、三次网络重试与403单源熔断。
 - `scripts/ingest-core.mjs`：体育相关性、六栏目规则、保守跨来源去重、日期精度与机会空字段处理。
-- `reports/collection.json`：真实采集结果、跳过原因、请求与重试次数。单个来源故障不停止其他来源；共同主机被拒绝时仍尊重主机限制。
+- `reports/collection.json`：真实采集结果、跳过原因、请求与重试次数。单个来源故障不停止其他来源；被拒绝的URL不会再次请求；独立栏目仍分别检查，不改路径获取被拒绝内容。
 
 原文只给日期时保存YYYY-MM-DD、datePrecision=day、publicationTimezone=Asia/Shanghai，不补造00:00为发布时间。采集时间使用独立collectedAt。科研机会无唯一明确截止日期时保留null，申报条件未核实时保留null，不从公示期/落款日期推断截止时间。
 

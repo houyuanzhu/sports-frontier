@@ -24,10 +24,10 @@ export async function persist(dir='bundle'){
  const read=async name=>JSON.parse(await readFile(`${dir}/${name}`,'utf8'));const articles=await read('articles.json'),state=await read('state.json'),status=await read('status.json'),manifest=await read('manifest.json');validateSnapshot(articles,status,state);
  if(manifest.sourceCommit!==process.env.GITHUB_SHA)throw Error('候选包不属于当前代码提交');
  const remote=git(['ls-remote','origin','refs/heads/content-data']);const actual=remote.split(/\s/)[0]||'';
- if(actual!==(manifest.baseDataSha||''))throw Error('持久化分支已发生变化，拒绝覆盖');
  if(actual)git(['fetch','--no-tags','origin','refs/heads/content-data:refs/remotes/origin/content-data']);
  const entries=[];for(const name of ['articles.json','manifest.json','state.json','status.json']){const blob=git(['hash-object','-w','--stdin'],await readFile(`${dir}/${name}`,'utf8'));entries.push(`100644 blob ${blob}\t${name}`)}
  const tree=git(['mktree'],entries.join('\n')+'\n');if(actual&&tree===git(['show','-s','--format=%T',actual])){console.log('快照内容完全相同，不创建重复提交。');return}
+ if(actual!==(manifest.baseDataSha||''))throw Error('持久化分支已发生变化，拒绝覆盖');
  const sha=git(['-c','user.name=github-actions[bot]','-c','user.email=41898282+github-actions[bot]@users.noreply.github.com','commit-tree',tree,...(actual?['-p',actual]:[])],`保存已验证体育索引快照（${manifest.mode}）\n`);
  // token只经运行器环境进入官方gh凭据助手，不写入Git配置或命令参数。
  git(['-c','credential.helper=','-c','credential.helper=!gh auth git-credential','push','origin',`${sha}:refs/heads/content-data`]);console.log(`已保存数据提交 ${sha}`);

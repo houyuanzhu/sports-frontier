@@ -4,5 +4,7 @@ dist/
 playwright-report/
 test-results/
 reports/
+data/
+work/
 .env*
 !.env.example
