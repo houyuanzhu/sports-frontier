@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-11-06T08:50:22.345Z",
+  "state": "partial",
+  "newCount": 6,
+  "candidateCount": 6,
+  "duplicateCount": 0,
+  "attempts": 29,
+  "retries": 0,
+  "lastContentPublishedAt": "2026-10-13",
+  "latestCandidatePublishedAt": "2026-10-13",
+  "storedCount": 6,
+  "autoPublish": true,
+  "message": "本次核验新增 6 条官方信息索引。",
+  "sources": [
+    {
+      "sourceId": "sport-notices",
+      "name": "国家体育总局·通知公告",
+      "url": "https://www.sport.gov.cn/n315/n20001395/index.html",
+      "status": "partial",
+      "httpStatus": 200,
+      "robotsStatus": 404,
+      "rssDiscovered": false,
+      "method": "公开HTML元数据（非RSS、非专有API）",
+      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "seen": 8,
+      "notFetchedCount": 0,
+      "skipped": [
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c30150617/content.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c30128047/content.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c30127232/content.html",
+          "reason": "转载或未知原公开主体，未纳入发布许可范围"
+        },
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c30068905/content.html",
+          "reason": "转载或未知原公开主体，未纳入发布许可范围"
+        },
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c30030042/content.html",
+          "reason": "转载或未知原公开主体，未纳入发布许可范围"
+        },
+        {
+          "url": "https://www.sport.gov.cn/n315/n20001395/c29920345/content.html",
+          "reason": "HTTP 403"
+        }
+      ],
+      "acceptedCount": 2
+    },
+    {
+      "sourceId": "shanghai-policy",
+      "name": "上海市体育局·政策法规",
+      "url": "https://tyj.sh.gov.cn/fgcxxgk/index.html",
+      "status": "success",
+      "httpStatus": 200,
+      "robotsStatus": 404,
+      "rssDiscovered": false,
+      "method": "公开HTML元数据（非RSS、非专有API）",
+      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "seen": 8,
+      "notFetchedCount": 0,
+      "skipped": [
+        {
+          "url": "https://tyj.sh.gov.cn/mlghcyfg/20260417/84af075d382e4372b879add7c11a2e17.html",
+          "reason": "超出首次采集时间窗口"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/zcfg/20251117/cd6dd3c1841e467f9e14a5028fe4c74d.html",
+          "reason": "超出首次采集时间窗口"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/zcfg/20250512/7ee82a4383b64e55802791ba5b32a071.html",
+          "reason": "超出首次采集时间窗口"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/zcfg/20250116/da9c2903a724427dae94a7515c8bdd9c.html",
+          "reason": "超出首次采集时间窗口"
+        }
+      ],
+      "acceptedCount": 4
+    },
+    {
+      "sourceId": "shanghai-notices",
+      "name": "上海市体育局·公告通知",
+      "url": "https://tyj.sh.gov.cn/ggtz/index.html",
+      "status": "success",
+      "httpStatus": 200,
+      "robotsStatus": 404,
+      "rssDiscovered": false,
+      "method": "公开HTML元数据（非RSS、非专有API）",
+      "checkedAt": "2026-11-06T08:50:22.345Z",
+      "seen": 8,
+      "notFetchedCount": 0,
+      "skipped": [
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261106/c0283df03ba44d8eb51086d7bc6af9e2.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261104/adde06fd966142808860ed6572bc7aed.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261104/658e3034fee049308d0c07442980683f.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261103/d563c9f376bc4db4a619992ad1e16903.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261102/57a6420f9cd24a8783f4eb42bc158ece.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261102/93bcd643f60f4725b7d9ce2bc767f01b.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261102/fe294932c1294c098ca2b8e91a8c31c1.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        },
+        {
+          "url": "https://tyj.sh.gov.cn/ggtz/20261030/72db0f55720f4dcc8576d9bbe5716ee3.html",
+          "reason": "非体育专业资讯或行政名单，跳过"
+        }
+      ],
+      "acceptedCount": 0
+    }
+  ]
+}

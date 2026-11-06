@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "e9393bbdb73b85ecbe56",
+      "slug": "info-e9393bbdb73b85ecbe56",
+      "url": "https://www.sport.gov.cn/n315/n20001395/c30107282/content.html",
+      "titleHash": "63231a46ab8059a982db3bd531edbf2fc5af0da253799b3514bef6fc7bdb5647",
+      "publishedAt": "2026-10-13",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "7b0e1566fc765f83708a",
+      "slug": "info-7b0e1566fc765f83708a",
+      "url": "https://www.sport.gov.cn/n315/n20001395/c30043418/content.html",
+      "titleHash": "d2a4af83b5951ee5199e396631651c9c7fe202496c8c3180d2e9bc03e8b0dd23",
+      "publishedAt": "2026-09-16",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "69d199c5f5da0b206b95",
+      "slug": "info-69d199c5f5da0b206b95",
+      "url": "https://tyj.sh.gov.cn/mlghcyfg/20260820/8d19e6ea85a74bf1aed95d4903da57ee.html",
+      "titleHash": "48d5ad3f06821758d2ddabd1e77e28049529eea3e804c3d044a7a982cd8afda7",
+      "publishedAt": "2026-08-20",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "c85925e3c64b03d6dc85",
+      "slug": "info-c85925e3c64b03d6dc85",
+      "url": "https://tyj.sh.gov.cn/mlqskj/20260727/997b03366a1045fbbc5c39ac9ccae084.html",
+      "titleHash": "8fe3e6a4aeae78e754b191e50455d7f39432f9e1970397ed3c1657102886b806",
+      "publishedAt": "2026-07-27",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "508d7ac7fdf19b44eade",
+      "slug": "info-508d7ac7fdf19b44eade",
+      "url": "https://tyj.sh.gov.cn/mlrsws/20260714/e44c2e4ac20644d395d93f536e9d13a2.html",
+      "titleHash": "5bc4947efe1d368e831aeaa1b3869570ac9bbd3cf8c36c697f668812c58712d4",
+      "publishedAt": "2026-07-14",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "c2f4cfa65a5df8e551a9",
+      "slug": "info-c2f4cfa65a5df8e551a9",
+      "url": "https://tyj.sh.gov.cn/mlghcyfg/20260518/552f8addcacb4800ad55cf570b142970.html",
+      "titleHash": "0cadab261b3f4de8f4fec6c4b588c16f1e119e2fbbc8c11ebb7ec467303ef7ab",
+      "publishedAt": "2026-05-19",
+      "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    }
+  ],
+  "lastCheckedAt": "2026-11-06T08:50:22.345Z"
+}
