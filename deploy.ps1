@@ -21,6 +21,15 @@ function Invoke-Git {
   & git @Arguments
   if ($LASTEXITCODE -ne 0) { throw 'Git 操作失败。未验证部署成功。' }
 }
+function Push-WithRetry {
+  for ($attempt=1; $attempt -le 3; $attempt++) {
+    & git -c http.version=HTTP/1.1 push -u origin main
+    if ($LASTEXITCODE -eq 0) { return }
+    Write-Host "第$attempt 次推送失败，将重试现有仓库。"
+    Start-Sleep -Seconds 5
+  }
+  throw '推送连续失败，仓库与本地提交已保留，请稍后重新运行脚本。'
+}
 & gh auth status
 if ($LASTEXITCODE -ne 0) { throw '请先运行 gh auth login --hostname github.com --git-protocol https --web --scopes workflow 完成授权，再重试本脚本。' }
 $login = (Invoke-Gh @('api','user','--jq','.login')).Trim()
@@ -51,12 +60,12 @@ if ('origin' -notin $remotes) {
     $repo = "$login/$RepositoryName-$suffix"
     Write-Host "仓库名称冲突，改用：$repo"
   }
-  Invoke-Gh @('repo','create',$repo,'--public','--source','.','--remote','origin','--push','--description','政视体育：洞察体育发展，追踪科技与科研前沿。Astro与GitHub Pages免费静态网站，当前演示阶段。')
+  Invoke-Gh @('repo','create',$repo,'--public','--source','.','--remote','origin','--description','政视体育：洞察体育发展，追踪科技与科研前沿。Astro与GitHub Pages免费静态网站，当前演示阶段。')
 } else {
   $origin = Invoke-Git @('remote','get-url','origin')
   if ($origin -notin @("https://github.com/$repo.git","git@github.com:$repo.git","https://github.com/$repo")) { throw '当前 origin 与目标仓库不匹配，已停止。' }
-  Invoke-Git @('push','origin','main')
 }
+Push-WithRetry
 $visibility=(Invoke-Gh @('repo','view',$repo,'--json','visibility','--jq','.visibility')).Trim()
 if ($visibility -ne 'PUBLIC') { throw '仅允许免费公开仓库部署。' }
 & gh api "repos/$repo/pages" --silent 2>$null
