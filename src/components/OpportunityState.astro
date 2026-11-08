@@ -1,0 +1,19 @@
+---
+import {opportunityState,opportunityStates} from '../lib/publication.mjs';
+import {opportunityKind} from '../../scripts/ingest-core.mjs';
+const {post}=Astro.props;
+const state=opportunityState(post);
+---
+<span data-opportunity-state data-kind={post.opportunity?.kind||opportunityKind(post.title)} data-opens={post.opportunity?.opensAt} data-deadline={post.opportunity?.deadline}>{opportunityStates[state==='open'?'unverified':state]}</span>
+<script>
+import {opportunityState,opportunityStates} from '../lib/publication.mjs';
+function refresh(){
+ for(const el of document.querySelectorAll<HTMLElement>('[data-opportunity-state]')){
+  const {kind,opens,deadline}=el.dataset;
+  el.textContent=opportunityStates[opportunityState({title:'',opportunity:{kind,opensAt:opens,deadline}})];
+ }
+}
+refresh();
+window.addEventListener('pageshow',refresh);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+</script>
