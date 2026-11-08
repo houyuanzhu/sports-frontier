@@ -7,11 +7,11 @@ export function robotsAllowed(text,url,agent='sports-frontier'){
  const target=new URL(url).pathname+new URL(url).search;const matching=selected.flatMap(g=>g.rules).filter(r=>{const pattern=r.path.replace(/[.+?^{}()|[\]\\]/g,'\\$&').replace(/\*/g,'.*');return new RegExp('^'+pattern).test(target)}).sort((a,b)=>b.path.length-a.path.length||Number(b.allow)-Number(a.allow));
  return !matching.length||matching[0].allow;
 }
-export function createClient(policy){let last=0;const robots=new Map(),blocked=new Set();const stats={requests:0,retries:0};
+export function createClient(policy){let last=0;const robots=new Map(),blocked=new Set();const stats={requests:0,retries:0};const maxAttempts=policy.maxAttempts||3;
  async function request(value,{allow404=false,accept,checkRedirect}={}){
   let url=allowedUrl(value,policy.allowedHosts).href;
   if(blocked.has(url))throw Error('该URL已返回403，本轮不再访问，不绕过限制');
-  for(let attempt=1;attempt<=3;attempt++){
+  for(let attempt=1;attempt<=maxAttempts;attempt++){
    try{
     let response;
     for(let redirect=0;redirect<=3;redirect++){
@@ -24,7 +24,7 @@ export function createClient(policy){let last=0;const robots=new Map(),blocked=n
     if(/noindex|none/i.test(response.headers.get('x-robots-tag')||'')){await response.body?.cancel();const e=Error('来源X-Robots-Tag禁止索引');e.noRetry=true;throw e}
     const reader=response.body.getReader();const chunks=[];let length=0;try{while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>policy.maxResponseBytes)throw Error('响应体超过大小限制');chunks.push(value)}}finally{await reader.cancel()}
     const bytes=Buffer.concat(chunks);const charset=/charset\s*=\s*([\w-]+)/i.exec(response.headers.get('content-type')||'')?.[1]||'utf-8';return {status:response.status,text:new TextDecoder(charset).decode(bytes),url,bytes:length};
-   }catch(e){if(e.noRetry||attempt===3)throw e;stats.retries++;await delay(Math.max(attempt*1000,e.retryMs||0))}
+   }catch(e){if(e.noRetry||attempt===maxAttempts)throw e;stats.retries++;await delay(Math.max(attempt*1000,e.retryMs||0))}
   }
  }
  return {stats,async page(url,{accept}={}){const origin=allowedUrl(url,policy.allowedHosts).origin;if(!robots.has(origin)){try{const result=await request(origin+'/robots.txt',{allow404:true,accept:'text/plain,*/*;q=0.2'});robots.set(origin,result)}catch(error){error.sourceStage='robots';robots.set(origin,{error});}}const rules=robots.get(origin);if(rules.error)throw rules.error;if(!robotsAllowed(rules.text,url))throw Error('robots.txt禁止访问该路径');const result=await request(url,{accept,checkRedirect:target=>robotsAllowed(rules.text,target)});return {...result,robotsStatus:rules.status}},request};

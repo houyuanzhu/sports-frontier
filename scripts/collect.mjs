@@ -5,7 +5,8 @@ import {createClient} from './source-client.mjs';
 import {collectSource} from './adapters/sport-html.mjs';
 import {collectResearch} from './adapters/crossref.mjs';
 import {registry,validateRecordUrl} from './source-registry.mjs';
-import {mergeCandidates,hash,publishedDate,canonicalUrl} from './ingest-core.mjs';
+import {collectionReceipt,recoverySources} from './schedule-guard.mjs';
+import {beijingDay,mergeCandidates,hash,publishedDate,canonicalUrl} from './ingest-core.mjs';
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const config=await read('sources/config.json'),policy=await read('sources/policy.json');
 const phase=Number(process.env.SOURCE_PHASE||config.phase||1),now=new Date();
@@ -22,17 +23,31 @@ for(const c of corrections){
  if(c.verifiedDeadline!==undefined&&(c.action!=='notice'||publishedDate(c.verifiedDeadline,now).datePrecision!=='day'))throw Error('更正中的历史截止日期无效');
  correctionUrls.add(url);
 }
-const selected=registry.filter(s=>s.enabled&&s.phase<=phase&&(!process.env.SOURCE_ID||s.id===process.env.SOURCE_ID));
+const recovery=process.env.COLLECTION_MODE==='recovery';
+const recoveryDay=beijingDay(now);
+const enabled=registry.filter(source=>source.enabled&&source.phase<=phase);
+const requested=(process.env.RECOVERY_IDS||'').split(',').filter(Boolean);
+const eligible=recoverySources(collectionReceipt(previous),recoveryDay,now);
+if(recovery&&(!publish||process.env.RECOVERY_DAY!==recoveryDay||!requested.length||requested.some(id=>!eligible.includes(id)||!enabled.some(source=>source.id===id))))throw Error('补检计划与已恢复的数据快照不一致，已停止补检');
+const selected=enabled.filter(source=>(!process.env.SOURCE_ID||source.id===process.env.SOURCE_ID)&&(!recovery||requested.includes(source.id)));
 if(!selected.length||(publish&&process.env.SOURCE_ID))throw Error('选定来源不符合采集模式');
-const client=createClient({...policy,allowedHosts:[...new Set(selected.map(s=>new URL(s.url).hostname))]});const results=[];
+const client=createClient({...policy,...(recovery?{maxAttempts:1}:{}),allowedHosts:[...new Set(selected.map(s=>new URL(s.url).hostname))]});const results=[];
 for(const source of selected){
  try{results.push(await (source.method==='crossref'?collectResearch(source,client,now):collectSource(source,client,policy,now)))}
  catch(e){results.push({sourceId:source.id,name:source.name,url:source.url,status:'failed',checkedAt:now.toISOString(),candidates:[],skipped:[],error:e.message,issue:sourceIssue(e,source.method==='crossref'?'api':'list')})}
 }
 const all=results.flatMap(s=>s.candidates);const merged=mergeCandidates(existing,all,corrections);
-const failures=results.filter(s=>s.status==='failed').length;const partial=results.some(s=>s.status!=='success');
-const state=failures===results.length?'failed':partial?'partial':merged.added?'updated':'no_change';
-const status={checkedAt:now.toISOString(),finishedAt:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID||null,schedule:process.env.SCHEDULE_CRON||null,state,newCount:publish?merged.added:0,candidateCount:merged.added,duplicateCount:merged.duplicates,heldCount:merged.held,reviewCount:merged.review.length,attempts:client.stats.requests,retries:client.stats.retries,lastContentPublishedAt:(publish?merged.articles[0]?.publishedAt:existing[0]?.publishedAt)||previous.lastContentPublishedAt||null,latestCandidatePublishedAt:all.map(post=>post.publishedAt).sort().at(-1)||null,storedCount:publish?merged.articles.length:existing.length,autoPublish:publish,message:state==='failed'?'所有来源均不可用，保留已有资讯；请查看日志。':publish?(merged.added?`本次核验新增 ${merged.added} 条公开信息索引。`:'检查完成，没有通过核验的新增资讯。'):`试采集发现 ${merged.added} 条候选，未发布。`,sources:results.map(({candidates,...rest})=>({...rest,acceptedCount:candidates.length}))};
+const finishedAt=new Date().toISOString();
+const scanned=results.map(({candidates,...rest})=>({...rest,acceptedCount:candidates.length,lastAttemptAt:finishedAt}));
+const covered=new Map((recovery?previous.sources||[]:[]).map(source=>[source.sourceId,source]));
+for(const source of scanned)covered.set(source.sourceId,source);
+const sources=[...covered.values()];
+const failures=sources.filter(s=>s.status==='failed').length;
+const partial=sources.some(s=>s.status!=='success');
+const state=failures===sources.length?'failed':partial?'partial':merged.added?'updated':'no_change';
+const recoveryAttempts={...previous.recoveryAttempts};
+if(recovery)for(const source of scanned)recoveryAttempts[source.sourceId]=recoveryDay;
+const status={checkedAt:now.toISOString(),finishedAt,collectionMode:recovery?'recovery':'normal',recoveryAttempts,scannedSourceIds:scanned.map(source=>source.sourceId),runId:process.env.GITHUB_RUN_ID||null,schedule:process.env.SCHEDULE_CRON||null,state,newCount:publish?merged.added:0,candidateCount:merged.added,duplicateCount:merged.duplicates,heldCount:merged.held,reviewCount:merged.review.length,attempts:client.stats.requests,retries:client.stats.retries,lastContentPublishedAt:(publish?merged.articles[0]?.publishedAt:existing[0]?.publishedAt)||previous.lastContentPublishedAt||null,latestCandidatePublishedAt:all.map(post=>post.publishedAt).sort().at(-1)||null,storedCount:publish?merged.articles.length:existing.length,autoPublish:publish,message:state==='failed'?'所有来源均不可用，保留已有资讯；请查看日志。':publish?(merged.added?`本次核验新增 ${merged.added} 条公开信息索引。`:'检查完成，没有通过核验的新增资讯。'):`试采集发现 ${merged.added} 条候选，未发布。`,sources};
 const known=new Set(existing.map(post=>post.slug));
 const added=merged.articles.filter(post=>!known.has(post.slug)&&post.editorial?.action!=='withdraw');
 status.sourceHistory=sourceHistory(previous.sourceHistory,results,publish?merged.articles:existing,publish?added:[],status.finishedAt);
@@ -55,6 +70,6 @@ if(publish){
  const manifest={schemaVersion:1,createdAt:now.toISOString(),sourceCommit:process.env.GITHUB_SHA||'local',baseDataSha:process.env.BASE_DATA_SHA||'',mode:'update',articleCount:merged.articles.length};
  for(const [name,value] of Object.entries({'articles.json':merged.articles,'state.json':ledger,'status.json':status,'manifest.json':manifest}))await writeFile('reports/publish-bundle/'+name,JSON.stringify(value,null,2)+'\n');
 }
-if(process.env.GITHUB_STEP_SUMMARY)await writeFile(process.env.GITHUB_STEP_SUMMARY,`### 真实来源检查\n\n${status.message}\n\n- 系统检查：${status.checkedAt}\n- 来源内容最新日期：${status.lastContentPublishedAt||'无'}\n- 实际新增：${status.newCount}\n- 去重：${status.duplicateCount}\n- 失败来源：${failures}/${results.length}\n`,{flag:'a'});
+if(process.env.GITHUB_STEP_SUMMARY)await writeFile(process.env.GITHUB_STEP_SUMMARY,`### 真实来源检查\n\n${status.message}\n\n- 运行方式：${status.collectionMode}（${status.scannedSourceIds.join(', ')}）\n- 系统检查：${status.checkedAt}\n- 来源内容最新日期：${status.lastContentPublishedAt||'无'}\n- 实际新增：${status.newCount}\n- 去重：${status.duplicateCount}\n- 失败来源：${failures}/${results.length}\n`,{flag:'a'});
 if(process.env.GITHUB_OUTPUT)await writeFile(process.env.GITHUB_OUTPUT,`all_failed=${state==='failed'}\nnew_count=${status.newCount}\n`,{flag:'a'});
 console.log(JSON.stringify({state,checkedAt:status.checkedAt,added:merged.added,total:merged.articles.length,duplicates:merged.duplicates,network:client.stats,sources:status.sources.map(s=>({id:s.sourceId,status:s.status,accepted:s.acceptedCount,skipped:s.skipped.length,issue:s.issue,error:s.error}))},null,2));

@@ -52,9 +52,10 @@ test('真实候选口径分开，连续故障、成功恢复及待抽查队列�
  assert.deepEqual(auditQueue(queue,[post],[post],'2026-11-09T00:00:00Z'),queue);
 });
 
-test('同日已部署即跳过备用，两次计划均使用同一防重复门禁',()=>{
+test('同日完整成功才满足全量检查跳过条件',()=>{
  const live={siteId:'sports-frontier',schemaVersion:1,autoPublish:true,collectionState:'partial',checkedAt:'2026-11-07T16:01:00Z'};
- assert.equal(skipSchedule(live,new Date('2026-11-08T03:37:00Z')),true);
+ assert.equal(skipSchedule(live,new Date('2026-11-08T03:37:00Z')),false);
+ assert.equal(skipSchedule({...live,collectionState:'no_change'},new Date('2026-11-08T03:37:00Z')),true);
  assert.equal(skipSchedule({...live,collectionState:'failed'},new Date('2026-11-08T03:37:00Z')),false);
  assert.equal(skipSchedule({...live,collectionState:'rolled_back'},new Date('2026-11-08T03:37:00Z')),false);
  assert.equal(skipSchedule(live,new Date('2026-11-09T00:10:00Z')),false);

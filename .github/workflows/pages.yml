@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 更新或恢复历史内容快照
+        description: 更新、补检允许访问的故障来源或恢复快照
         type: choice
-        options: [update, rollback]
+        options: [update, recover, rollback]
         default: update
       rollback_ref:
         description: 回滚时填写content-data分支的完整提交SHA
@@ -28,29 +28,40 @@ jobs:
     timeout-minutes: 2
     permissions:
       contents: read
+      actions: read
     outputs:
+      mode: ${{ steps.guard.outputs.mode }}
+      reason: ${{ steps.guard.outputs.reason }}
+      day: ${{ steps.guard.outputs.day }}
+      ids: ${{ steps.guard.outputs.ids }}
       skip: ${{ steps.guard.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.mode == 'recover'
         with:
           persist-credentials: false
       - id: guard
-        name: 同日已部署检查去重
+        name: 确定正常采集、补检或跳过
         env:
           EVENT: ${{ github.event_name }}
+          INPUT_MODE: ${{ inputs.mode }}
           SCHEDULE_CRON: ${{ github.event.schedule }}
           PAGES_HEALTH: https://houyuanzhu.github.io/sports-frontier/health.json
+          GH_TOKEN: ${{ github.token }}
         run: |
-          printf '计划 cron：%s；实际执行：%s\n' "$SCHEDULE_CRON" "$(date -u +%FT%TZ)" >> "$GITHUB_STEP_SUMMARY"
-          if [ "$EVENT" = schedule ] && curl -fsS --max-time 15 "$PAGES_HEALTH?run=$GITHUB_RUN_ID" -o health.json; then
-            if node scripts/schedule-guard.mjs health.json; then
-              echo 'skip=true' >> "$GITHUB_OUTPUT"
-              echo '同一北京时间日已有成功上线的采集结果，本次跳过采集与部署。' >> "$GITHUB_STEP_SUMMARY"
-              exit 0
-            fi
+          if [ "$EVENT" != schedule ] && [ "$INPUT_MODE" != recover ]; then
+            printf 'skip=false\nmode=normal\n' >> "$GITHUB_OUTPUT"
+            exit 0
           fi
-          echo 'skip=false' >> "$GITHUB_OUTPUT"
+          export RUN_CREATED_AT
+          RUN_CREATED_AT=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --jq .created_at)
+          if curl -fsS --max-time 15 "$PAGES_HEALTH?run=$GITHUB_RUN_ID" -o health.json; then
+            plan=$(node scripts/schedule-guard.mjs health.json)
+          else
+            plan=$(node scripts/schedule-guard.mjs)
+          fi
+          printf '调度决策：%s\n' "$plan" >> "$GITHUB_STEP_SUMMARY"
+          jq -r '"mode="+.mode,"reason="+.reason,"day="+.day,"ids="+(.ids|join(",")),"skip="+(.mode=="skip"|tostring)' <<< "$plan" >> "$GITHUB_OUTPUT"
   build:
     needs: schedule-check
     if: needs.schedule-check.outputs.skip != 'true'
@@ -89,6 +100,9 @@ jobs:
         env:
           ENABLED: ${{ steps.identity.outputs.publication_enabled }}
           SCHEDULE_CRON: ${{ github.event.schedule }}
+          COLLECTION_MODE: ${{ needs.schedule-check.outputs.mode }}
+          RECOVERY_DAY: ${{ needs.schedule-check.outputs.day }}
+          RECOVERY_IDS: ${{ needs.schedule-check.outputs.ids }}
         run: |
           if [ "$ENABLED" = true ] && [ "$GITHUB_EVENT_NAME" != pull_request ]; then
             node scripts/collect.mjs --publish
@@ -197,6 +211,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           SCHEDULE_CRON: ${{ github.event.schedule }}
           GATE_SKIP: ${{ needs.schedule-check.outputs.skip }}
+          GATE_MODE: ${{ needs.schedule-check.outputs.mode }}
+          GATE_REASON: ${{ needs.schedule-check.outputs.reason }}
+          GATE_IDS: ${{ needs.schedule-check.outputs.ids }}
         run: |
           case "$SCHEDULE_CRON" in
             '10 0 * * *') clock=08:10 ;;
@@ -210,7 +227,7 @@ jobs:
         with:
           name: schedule-timing
           path: schedule-timing.json
-          retention-days: 7
+          retention-days: 21
       - name: 保留失败信号，不将检查成功等同资讯更新
         env:
           ALL_FAILED: ${{ needs.build.outputs.all_failed }}

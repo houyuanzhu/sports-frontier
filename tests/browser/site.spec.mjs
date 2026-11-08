@@ -62,3 +62,19 @@ test('每日情报、研究精选和风口观察可公开阅读并适配三种�
   await expect(page.locator('meta[name=robots]')).toHaveAttribute('content',/noindex/);
  }
 });
+test('首页正式发布与今日收录分开，历史简报同时标明三种时间',async({page})=>{
+ await page.goto(base+'/');
+ await expect(page.getByRole('heading',{name:/近期正式发布/})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'今日新收录'})).toBeVisible();
+ await expect(page.getByRole('heading',{name:/常规政策索引与赛事规程/})).toBeVisible();
+ const axes=page.getByLabel('情报时间口径');
+ await expect(axes).toContainText('最近原始信息发布日期');
+ await expect(axes).toContainText('最近一期网站首次收录日');
+ await expect(axes).toContainText('最近采集检查时间');
+ await page.getByRole('link',{name:'阅读最近一期'}).click();
+ await expect(page.locator('h1')).toContainText('首次收录');
+ const row=page.locator('.edition-item').first();
+ await expect(row.locator('time').first()).toContainText('原始信息发布');
+ await expect(row.locator('time').last()).toContainText('网站首次收录');
+ expect(await row.locator('time').first().getAttribute('datetime')).not.toBe(await row.locator('time').last().getAttribute('datetime'));
+});
