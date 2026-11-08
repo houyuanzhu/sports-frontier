@@ -9,7 +9,8 @@
     "method": "html",
     "timezone": "Asia/Shanghai",
     "maxDetails": 14,
-    "classificationBasis": "延用原审查范围，按公告文种与明确体育主题判定"
+    "classificationBasis": "延用原审查范围，按公告文种与明确体育主题判定",
+    "opportunitySlots": 3
   },
   {
     "id": "sport-local",
@@ -155,7 +156,8 @@
     "id": "fujian-sports",
     "name": "福建省体育局·工作动态",
     "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/",
-    "defaultCategory": "headlines"
+    "defaultCategory": "headlines",
+    "opportunitySlots": 3
   },
   {
     "enabled": true,
@@ -231,7 +233,8 @@
       ],
       "pathPattern": "^/tzgg/index_1\\.htm$"
     },
-    "bodySelector": ".xl-article-nr"
+    "bodySelector": ".xl-article-nr",
+    "opportunitySlots": 3
   },
   {
     "id": "crossref-sports-engineering",

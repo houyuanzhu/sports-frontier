@@ -1,6 +1,6 @@
 import {sourceIssue} from '../source-quality.mjs';
 import {load} from 'cheerio';
-import {beijingDay,canonicalUrl,clean} from '../ingest-core.mjs';
+import {beijingDay,canonicalUrl,classify,clean} from '../ingest-core.mjs';
 
 export async function discover(source,client,policy,now){
  const origin=new URL(source.url).origin;
@@ -38,6 +38,11 @@ export async function discover(source,client,policy,now){
  const today=beijingDay(now);
  const entries=[...urls.values()].sort((a,b)=>Number(a.pinned)-Number(b.pinned)||(b.date&&b.date<=today?b.date:'').localeCompare(a.date&&a.date<=today?a.date:'', 'en'));
  const maxDetails=Math.min(24,source.maxDetails||policy.maxItemsPerSource);
- const chosen=entries.slice(0,maxDetails);
+ const reserved=Math.min(source.opportunitySlots||0,maxDetails);
+ const priority=reserved?entries.filter(entry=>{
+  const age=(Date.parse(today)-Date.parse(entry.date))/86400000;
+  return !entry.pinned&&age>=0&&age<=(source.maxAgeDays||policy.maxAgeDays)&&classify(entry.title,source.defaultCategory,source.classificationProfile).category==='opportunities';
+ }).slice(0,reserved):[];
+ const chosen=[...priority,...entries.filter(entry=>!priority.includes(entry))].slice(0,maxDetails);
  return {entries:chosen,listed:entries.length,notFetched:entries.length-chosen.length,pinned:entries.filter(entry=>entry.pinned).length,pages,listFailure};
 }

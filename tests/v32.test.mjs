@@ -60,3 +60,19 @@ test('同日已部署即跳过备用，两次计划均使用同一防重复门�
  assert.equal(skipSchedule(live,new Date('2026-11-09T00:10:00Z')),false);
  assert.equal(skipSchedule(null),false);
 });
+import {discover} from '../scripts/adapters/list-pages.mjs';
+
+test('福建等重点入口在原预算内预留机会名额，过期和置顶条目不占用预留',async()=>{
+ const origin='https://fixture.invalid';
+ const entries=[
+  ['2026-11-07','体育赛事开赛','event',''],
+  ['2026-11-06','体育科研课题申报','open',''],
+  ['2026-11-08','体育科研课题申报','pinned','class="pinned"'],
+  ['2026-01-01','体育科研课题申报','old','']
+ ];
+ const client={page:async url=>({url,status:200,robotsStatus:404,text:entries.map(([date,title,slug,attrs])=>`<li ${attrs}>${date}<a href="/detail/${slug}">${title}</a></li>`).join('')})};
+ const source={url:origin+'/list',articlePathPattern:'/detail/[a-z]+$',maxDetails:1,opportunitySlots:1,maxAgeDays:45,defaultCategory:'headlines',classificationProfile:'strict'};
+ const result=await discover(source,client,{},new Date('2026-11-08'));
+ assert.deepEqual(result.entries.map(e=>e.url),[origin+'/detail/open']);
+ assert.equal(result.notFetched,3);
+});

@@ -27,5 +27,5 @@ export function createClient(policy){let last=0;const robots=new Map(),blocked=n
    }catch(e){if(e.noRetry||attempt===3)throw e;stats.retries++;await delay(Math.max(attempt*1000,e.retryMs||0))}
   }
  }
- return {stats,async page(url,{accept}={}){const origin=allowedUrl(url,policy.allowedHosts).origin;if(!robots.has(origin)){try{const result=await request(origin+'/robots.txt',{allow404:true,accept:'text/plain,*/*;q=0.2'});robots.set(origin,result)}catch(error){error.sourceStage='robots';throw error}}const rules=robots.get(origin);if(!robotsAllowed(rules.text,url))throw Error('robots.txt禁止访问该路径');const result=await request(url,{accept,checkRedirect:target=>robotsAllowed(rules.text,target)});return {...result,robotsStatus:rules.status}},request};
+ return {stats,async page(url,{accept}={}){const origin=allowedUrl(url,policy.allowedHosts).origin;if(!robots.has(origin)){try{const result=await request(origin+'/robots.txt',{allow404:true,accept:'text/plain,*/*;q=0.2'});robots.set(origin,result)}catch(error){error.sourceStage='robots';robots.set(origin,{error});}}const rules=robots.get(origin);if(rules.error)throw rules.error;if(!robotsAllowed(rules.text,url))throw Error('robots.txt禁止访问该路径');const result=await request(url,{accept,checkRedirect:target=>robotsAllowed(rules.text,target)});return {...result,robotsStatus:rules.status}},request};
 }
