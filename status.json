@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-11-08T08:09:59.403Z",
-  "finishedAt": "2026-11-08T08:11:33.847Z",
-  "runId": "42461597005",
+  "checkedAt": "2026-11-08T08:12:56.911Z",
+  "finishedAt": "2026-11-08T08:14:42.326Z",
+  "runId": "42461814766",
   "schedule": null,
   "state": "partial",
   "newCount": 0,
@@ -9,8 +9,8 @@
   "duplicateCount": 27,
   "heldCount": 0,
   "reviewCount": 0,
-  "attempts": 114,
-  "retries": 2,
+  "attempts": 116,
+  "retries": 4,
   "lastContentPublishedAt": "2026-11-06T17:13+08:00",
   "latestCandidatePublishedAt": "2026-11-06T17:13+08:00",
   "storedCount": 27,
@@ -25,7 +25,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://www.sport.gov.cn/n315/n20001395/index.html",
@@ -114,7 +114,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.sh.gov.cn/fgcxxgk/index.html",
@@ -214,7 +214,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.sh.gov.cn/ggtz/index.html",
@@ -391,7 +391,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/index.html",
@@ -578,7 +578,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/index.html",
@@ -721,7 +721,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/",
@@ -931,7 +931,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/jjty/",
@@ -1105,7 +1105,7 @@
       "name": "厦门市体育局·体育新闻",
       "url": "https://sports.xm.gov.cn/tyxw/",
       "status": "failed",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1122,7 +1122,7 @@
       "name": "厦门市体育局·通知公告",
       "url": "https://sports.xm.gov.cn/tzgg/",
       "status": "failed",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1142,7 +1142,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "Crossref 公共书目 API",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://api.crossref.org/journals/1369-7072/works?filter=from-pub-date%3A2026-10-04%2Cuntil-pub-date%3A2026-11-08%2Ctype%3Ajournal-article&sort=published&order=desc&rows=8",
@@ -1161,7 +1161,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "Crossref 公共书目 API",
-      "checkedAt": "2026-11-08T08:09:59.403Z",
+      "checkedAt": "2026-11-08T08:12:56.911Z",
       "pages": [
         {
           "url": "https://api.crossref.org/journals/1476-3141/works?filter=from-pub-date%3A2026-10-04%2Cuntil-pub-date%3A2026-11-08%2Ctype%3Ajournal-article&sort=published&order=desc&rows=8",
@@ -1187,14 +1187,20 @@
           "state": "partial",
           "accepted": 2,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "partial",
+          "accepted": 2,
+          "new": 0
         }
       ],
-      "attempts": 2,
+      "attempts": 3,
       "successes": 0,
-      "partial": 2,
+      "partial": 3,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 193516,
+      "failureMs": 381995,
       "publishedCount": 2,
       "consecutiveSuccesses": 0
     },
@@ -1211,16 +1217,22 @@
           "state": "success",
           "accepted": 4,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 4,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 4,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "shanghai-notices": {
       "recent": [
@@ -1235,16 +1247,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "beijing-sports": {
       "recent": [
@@ -1259,16 +1277,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "beijing-notices": {
       "recent": [
@@ -1283,16 +1307,22 @@
           "state": "success",
           "accepted": 4,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 4,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 4,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "fujian-sports": {
       "recent": [
@@ -1307,16 +1337,22 @@
           "state": "success",
           "accepted": 1,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 1,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 1,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "fujian-events": {
       "recent": [
@@ -1331,16 +1367,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "xiamen-news": {
       "recent": [
@@ -1355,14 +1397,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 2,
+      "attempts": 3,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 193516,
+      "failureMs": 381995,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -1379,14 +1427,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 2,
+      "attempts": 3,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 193516,
+      "failureMs": 381995,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -1403,16 +1457,22 @@
           "state": "success",
           "accepted": 8,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 8,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 8,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     },
     "crossref-sports-biomechanics": {
       "recent": [
@@ -1427,16 +1487,22 @@
           "state": "success",
           "accepted": 8,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T08:14:42.326Z",
+          "state": "success",
+          "accepted": 8,
+          "new": 0
         }
       ],
-      "attempts": 2,
-      "successes": 2,
+      "attempts": 3,
+      "successes": 3,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T08:11:33.847Z",
+      "lastSuccessAt": "2026-11-08T08:14:42.326Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 8,
-      "consecutiveSuccesses": 2
+      "consecutiveSuccesses": 3
     }
   },
   "quality": {
