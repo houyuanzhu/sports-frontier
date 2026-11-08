@@ -1,18 +1,33 @@
 {
-  "checkedAt": "2026-11-08T08:59:49.896Z",
-  "finishedAt": "2026-11-08T09:01:27.846Z",
-  "runId": "42465228704",
+  "checkedAt": "2026-11-08T09:34:14.482Z",
+  "finishedAt": "2026-11-08T09:35:31.102Z",
+  "collectionMode": "normal",
+  "recoveryAttempts": {},
+  "scannedSourceIds": [
+    "sport-notices",
+    "shanghai-policy",
+    "shanghai-notices",
+    "beijing-sports",
+    "beijing-notices",
+    "fujian-sports",
+    "fujian-events",
+    "xiamen-news",
+    "xiamen-notices",
+    "crossref-sports-engineering",
+    "crossref-sports-biomechanics"
+  ],
+  "runId": "42467711552",
   "schedule": null,
   "state": "partial",
   "newCount": 0,
   "candidateCount": 0,
-  "duplicateCount": 27,
+  "duplicateCount": 23,
   "heldCount": 0,
   "reviewCount": 0,
-  "attempts": 114,
-  "retries": 2,
+  "attempts": 82,
+  "retries": 4,
   "lastContentPublishedAt": "2026-11-06T17:13+08:00",
-  "latestCandidatePublishedAt": "2026-11-06T17:13+08:00",
+  "latestCandidatePublishedAt": "2026-11-06",
   "storedCount": 27,
   "autoPublish": true,
   "message": "检查完成，没有通过核验的新增资讯。",
@@ -25,7 +40,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://www.sport.gov.cn/n315/n20001395/index.html",
@@ -104,7 +119,8 @@
           }
         }
       ],
-      "acceptedCount": 2
+      "acceptedCount": 2,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "shanghai-policy",
@@ -114,7 +130,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://tyj.sh.gov.cn/fgcxxgk/index.html",
@@ -204,7 +220,8 @@
           }
         }
       ],
-      "acceptedCount": 4
+      "acceptedCount": 4,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "shanghai-notices",
@@ -214,7 +231,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://tyj.sh.gov.cn/ggtz/index.html",
@@ -381,337 +398,44 @@
           }
         }
       ],
-      "acceptedCount": 0
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "beijing-sports",
       "name": "北京市体育局·工作动态",
       "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/index.html",
-      "status": "success",
-      "httpStatus": 200,
-      "robotsStatus": 404,
-      "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
-      "pages": [
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/index.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/8a9ad286-2.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/8a9ad286-3.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        }
-      ],
-      "seen": 60,
-      "pinnedCount": 0,
-      "notFetchedCount": 46,
-      "skipped": [
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744154803/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744154551/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744154455/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744154452/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744154446/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744153958/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744153384/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744153308/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152974/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152933/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152926/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152921/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152658/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744152654/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        }
-      ],
-      "acceptedCount": 0
+      "status": "failed",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
+      "skipped": [],
+      "error": "fetch failed",
+      "issue": {
+        "kind": "timeout",
+        "stage": "robots",
+        "http": null,
+        "code": "ETIMEDOUT",
+        "message": "fetch failed"
+      },
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "beijing-notices",
       "name": "北京市体育局·通知公告",
       "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/index.html",
-      "status": "success",
-      "httpStatus": 200,
-      "robotsStatus": 404,
-      "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
-      "pages": [
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/index.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/5bdf6043-2.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/5bdf6043-3.html",
-          "httpStatus": 200,
-          "robotsStatus": 404
-        }
-      ],
-      "seen": 60,
-      "pinnedCount": 0,
-      "notFetchedCount": 46,
-      "skipped": [
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156696/index.html",
-          "reason": "缺少明确的专业栏目依据，留待人工核验",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "缺少明确的专业栏目依据，留待人工核验"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156019/index.html",
-          "reason": "缺少明确的专业栏目依据，留待人工核验",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "缺少明确的专业栏目依据，留待人工核验"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744155929/index.html",
-          "reason": "非体育专业资讯或行政名单，跳过",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "非体育专业资讯或行政名单，跳过"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744155335/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744155431/index.html",
-          "reason": "转载或未知原公开主体，未纳入发布许可范围",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "转载或未知原公开主体，未纳入发布许可范围"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744151191/index.html",
-          "reason": "非体育专业资讯或行政名单，跳过",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "非体育专业资讯或行政名单，跳过"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744151009/index.html",
-          "reason": "非体育专业资讯或行政名单，跳过",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "非体育专业资讯或行政名单，跳过"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744150441/index.html",
-          "reason": "缺少明确的专业栏目依据，留待人工核验",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "缺少明确的专业栏目依据，留待人工核验"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744144062/index.html",
-          "reason": "非体育专业资讯或行政名单，跳过",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "非体育专业资讯或行政名单，跳过"
-          }
-        },
-        {
-          "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744138532/index.html",
-          "reason": "非体育专业资讯或行政名单，跳过",
-          "issue": {
-            "kind": "excluded",
-            "stage": "detail",
-            "http": null,
-            "code": null,
-            "message": "非体育专业资讯或行政名单，跳过"
-          }
-        }
-      ],
-      "acceptedCount": 4
+      "status": "failed",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
+      "skipped": [],
+      "error": "fetch failed",
+      "issue": {
+        "kind": "timeout",
+        "stage": "robots",
+        "http": null,
+        "code": "ETIMEDOUT",
+        "message": "fetch failed"
+      },
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "fujian-sports",
@@ -721,7 +445,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/",
@@ -921,7 +645,8 @@
           }
         }
       ],
-      "acceptedCount": 1
+      "acceptedCount": 1,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "fujian-events",
@@ -931,7 +656,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "公开 HTML 元数据",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/jjty/",
@@ -1098,14 +823,15 @@
           }
         }
       ],
-      "acceptedCount": 0
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "xiamen-news",
       "name": "厦门市体育局·体育新闻",
       "url": "https://sports.xm.gov.cn/tyxw/",
       "status": "failed",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1115,14 +841,15 @@
         "code": "ETIMEDOUT",
         "message": "fetch failed"
       },
-      "acceptedCount": 0
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "xiamen-notices",
       "name": "厦门市体育局·通知公告",
       "url": "https://sports.xm.gov.cn/tzgg/",
       "status": "failed",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1132,7 +859,8 @@
         "code": "ETIMEDOUT",
         "message": "fetch failed"
       },
-      "acceptedCount": 0
+      "acceptedCount": 0,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "crossref-sports-engineering",
@@ -1142,7 +870,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "Crossref 公共书目 API",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://api.crossref.org/journals/1369-7072/works?filter=from-pub-date%3A2026-10-04%2Cuntil-pub-date%3A2026-11-08%2Ctype%3Ajournal-article&sort=published&order=desc&rows=8",
@@ -1151,7 +879,8 @@
       ],
       "seen": 8,
       "skipped": [],
-      "acceptedCount": 8
+      "acceptedCount": 8,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     },
     {
       "sourceId": "crossref-sports-biomechanics",
@@ -1161,7 +890,7 @@
       "httpStatus": 200,
       "robotsStatus": 404,
       "method": "Crossref 公共书目 API",
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "pages": [
         {
           "url": "https://api.crossref.org/journals/1476-3141/works?filter=from-pub-date%3A2026-10-04%2Cuntil-pub-date%3A2026-11-08%2Ctype%3Ajournal-article&sort=published&order=desc&rows=8",
@@ -1170,7 +899,8 @@
       ],
       "seen": 8,
       "skipped": [],
-      "acceptedCount": 8
+      "acceptedCount": 8,
+      "lastAttemptAt": "2026-11-08T09:35:31.102Z"
     }
   ],
   "sourceHistory": {
@@ -1205,14 +935,20 @@
           "state": "partial",
           "accepted": 2,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "partial",
+          "accepted": 2,
+          "new": 0
         }
       ],
-      "attempts": 5,
+      "attempts": 6,
       "successes": 0,
-      "partial": 5,
+      "partial": 6,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 3187515,
+      "failureMs": 5230771,
       "publishedCount": 2,
       "consecutiveSuccesses": 0
     },
@@ -1247,16 +983,22 @@
           "state": "success",
           "accepted": 4,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 4,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 4,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     },
     "shanghai-notices": {
       "recent": [
@@ -1289,16 +1031,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     },
     "beijing-sports": {
       "recent": [
@@ -1331,16 +1079,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
+      "attempts": 6,
       "successes": 5,
       "partial": 0,
       "lastSuccessAt": "2026-11-08T09:01:27.846Z",
-      "failureSince": null,
+      "failureSince": "2026-11-08T09:35:31.102Z",
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 0
     },
     "beijing-notices": {
       "recent": [
@@ -1373,16 +1127,22 @@
           "state": "success",
           "accepted": 4,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
+      "attempts": 6,
       "successes": 5,
       "partial": 0,
       "lastSuccessAt": "2026-11-08T09:01:27.846Z",
-      "failureSince": null,
+      "failureSince": "2026-11-08T09:35:31.102Z",
       "failureMs": 0,
       "publishedCount": 4,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 0
     },
     "fujian-sports": {
       "recent": [
@@ -1415,16 +1175,22 @@
           "state": "success",
           "accepted": 1,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 1,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 1,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     },
     "fujian-events": {
       "recent": [
@@ -1457,16 +1223,22 @@
           "state": "success",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 0,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     },
     "xiamen-news": {
       "recent": [
@@ -1499,14 +1271,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
+      "attempts": 6,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 3187515,
+      "failureMs": 5230771,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -1541,14 +1319,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 5,
+      "attempts": 6,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 3187515,
+      "failureMs": 5230771,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -1583,16 +1367,22 @@
           "state": "success",
           "accepted": 8,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 8,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 8,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     },
     "crossref-sports-biomechanics": {
       "recent": [
@@ -1625,28 +1415,34 @@
           "state": "success",
           "accepted": 8,
           "new": 0
+        },
+        {
+          "at": "2026-11-08T09:35:31.102Z",
+          "state": "success",
+          "accepted": 8,
+          "new": 0
         }
       ],
-      "attempts": 5,
-      "successes": 5,
+      "attempts": 6,
+      "successes": 6,
       "partial": 0,
-      "lastSuccessAt": "2026-11-08T09:01:27.846Z",
+      "lastSuccessAt": "2026-11-08T09:35:31.102Z",
       "failureSince": null,
       "failureMs": 0,
       "publishedCount": 8,
-      "consecutiveSuccesses": 5
+      "consecutiveSuccesses": 6
     }
   },
   "quality": {
     "duplicateCandidates": {
-      "numerator": 27,
-      "denominator": 27
+      "numerator": 23,
+      "denominator": 23
     },
     "candidateExclusion": {
-      "numerator": 81,
-      "denominator": 108
+      "numerator": 57,
+      "denominator": 80
     },
-    "exclusions": 81,
+    "exclusions": 57,
     "publishedRecordErrors": {
       "numerator": 0,
       "denominator": 27
@@ -1658,10 +1454,10 @@
   },
   "dailyChecks": {
     "2026-11-08": {
-      "checkedAt": "2026-11-08T08:59:49.896Z",
+      "checkedAt": "2026-11-08T09:34:14.482Z",
       "state": "partial",
       "newCount": 0,
-      "runId": "42465228704"
+      "runId": "42467711552"
     }
   },
   "auditQueue": []

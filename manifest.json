@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-08T08:59:49.896Z",
-  "sourceCommit": "92c1ec360e05c15c886012ed85a9c3c9315866ed",
-  "baseDataSha": "0e540d3fabc7c05da7fd43cd2f900513e12fd8fd",
+  "createdAt": "2026-11-08T09:34:14.482Z",
+  "sourceCommit": "c59217176e9ca841bb24e006ad4eb98051f7f183",
+  "baseDataSha": "9633fed502aca9f925931630ebe224e084db9808",
   "mode": "update",
   "articleCount": 27
 }
