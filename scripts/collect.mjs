@@ -16,7 +16,9 @@ const correctionUrls=new Set();
 for(const c of corrections){
  const url=canonicalUrl(validateRecordUrl(c.url,c.sourceId).href);
  if(correctionUrls.has(url)||!['withdraw','notice'].includes(c.action)||typeof c.note!=='string'||!c.note.trim()||c.note.length>500||!/^\d{4}-\d{2}-\d{2}$/.test(c.date))throw Error('更正条目格式不合法');
- publishedDate(c.date,now);correctionUrls.add(url);
+ publishedDate(c.date,now);
+ if(c.verifiedDeadline!==undefined&&(c.action!=='notice'||publishedDate(c.verifiedDeadline,now).datePrecision!=='day'))throw Error('更正中的历史截止日期无效');
+ correctionUrls.add(url);
 }
 const selected=registry.filter(s=>s.enabled&&s.phase<=phase&&(!process.env.SOURCE_ID||s.id===process.env.SOURCE_ID));
 if(!selected.length||(publish&&process.env.SOURCE_ID))throw Error('选定来源不符合采集模式');

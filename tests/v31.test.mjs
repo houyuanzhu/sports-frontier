@@ -43,6 +43,9 @@ test('同日转载、原文更正及撤回，跨日期同标题不合并',()=>{
  const withdrawn=mergeCandidates(first.articles,[original],[{url:original.url,action:'withdraw',date:'2026-11-08',note:'内部机制测试'}]);
  assert.equal(withdrawn.held,1);
  assert.equal(withdrawn.articles[0].editorial.action,'withdraw');
+ const reviewed=mergeCandidates([{...original,category:'opportunities'}],[],[{url:original.url,action:'notice',date:'2026-11-08',note:'内部机制测试',verifiedDeadline:'2026-11-07'}]);
+ assert.equal(reviewed.added,0);
+ assert.equal(lifecycle(reviewed.articles[0],'2026-11-08'),'已截止');
 });
 
 test('分页机制优先采集非置顶的新条目，忽略超范围的下一页',async()=>{

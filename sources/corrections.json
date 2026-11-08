@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "url": "https://www.sport.gov.cn/n315/n20001395/c30107282/content.html",
+    "sourceId": "sport-notices",
+    "date": "2026-11-08",
+    "action": "notice",
+    "verifiedDeadline": "2026-11-05",
+    "note": "人工复核原通知的选题报送条款，原文要求在 2026 年 11 月 5 日前报送。这是建议选题征询。"
+  },
+  {
+    "url": "https://tyj.sh.gov.cn/mlrsws/20260714/e44c2e4ac20644d395d93f536e9d13a2.html",
+    "sourceId": "shanghai-policy",
+    "date": "2026-11-08",
+    "action": "notice",
+    "verifiedDeadline": "2026-07-31",
+    "note": "人工复核原通知的申报时间安排。网上申报要求在 2026 年 7 月 31 日前完成，随后还有独立的书面材料报送环节。"
+  }
+]

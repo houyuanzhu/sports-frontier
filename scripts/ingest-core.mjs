@@ -65,6 +65,12 @@ export function sameEvent(a,b){
  const grams=s=>new Set(Array.from({length:Math.max(0,s.length-3)},(_,i)=>s.slice(i,i+4)));const g=grams(x),h=grams(y);const intersection=[...g].filter(k=>h.has(k)).length;
  return intersection/(g.size+h.size-intersection)>=.94;
 }
+export function applyCorrection(post,change){
+ if(!change)return post;
+ const {action,date,note,verifiedDeadline}=change;
+ const opportunity=verifiedDeadline&&post.category==='opportunities'?{...post.opportunity,deadline:verifiedDeadline,deadlinePrecision:'day'}:post.opportunity;
+ return {...post,opportunity,editorial:{action,date,note}};
+}
 export function mergeCandidates(existing,candidates,corrections=[]){
  const articles=structuredClone(existing);let added=0,duplicates=0,held=0;
  const review=[];
@@ -82,9 +88,9 @@ export function mergeCandidates(existing,candidates,corrections=[]){
   }
   articles.push(candidate);added++;
  }
- for(const post of articles){const change=changes.get(canonicalUrl(post.url));if(change)post.editorial={action:change.action,date:change.date,note:change.note};}
- articles.sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)||a.slug.localeCompare(b.slug));
- return {articles,added,duplicates,held,review};
+ const corrected=articles.map(post=>applyCorrection(post,changes.get(canonicalUrl(post.url))));
+ corrected.sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)||a.slug.localeCompare(b.slug));
+ return {articles:corrected,added,duplicates,held,review};
 }
 export function opportunityFields(text){
  const matches=[...text.matchAll(/(?:申报截止(?:日期|时间)|受理截止(?:日期|时间)|申请截止(?:日期|时间))\s*[：:为是]?\s*(20\d{2})[年\/-](\d{1,2})[月\/-](\d{1,2})日?/g)];
