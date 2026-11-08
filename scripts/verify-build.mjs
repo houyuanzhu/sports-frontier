@@ -1,9 +1,18 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import {buildEditions} from '../src/lib/daily.mjs';
+import {signedTrends} from '../src/lib/editorial.mjs';
+import {calendarDay} from '../src/lib/publication.mjs';
+import {applyCorrection,canonicalUrl} from './ingest-core.mjs';
 import {load} from 'cheerio';
 const site=JSON.parse(await readFile('src/data/site.json','utf8'));
 const posts=JSON.parse(await readFile('src/data/articles.json','utf8'));
+const status=JSON.parse(await readFile('src/data/status.json','utf8'));
+const corrections=new Map(JSON.parse(await readFile('sources/corrections.json','utf8')).map(change=>[canonicalUrl(change.url),change]));
+const currentPosts=posts.map(post=>post.demo?post:applyCorrection(post,corrections.get(canonicalUrl(post.url))));
+const editions=buildEditions(currentPosts,status);
+const trends=signedTrends(JSON.parse(await readFile('sources/trends.json','utf8')),calendarDay(new Date()));
 const root=path.resolve('dist');let pages=0,links=0;const files=[];
 async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const f=path.join(dir,e.name);e.isDirectory()?await walk(f):files.push(f)}}await walk(root);
 const repo=process.env.GITHUB_REPOSITORY?.split('/');
@@ -27,9 +36,9 @@ for(const file of files.filter(f=>f.endsWith('.html'))){
   catch{throw Error(`链接不存在：${file} → ${href}`)}
  }
 }
-assert.equal(pages,9+site.categories.length+posts.length);
+assert.equal(pages,13+site.categories.length+posts.length+editions.length+trends.length);
 for(const c of site.categories)assert.ok(files.includes(path.join(root,`categories/${c.slug}/index.html`)));
-for(const required of ['index.html','articles/index.html','categories/index.html','search/index.html','archive/index.html','about/index.html','status/index.html','404.html','sitemap-index.xml','robots.txt','health.json'])assert.ok(files.includes(path.join(root,required)),required);
+for(const required of ['index.html','articles/index.html','categories/index.html','search/index.html','archive/index.html','about/index.html','status/index.html','404.html','daily/index.html','research/index.html','trends/index.html','editorial/index.html',...editions.map(entry=>'daily/'+entry.date+'/index.html'),...trends.map(entry=>'trends/'+entry.slug+'/index.html'),'sitemap-index.xml','robots.txt','health.json'])assert.ok(files.includes(path.join(root,required)),required);
 const health=JSON.parse(await readFile('dist/health.json','utf8'));
 const config=JSON.parse(await readFile('sources/config.json','utf8'));assert.equal(health.siteId,site.siteId);assert.equal(health.buildCommit,process.env.GITHUB_SHA||'local');assert.equal(health.autoPublish,config.autoPublish);assert.equal(health.articleCount,posts.length);
 const css=(await Promise.all(files.filter(f=>f.endsWith('.css')).map(f=>readFile(f,'utf8')))).join('');

@@ -1,0 +1,12 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {url,dateText} from '../../lib/content.mjs';
+import {calendarDay} from '../../lib/publication.mjs';
+import {signedTrends,trendTopics} from '../../lib/editorial.mjs';
+import entries from '../../../sources/trends.json';
+const topics=signedTrends(entries,calendarDay(new Date()));
+---
+<Layout title="体育风口观察">
+ <div class="page-heading"><p class="eyebrow">体育风口观察 / 证据与分析</p><h1>体育风口观察<span>。</span></h1><p>围绕七个方向开展编辑专题。已签发文章附原始资料、日期及各项分析所依据的证据。</p></div>
+ <section class="watch-grid" aria-label="观察方向">{Object.entries(trendTopics).map(([key,label])=><section class="aside-block"><h2>{label}</h2>{topics.filter(topic=>topic.topic===key).map(topic=><article><p class="eyebrow">已签发 · {dateText(topic.signedOn)}</p><h3><a href={url(`trends/${topic.slug}/`)}>{topic.title}</a></h3><p>{topic.summary}</p></article>)}{!topics.some(topic=>topic.topic===key)&&<p>暂无已签发专题。</p>}</section>)}</section>
+</Layout>

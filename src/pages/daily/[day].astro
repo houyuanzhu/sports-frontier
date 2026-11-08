@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import OpportunityState from '../../components/OpportunityState.astro';
+import {posts,url,dateText,contentTag} from '../../lib/content.mjs';
+import {buildEditions,checkLabels,editionFact} from '../../lib/daily.mjs';
+import status from '../../data/status.json';
+export function getStaticPaths(){return buildEditions(posts,status).map(edition=>({params:{day:edition.date},props:{edition}}))}
+const {edition}=Astro.props;
+const check=edition.check;
+---
+<Layout title={`${dateText(edition.date)} 每日体育情报`}>
+ <div class="page-heading">
+  <p class="eyebrow"><a href={url('daily/')}>每日体育情报</a> / 北京时间收录归档</p>
+  <h1>{dateText(edition.date)}<span>。</span></h1>
+  <p>当日首次收录 {edition.count} 条。条目内保留各自的原文发布日期。</p>
+  {check?<p class="edition-state">{checkLabels[check.state]} · 当日最近检查 {dateText(check.checkedAt,true)} · {check.newCount?`本轮新增 ${check.newCount} 条`:'本轮暂无新增'}{/^\d+$/.test(check.runId||'')&&<> · <a href={`https://github.com/houyuanzhu/sports-frontier/actions/runs/${check.runId}`}>检查日志 ↗</a></>}</p>:<p>这期依据已存档的首次收录时间重建。</p>}
+ </div>
+ {!edition.count&&<p class="empty-state">暂无新增。可继续浏览此前的情报归档。</p>}
+ {edition.sections.map(group=><section class="edition-section" aria-label={group.label}>
+   <div class="section-line"><h2>{group.label} <span>{group.posts.length} 条</span></h2></div>
+   {group.posts.map(post=><article class="edition-item">
+    <p class="eyebrow">{contentTag(post)}{post.priority&&<> · {post.signoff?'已签发':'重要性已复核 · 待签发'}</>}</p>
+    <h3><a href={url(`articles/${post.slug}/`)}>{post.title}</a></h3>
+    <p>{editionFact(post)}</p>
+    <div class="meta"><span>{post.source}</span><time datetime={post.publishedAt}>原文发布 {dateText(post.publishedAt,post.datePrecision!=='day')}</time>{post.informationType==='opportunity'&&<OpportunityState post={post}/>}</div>
+    <a class="text-link" href={post.url} rel="noopener noreferrer">查阅原文 ↗</a>
+   </article>)}
+ </section>)}
+</Layout>

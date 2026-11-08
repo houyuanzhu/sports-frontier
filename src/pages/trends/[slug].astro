@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {url,dateText} from '../../lib/content.mjs';
+import {calendarDay} from '../../lib/publication.mjs';
+import {signedTrends,trendTopics} from '../../lib/editorial.mjs';
+import entries from '../../../sources/trends.json';
+export function getStaticPaths(){return signedTrends(entries,calendarDay(new Date())).map(entry=>({params:{slug:entry.slug},props:{entry}}))}
+const {entry}=Astro.props;
+---
+<Layout title={entry.title} description={entry.summary}>
+ <div class="page-heading"><p class="eyebrow"><a href={url('trends/')}>体育风口观察</a> / {trendTopics[entry.topic]}</p><h1>{entry.title}</h1><p>{entry.summary}</p><p class="meta">撰稿 {entry.author} · 编辑签发 {entry.editor} · {dateText(entry.signedOn)} · 资料截至 {dateText(entry.materialThrough)}</p></div>
+ <article class="article-body">
+  {entry.claims.map((claim,index)=><section><h2>分析 {index+1}</h2><p>{claim.text}</p><ul>{claim.evidence.map(id=>{const evidence=entry.sources.find(source=>source.id===id);return <li><a href={'#source-'+id}>{evidence.label}</a></li>})}</ul></section>)}
+  <section><h2>原始资料</h2><ul>{entry.sources.map(source=><li id={'source-'+source.id}><a href={source.url}>{source.label} ↗</a> · {dateText(source.date)}</li>)}</ul></section>
+ </article>
+</Layout>

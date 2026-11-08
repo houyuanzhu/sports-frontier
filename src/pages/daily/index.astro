@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {posts,url,dateText} from '../../lib/content.mjs';
+import {buildEditions,checkLabels} from '../../lib/daily.mjs';
+import status from '../../data/status.json';
+const editions=buildEditions(posts,status);
+---
+<Layout title="每日体育情报">
+ <div class="page-heading"><p class="eyebrow">每日体育情报 / 北京时间归档</p><h1>每日体育情报<span>。</span></h1><p>按北京时间首次收录日汇总。每条情报单独保留原文发布日期；当日采集检查结果也单独记录。</p></div>
+ <section class="brief-editions" aria-label="每日归档">
+  {editions.map(edition=><a class="brief-edition" href={url(`daily/${edition.date}/`)}><time datetime={edition.date}>{dateText(edition.date)}</time><strong>{edition.count?edition.count+' 条收录':'暂无新增'}</strong><span>{edition.check?checkLabels[edition.check.state]:'历史收录归档'} ↗</span></a>)}
+  {!editions.length&&<p class="empty-state">暂无可归档的采集结果或真实记录。</p>}
+ </section>
+</Layout>

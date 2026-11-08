@@ -41,8 +41,8 @@ export function sourceHistory(previous,results,published,added,now){
 
 export function collectionQuality(results,accepted,duplicates){
  const exclusions=results.flatMap(source=>source.skipped).filter(row=>row.issue?.kind==='excluded').length;
- const invalid=results.flatMap(source=>source.skipped).filter(row=>['excluded','structure','date'].includes(row.issue?.kind)).length;
- return {duplicate:{numerator:duplicates,denominator:accepted},invalid:{numerator:invalid,denominator:accepted+invalid},exclusions};
+ const rejected=results.flatMap(source=>source.skipped).filter(row=>['excluded','structure','date'].includes(row.issue?.kind)).length;
+ return {duplicateCandidates:{numerator:duplicates,denominator:accepted},candidateExclusion:{numerator:rejected,denominator:accepted+rejected},exclusions};
 }
 
 export function auditQueue(previous,posts,added,now){

@@ -1,8 +1,8 @@
-# 政视体育 · V3.2
+# 政视体育 · V4.0
 
 [公开网站](https://houyuanzhu.github.io/sports-frontier/) · [信源与使用规则](https://houyuanzhu.github.io/sports-frontier/sources/) · [运行状态](https://houyuanzhu.github.io/sports-frontier/status/)
 
-沿用 Astro、Tailwind CSS、六栏目、搜索、归档、响应式设计和免费 GitHub Pages。V3.2 在国家体育总局和上海原入口基础上，增加北京、福建、厦门政府公开信息及两种 Crossref 期刊书目。以真实原文日期排序，保存首次收录时间。期刊记录保留英文原题，栏目依据为经过审核的期刊范围，书目不代表成果评级。
+沿用 Astro、Tailwind CSS、六栏目、搜索、归档、响应式设计和免费 GitHub Pages。V4.0 保留 V3.2 的 11 个信源入口和历史快照，并增加每日情报、科研精选、体育风口观察与公开审核更正页。以真实原文日期排序，保存首次收录时间。期刊记录保留英文原题，栏目依据为经过审核的期刊范围，书目不代表成果评级。
 
 ## 自动化与维护
 
@@ -34,3 +34,7 @@ npm run dev
 ## V3.2 信息分层与抽查
 
 四类信息与六大栏目独立。重要性复核、论文人工导读和科研机会事实录入使用 `sources/editorial.json`。未来新增内容每轮每来源最多抽一条进 `status.auditQueue`，人工决策填入 `sources/quality-reviews.json`。来源完整成功率使用最近最多 30 次采集，不计跳过和回滚。细节见 [V3.2 内容分层与重要性规则](V32-QUALITY.md)。
+
+## V4.0 每日情报与签发
+
+每日情报按北京时间首次收录日归档。采集运行时间和原文发布日期分别展示。重要资讯、精选论文解读与原创专题使用 Git 中的编辑签发记录。详见 [V4.0 编辑操作说明](V40-EDITORIAL.md)。

@@ -1,3 +1,4 @@
+import {recordDailyCheck} from '../src/lib/daily.mjs';
 import {sourceIssue,sourceHistory,collectionQuality,auditQueue} from './source-quality.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createClient} from './source-client.mjs';
@@ -37,7 +38,10 @@ const added=merged.articles.filter(post=>!known.has(post.slug)&&post.editorial?.
 status.sourceHistory=sourceHistory(previous.sourceHistory,results,publish?merged.articles:existing,publish?added:[],status.finishedAt);
 status.quality=collectionQuality(results,all.length,merged.duplicates);
 const reviews=await read('sources/quality-reviews.json');
-const decisions=Object.values(reviews);
+const decisions=merged.articles.filter(post=>reviews[post.slug]?.url===post.url).map(post=>reviews[post.slug]);
+const publishedAudits=decisions.filter(review=>typeof review.recordCorrect==='boolean');
+status.quality.publishedRecordErrors={numerator:publishedAudits.filter(review=>!review.recordCorrect).length,denominator:publishedAudits.length};
+status.dailyChecks=recordDailyCheck(recordDailyCheck(previous.dailyChecks,previous),status);
 status.quality.classification={numerator:decisions.filter(review=>review.correct===true).length,denominator:decisions.filter(review=>typeof review.correct==='boolean').length};
 status.auditQueue=auditQueue((previous.auditQueue||[]).filter(entry=>!reviews[entry.slug]),merged.articles,publish?added:[],status.finishedAt);
 const ledger={schemaVersion:1,records:merged.articles.map(p=>({id:p.id,slug:p.slug,url:p.url,titleHash:hash(p.title),publishedAt:p.publishedAt,firstIndexedAt:p.firstIndexedAt})),lastCheckedAt:now.toISOString()};

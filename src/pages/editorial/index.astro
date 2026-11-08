@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {allPosts,url,dateText} from '../../lib/content.mjs';
+const corrections=allPosts.filter(post=>post.editorial);
+---
+<Layout title="编辑审核与更正">
+ <div class="page-heading"><p class="eyebrow">公开说明 / 审核与更正</p><h1>编辑审核与更正<span>。</span></h1><p>查阅原始来源、复核说明和公开更正记录。</p></div>
+ <div class="prose">
+  <h2>内容如何审核</h2><p>自动收录核对来源、日期、链接和内容类型。重要资讯可查看复核依据及签发状态。论文解读须核验全文，专题分析须附原始资料和逐项证据，经编辑签发后进入公开页面。</p>
+  <h2>提交更正或撤回请求</h2><p>请提供本站条目地址、原文链接、需要更正的字段及依据。GitHub 工单公开可见，请删除个人信息及未公开材料。维护者核验后附更正说明，或撤回并在旧地址保留撤回告示。撤回条目会从公开列表、搜索和每日归档移除。</p>
+  <p><a href="https://github.com/houyuanzhu/sports-frontier/issues/new?title=资讯更正请求" rel="noopener noreferrer">通过 GitHub 提交更正 ↗</a></p>
+  <h2>公开更正记录</h2>
+  {corrections.length?<ul>{corrections.map(post=><li><time datetime={post.editorial.date}>{dateText(post.editorial.date)}</time> · <a href={url(`articles/${post.slug}/`)}>{post.editorial.action==='withdraw'?'撤回说明':post.title}</a> · {post.editorial.action==='withdraw'?'已撤回':'附更正说明'}</li>)}</ul>:<p>暂无更正或撤回记录。</p>}
+  <p><a href={url('sources/')}>查看来源与使用规则 ↗</a></p>
+ </div>
+</Layout>

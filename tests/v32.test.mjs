@@ -46,7 +46,7 @@ test('真实候选口径分开，连续故障、成功恢复及待抽查队列�
  assert.deepEqual([history.test.successes,history.test.attempts,history.test.publishedCount],[1,3,1]);
  history=sourceHistory(history,[result],[post],[],'2026-11-09T00:00:00Z');
  assert.equal(history.test.failureSince,null);
- assert.deepEqual(collectionQuality([result],1,1),{duplicate:{numerator:1,denominator:1},invalid:{numerator:1,denominator:2},exclusions:1});
+ assert.deepEqual(collectionQuality([result],1,1),{duplicateCandidates:{numerator:1,denominator:1},candidateExclusion:{numerator:1,denominator:2},exclusions:1});
  const queue=auditQueue([],[post],[post],'2026-11-08T00:00:00Z');
  assert.equal(queue.length,1);
  assert.deepEqual(auditQueue(queue,[post],[post],'2026-11-09T00:00:00Z'),queue);

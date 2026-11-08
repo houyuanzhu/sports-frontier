@@ -49,3 +49,16 @@ test('四类信息和科研机会状态可组合筛选',async({page})=>{
  await page.getByLabel('申请状态').selectOption('open');
  await expect(page.locator('.search-result:visible')).toHaveCount(await talent.and(page.locator('[data-state="open"]')).count());
 });
+test('每日情报、研究精选和风口观察可公开阅读并适配三种屏宽',async({page})=>{
+ await page.goto(base+'/');
+ await expect(page.getByRole('link',{name:'阅读最近一期'})).toBeVisible();
+ await page.getByRole('link',{name:'阅读最近一期'}).click();
+ await expect(page).toHaveURL(/daily\/20\d{2}-\d{2}-\d{2}\//);
+ await expect(page.locator('.page-heading')).toContainText('原文发布日期');
+ for(const [route,title] of [['daily/','每日体育情报'],['research/','体育科研精选'],['trends/','体育风口观察'],['editorial/','编辑审核与更正']]){
+  await page.goto(base+'/'+route);
+  await expect(page.locator('h1')).toContainText(title);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),route).toBeTruthy();
+  await expect(page.locator('meta[name=robots]')).toHaveAttribute('content',/noindex/);
+ }
+});
