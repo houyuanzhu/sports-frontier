@@ -647,8 +647,8 @@
     "contentHash": "0d5b189c6fa241d9b227bf90b7e012cb5c4790a66a1b5162d1279ef993d4b1a2",
     "rightsMode": "metadata-only",
     "opportunity": {
-      "deadline": null,
-      "deadlinePrecision": null,
+      "deadline": "2026-11-05",
+      "deadlinePrecision": "day",
       "eligibility": null,
       "verificationNote": "仅当正文出现唯一明确的申报截止日期标签时记录；申报条件未人工核实，留空，以原文为准。"
     },
@@ -657,7 +657,12 @@
         "heading": "官方信息索引",
         "text": "本条仅记录官方公开标题、来源、日期和原文入口，不转载正文、图片或附件，也不生成政策解读、科研结论或趋势预测。"
       }
-    ]
+    ],
+    "editorial": {
+      "action": "notice",
+      "date": "2026-11-08",
+      "note": "人工复核原通知的选题报送条款，原文要求在 2026 年 11 月 5 日前报送。这是建议选题征询。"
+    }
   },
   {
     "slug": "info-7b0e1566fc765f83708a",
@@ -813,8 +818,8 @@
     "contentHash": "5791b7ab8045da52033466ea5f9ecda4fd2e57bde06759b208edcf4610ac78de",
     "rightsMode": "metadata-only",
     "opportunity": {
-      "deadline": null,
-      "deadlinePrecision": null,
+      "deadline": "2026-07-31",
+      "deadlinePrecision": "day",
       "eligibility": null,
       "verificationNote": "仅当正文出现唯一明确的申报截止日期标签时记录；申报条件未人工核实，留空，以原文为准。"
     },
@@ -823,7 +828,12 @@
         "heading": "官方信息索引",
         "text": "本条仅记录官方公开标题、来源、日期和原文入口，不转载正文、图片或附件，也不生成政策解读、科研结论或趋势预测。"
       }
-    ]
+    ],
+    "editorial": {
+      "action": "notice",
+      "date": "2026-11-08",
+      "note": "人工复核原通知的申报时间安排。网上申报要求在 2026 年 7 月 31 日前完成，随后还有独立的书面材料报送环节。"
+    }
   },
   {
     "slug": "info-c2f4cfa65a5df8e551a9",
