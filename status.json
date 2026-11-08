@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T05:51:47.920Z",
+  "checkedAt": "2026-11-08T05:55:22.333Z",
   "state": "partial",
   "newCount": 0,
   "candidateCount": 0,
@@ -21,7 +21,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-07T05:51:47.920Z",
+      "checkedAt": "2026-11-08T05:55:22.333Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
@@ -61,7 +61,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-07T05:51:47.920Z",
+      "checkedAt": "2026-11-08T05:55:22.333Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
@@ -93,7 +93,7 @@
       "robotsStatus": 404,
       "rssDiscovered": false,
       "method": "公开HTML元数据（非RSS、非专有API）",
-      "checkedAt": "2026-11-07T05:51:47.920Z",
+      "checkedAt": "2026-11-08T05:55:22.333Z",
       "seen": 8,
       "notFetchedCount": 0,
       "skipped": [
