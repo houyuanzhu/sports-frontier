@@ -9,13 +9,17 @@ test('真实Git事务验证：历史持久化、同包重试幂等、并发覆�
  const saved={...process.env};delete process.env.GITHUB_ENV;delete process.env.GITHUB_OUTPUT;delete process.env.ROLLBACK_REF;process.env.GITHUB_SHA=hash('local-storage-regression').slice(0,40);
  try{process.chdir(repo);
   const a=fixtures.filter(f=>/科技创新项目立项|智能体育典型案例/.test(f.title)).map(f=>({...f,source:f.publisher,id:hash(f.url).slice(0,20),slug:'info-'+hash(f.url).slice(0,20),demo:false,category:'technology',collectedAt:new Date().toISOString(),firstIndexedAt:new Date().toISOString(),body:[]}));
-  const status={checkedAt:new Date().toISOString(),state:'no_change',newCount:0};
+  const status={checkedAt:new Date(Date.now()-1000).toISOString(),state:'no_change',newCount:0};
   const save=async(articles,base)=>{const state={schemaVersion:1,records:articles.map(p=>({slug:p.slug}))};validateSnapshot(articles,status,state);for(const [name,value]of Object.entries({'articles.json':articles,'state.json':state,'status.json':status,'manifest.json':{schemaVersion:1,sourceCommit:process.env.GITHUB_SHA,baseDataSha:base,mode:'update'}}))await writeFile('bundle/'+name,JSON.stringify(value,null,2)+'\n')};
   await save(a.slice(0,1),'');await persist();const first=git(bare,['rev-parse','refs/heads/content-data']);await persist();assert.equal(git(bare,['rev-parse','refs/heads/content-data']),first,'同一候选包重试不得重复提交');
-  await save(a,first);await persist();const second=git(bare,['rev-parse','refs/heads/content-data']);assert.notEqual(first,second);
+  status.checkedAt=new Date().toISOString();await save(a,first);await persist();const second=git(bare,['rev-parse','refs/heads/content-data']);assert.notEqual(first,second);
   await restore();assert.equal(JSON.parse(await readFile('src/data/articles.json','utf8')).length,a.length);
   await save(a.slice(0,1),'');await assert.rejects(()=>persist(),/拒绝覆盖/);
-  process.env.ROLLBACK_REF=first;await restore();assert.equal(JSON.parse(await readFile('src/data/articles.json','utf8')).length,1);assert.equal(JSON.parse(await readFile('src/data/status.json','utf8')).state,'rolled_back');
+  process.env.ROLLBACK_REF=first;await restore();assert.equal(JSON.parse(await readFile('src/data/articles.json','utf8')).length,1);
+  const rolledBack=JSON.parse(await readFile('src/data/status.json','utf8'));
+  assert.equal(rolledBack.state,'rolled_back');assert.equal(rolledBack.checkedAt,status.checkedAt);
+  assert.ok(Date.parse(rolledBack.rolledBackAt)>=Date.parse(rolledBack.checkedAt));
+  assert.equal(rolledBack.storedCount,1);assert.equal(rolledBack.lastContentPublishedAt,a[0].publishedAt);
   await persist('reports/publish-bundle');const third=git(bare,['rev-parse','refs/heads/content-data']);assert.notEqual(third,first);assert.equal(git(bare,['rev-parse',third+'^']),second,'回滚采用新提交，不能重写历史');
  }finally{process.chdir(original);for(const key of ['GITHUB_SHA','GITHUB_ENV','GITHUB_OUTPUT','ROLLBACK_REF']){if(saved[key]===undefined)delete process.env[key];else process.env[key]=saved[key]}}
 });

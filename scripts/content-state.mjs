@@ -17,7 +17,20 @@ export async function restore(){
  await writeFile('src/data/articles.json',JSON.stringify(articles,null,2)+'\n');await writeFile('src/data/status.json',JSON.stringify(status,null,2)+'\n');await mkdir('data',{recursive:true});await writeFile('data/ingestion-state.json',JSON.stringify(state,null,2)+'\n');
  if(process.env.GITHUB_ENV)await writeFile(process.env.GITHUB_ENV,`BASE_DATA_SHA=${base}\n`,{flag:'a'});
  if(process.env.GITHUB_OUTPUT)await writeFile(process.env.GITHUB_OUTPUT,`base_data_sha=${base}\n`,{flag:'a'});
- if(process.env.ROLLBACK_REF){await mkdir('reports/publish-bundle',{recursive:true});const manifest={schemaVersion:1,mode:'rollback',sourceCommit:process.env.GITHUB_SHA,baseDataSha:base,rollbackRef:target,createdAt:new Date().toISOString(),articleCount:articles.length};const rollbackStatus={...status,checkedAt:new Date().toISOString(),newCount:0,state:'rolled_back',message:'已恢复所选历史数据快照，本次未采集新内容。'};await writeFile('src/data/status.json',JSON.stringify(rollbackStatus,null,2)+'\n');for(const [name,value] of Object.entries({'articles.json':articles,'state.json':state,'status.json':rollbackStatus,'manifest.json':manifest}))await writeFile('reports/publish-bundle/'+name,JSON.stringify(value,null,2)+'\n')}
+ if(process.env.ROLLBACK_REF){
+  const latestStatus=JSON.parse(git(['show',`${base}:status.json`]));
+  const rolledBackAt=new Date().toISOString();
+  const manifest={schemaVersion:1,mode:'rollback',sourceCommit:process.env.GITHUB_SHA,baseDataSha:base,rollbackRef:target,createdAt:rolledBackAt,articleCount:articles.length};
+  const rollbackStatus={
+   ...latestStatus, rolledBackAt, newCount:0, storedCount:articles.length,
+   lastContentPublishedAt:articles.map(article=>article.publishedAt).sort().at(-1)??null,
+   state:'rolled_back',message:'已恢复所选历史数据快照，本次未采集新内容。'
+  };
+  await mkdir('reports/publish-bundle',{recursive:true});
+  await writeFile('src/data/status.json',JSON.stringify(rollbackStatus,null,2)+'\n');
+  const bundle={'articles.json':articles,'state.json':state,'status.json':rollbackStatus,'manifest.json':manifest};
+  for(const [name,value] of Object.entries(bundle))await writeFile('reports/publish-bundle/'+name,JSON.stringify(value,null,2)+'\n');
+ }
  console.log(`已恢复 ${articles.length} 条历史资讯；数据版本 ${target}`);
 }
 export async function persist(dir='bundle'){
