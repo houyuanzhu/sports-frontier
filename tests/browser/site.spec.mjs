@@ -36,3 +36,16 @@ test('键盘入口与无脚本阅读兜底',async({page,browser})=>{
  await page.goto(base+'/');await page.keyboard.press('Tab');await expect(page.getByRole('link',{name:'跳至正文'})).toBeFocused();await page.keyboard.press('Enter');await expect(page.locator('#main')).toBeFocused();
  const context=await browser.newContext({javaScriptEnabled:false});const reader=await context.newPage();await reader.goto('http://127.0.0.1:4321'+base+`/articles/${posts[0].slug}/`);await expect(reader.locator('.article-body')).toContainText(posts[0].demo?'从体育问题出发':posts[0].contentType==='research-index'?'书目说明':'官方信息索引');await reader.goto('http://127.0.0.1:4321'+base+'/search/');await expect(reader.locator('noscript p')).toContainText('搜索需要启用浏览器脚本');await context.close();
 });
+test('四类信息和科研机会状态可组合筛选',async({page})=>{
+ await page.goto(base+'/search/?type=paper');
+ await expect(page.getByLabel('信息类型')).toHaveValue('paper');
+ await expect(page.locator('.search-result:visible')).toHaveCount(posts.filter(post=>post.doi).length);
+ await page.getByLabel('信息类型').selectOption('opportunity');
+ await page.getByLabel('科研机会子类').selectOption('talent');
+ const talent=page.locator('[data-type="opportunity"][data-kind="talent"]');
+ await expect(page.locator('.search-result:visible')).toHaveCount(await talent.count());
+ await page.getByLabel('申请状态').selectOption('closed');
+ await expect(page.locator('.search-result:visible')).toHaveCount(await talent.and(page.locator('[data-state="closed"]')).count());
+ await page.getByLabel('申请状态').selectOption('open');
+ await expect(page.locator('.search-result:visible')).toHaveCount(await talent.and(page.locator('[data-state="open"]')).count());
+});

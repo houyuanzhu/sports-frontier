@@ -1,3 +1,4 @@
+import {affectsSource,sourceIssue} from '../source-quality.mjs';
 import {load} from 'cheerio';
 import {beijingDay,clean,hash,publishedDate} from '../ingest-core.mjs';
 
@@ -32,6 +33,6 @@ export async function collectResearch(source,client,now){
  const items=JSON.parse(result.text).message?.items;
  if(!Array.isArray(items))throw Error('Crossref 未返回书目列表');
  const candidates=[],skipped=[];
- for(const item of items){try{candidates.push(researchCandidate(item,source,now));}catch(error){skipped.push({doi:item.DOI,reason:error.message});}}
- return {sourceId:source.id,name:source.name,url:source.url,status:'success',httpStatus:result.status,robotsStatus:result.robotsStatus,method:'Crossref 公共书目 API',checkedAt:now.toISOString(),pages:[{url:url.href,httpStatus:result.status}],seen:items.length,candidates,skipped};
+ for(const item of items){try{candidates.push(researchCandidate(item,source,now));}catch(error){skipped.push({doi:item.DOI,reason:error.message,issue:sourceIssue(error,'record')});}}
+ return {sourceId:source.id,name:source.name,url:source.url,status:skipped.some(row=>affectsSource(row.issue))?'partial':'success',httpStatus:result.status,robotsStatus:result.robotsStatus,method:'Crossref 公共书目 API',checkedAt:now.toISOString(),pages:[{url:url.href,httpStatus:result.status}],seen:items.length,candidates,skipped};
 }

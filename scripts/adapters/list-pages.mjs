@@ -1,3 +1,4 @@
+import {sourceIssue} from '../source-quality.mjs';
 import {load} from 'cheerio';
 import {beijingDay,canonicalUrl,clean} from '../ingest-core.mjs';
 
@@ -11,7 +12,7 @@ export async function discover(source,client,policy,now){
  while(next&&pages.length<maxPages&&!visited.has(next)){
   visited.add(next);
   let listing;
-  try{listing=await client.page(next);}catch(error){if(!pages.length)throw error;listFailure=error.message;break;}
+  try{listing=await client.page(next);}catch(error){if(!pages.length)throw error;listFailure=sourceIssue(error,'list');break;}
   pages.push({url:listing.url,httpStatus:listing.status,robotsStatus:listing.robotsStatus});
   const $=load(listing.text);
   for(const el of $(source.listSelector||'a[href]').toArray()){

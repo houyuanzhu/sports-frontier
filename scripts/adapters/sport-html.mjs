@@ -1,3 +1,4 @@
+import {affectsSource,sourceIssue} from '../source-quality.mjs';
 import {load} from 'cheerio';
 import {beijingDay,clean,hash,publishedDate,classify,opportunityFields} from '../ingest-core.mjs';
 import {discover} from './list-pages.mjs';
@@ -22,6 +23,6 @@ export async function collectSource(source,client,policy,now){
   candidate.region=source.region||null;
   if(candidate.opportunity)candidate.opportunity.kind=classification.kind||'call';
   candidates.push(candidate);
- }catch(e){if(/HTTP|403|fetch|超时|timeout|缺少完整标题|日期格式/.test(e.message))detailErrors++;skipped.push({url,reason:e.message});if(/403/.test(e.message))break}}
- return {sourceId:source.id,name:source.name,url:source.url,status:detailErrors===list.entries.length?'failed':detailErrors||list.listFailure?'partial':'success',httpStatus:list.pages[0].httpStatus,robotsStatus:list.pages[0].robotsStatus,method:'公开 HTML 元数据',checkedAt:now.toISOString(),pages:list.pages,seen:list.listed,pinnedCount:list.pinned,notFetchedCount:list.listed-candidates.length-skipped.length,error:list.listFailure,candidates,skipped};
+ }catch(e){const issue=sourceIssue(e,'detail');if(affectsSource(issue))detailErrors++;skipped.push({url,reason:e.message,issue});if(issue.http===403)break}}
+ return {sourceId:source.id,name:source.name,url:source.url,status:!candidates.length&&detailErrors===skipped.length&&detailErrors>0?'failed':detailErrors||list.listFailure?'partial':'success',httpStatus:list.pages[0].httpStatus,robotsStatus:list.pages[0].robotsStatus,method:'公开 HTML 元数据',checkedAt:now.toISOString(),pages:list.pages,seen:list.listed,pinnedCount:list.pinned,notFetchedCount:list.listed-candidates.length-skipped.length,error:list.listFailure?.message,issue:list.listFailure,candidates,skipped};
 }

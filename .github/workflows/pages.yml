@@ -26,10 +26,15 @@ jobs:
   schedule-check:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-    permissions: {}
+    permissions:
+      contents: read
     outputs:
       skip: ${{ steps.guard.outputs.skip }}
     steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'schedule'
+        with:
+          persist-credentials: false
       - id: guard
         name: 同日已部署检查去重
         env:
@@ -38,9 +43,8 @@ jobs:
           PAGES_HEALTH: https://houyuanzhu.github.io/sports-frontier/health.json
         run: |
           printf '计划 cron：%s；实际执行：%s\n' "$SCHEDULE_CRON" "$(date -u +%FT%TZ)" >> "$GITHUB_STEP_SUMMARY"
-          if [ "$EVENT" = schedule ] && curl -fsS --max-time 15 "$PAGES_HEALTH" -o health.json; then
-            today=$(TZ=Asia/Shanghai date +%F)
-            if jq -e --arg today "$today" '.siteId == "sports-frontier" and .version == "3.1.0" and .autoPublish == true and (.collectionState == "updated" or .collectionState == "no_change" or (.collectionState == "partial" and .schedule == "37 3 * * *")) and ((.checkedAt | sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) + 28800 | strftime("%Y-%m-%d")) == $today' health.json >/dev/null; then
+          if [ "$EVENT" = schedule ] && curl -fsS --max-time 15 "$PAGES_HEALTH?run=$GITHUB_RUN_ID" -o health.json; then
+            if node scripts/schedule-guard.mjs health.json; then
               echo 'skip=true' >> "$GITHUB_OUTPUT"
               echo '同一北京时间日已有成功上线的采集结果，本次跳过采集与部署。' >> "$GITHUB_STEP_SUMMARY"
               exit 0
@@ -179,8 +183,34 @@ jobs:
     if: always()
     needs: [schedule-check, build, persist, deploy]
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions:
+      contents: read
+      actions: read
     steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'schedule'
+        with:
+          persist-credentials: false
+      - name: 记录定时触发与发布时点
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SCHEDULE_CRON: ${{ github.event.schedule }}
+          GATE_SKIP: ${{ needs.schedule-check.outputs.skip }}
+        run: |
+          case "$SCHEDULE_CRON" in
+            '10 0 * * *') clock=08:10 ;;
+            '37 3 * * *') clock=11:37 ;;
+            *) exit 1 ;;
+          esac
+          node scripts/run-timing.mjs "$GITHUB_RUN_ID@$clock" > schedule-timing.json
+          cat schedule-timing.json >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'schedule'
+        with:
+          name: schedule-timing
+          path: schedule-timing.json
+          retention-days: 7
       - name: 保留失败信号，不将检查成功等同资讯更新
         env:
           ALL_FAILED: ${{ needs.build.outputs.all_failed }}

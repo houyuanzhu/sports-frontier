@@ -25,7 +25,7 @@ test('北京时间分钟精度、日历统计与过期科研机会',()=>{
  const past={category:'opportunities',publishedAt:'2026-11-08',title:'课题申报',opportunity:{deadline:'2026-11-07'}};
  const article={category:'technology',publishedAt:'2026-11-02'};
  assert.equal(lifecycle(past,'2026-11-08'),'已截止');
- assert.equal(lifecycle({...past,opportunity:{deadline:null}},'2026-11-08'),'截止日期待核实');
+ assert.equal(lifecycle({...past,opportunity:{deadline:null}},'2026-11-08'),'待核实');
  assert.equal(lifecycle({category:'policy',publishedAt:'2026-09-08'},'2026-11-08'),'历史政策，效力以原文为准');
  assert.deepEqual(publicationStats([past,article,{...article,publishedAt:'2026-10-10'},{...article,publishedAt:'2026-10-09'},{...article,editorial:{action:'withdraw'}}],'2026-11-08'),
   {total:4,last7:2,last30:3,latestEffective:'2026-11-02'});
