@@ -6,6 +6,7 @@ on:
     branches: [main]
   schedule:
     - cron: '10 0 * * *'
+    - cron: '37 3 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -22,7 +23,33 @@ concurrency:
   group: sports-publication-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  schedule-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    outputs:
+      skip: ${{ steps.guard.outputs.skip }}
+    steps:
+      - id: guard
+        name: 同日已部署检查去重
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE_CRON: ${{ github.event.schedule }}
+          PAGES_HEALTH: https://houyuanzhu.github.io/sports-frontier/health.json
+        run: |
+          printf '计划 cron：%s；实际执行：%s\n' "$SCHEDULE_CRON" "$(date -u +%FT%TZ)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$EVENT" = schedule ] && curl -fsS --max-time 15 "$PAGES_HEALTH" -o health.json; then
+            today=$(TZ=Asia/Shanghai date +%F)
+            if jq -e --arg today "$today" '.siteId == "sports-frontier" and .version == "3.1.0" and .autoPublish == true and (.collectionState == "updated" or .collectionState == "no_change" or (.collectionState == "partial" and .schedule == "37 3 * * *")) and ((.checkedAt | sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) + 28800 | strftime("%Y-%m-%d")) == $today' health.json >/dev/null; then
+              echo 'skip=true' >> "$GITHUB_OUTPUT"
+              echo '同一北京时间日已有成功上线的采集结果，本次跳过采集与部署。' >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          fi
+          echo 'skip=false' >> "$GITHUB_OUTPUT"
   build:
+    needs: schedule-check
+    if: needs.schedule-check.outputs.skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -57,6 +84,7 @@ jobs:
         if: inputs.mode != 'rollback'
         env:
           ENABLED: ${{ steps.identity.outputs.publication_enabled }}
+          SCHEDULE_CRON: ${{ github.event.schedule }}
         run: |
           if [ "$ENABLED" = true ] && [ "$GITHUB_EVENT_NAME" != pull_request ]; then
             node scripts/collect.mjs --publish
@@ -149,7 +177,7 @@ jobs:
           exit 1
   check-result:
     if: always()
-    needs: [build, persist, deploy]
+    needs: [schedule-check, build, persist, deploy]
     runs-on: ubuntu-latest
     permissions: {}
     steps:
@@ -159,7 +187,9 @@ jobs:
           BUILD: ${{ needs.build.result }}
           PERSIST: ${{ needs.persist.result }}
           DEPLOY: ${{ needs.deploy.result }}
+          SKIP: ${{ needs.schedule-check.outputs.skip }}
         run: |
+          if [ "$SKIP" = true ]; then exit 0; fi
           test "$BUILD" = success
           test "$PERSIST" = success -o "$PERSIST" = skipped
           test "$DEPLOY" = success -o "$DEPLOY" = skipped

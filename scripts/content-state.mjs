@@ -1,12 +1,27 @@
 import {execFileSync} from 'node:child_process';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import {publishedDate} from './ingest-core.mjs';
+import {canonicalUrl,hash,publishedDate} from './ingest-core.mjs';
+import {validateRecordUrl} from './source-registry.mjs';
 const git=(args,input)=>execFileSync('git',args,{encoding:'utf8',input,stdio:['pipe','pipe','pipe']}).trim();
 export function validateSnapshot(articles,status,state){
  if(!Array.isArray(articles)||articles.length>20000||state.schemaVersion!==1||!Array.isArray(state.records))throw Error('持久化数据结构无效');
- const ids=new Set();for(const p of articles){const u=new URL(p.url);if(p.demo!==false||!/^info-[a-f0-9]{20}$/.test(p.slug)||!p.source||!p.publishedAt||!p.collectedAt||u.protocol!=='https:'||!['www.sport.gov.cn','tyj.sh.gov.cn'].includes(u.hostname)||u.username||u.password||u.port||!Array.isArray(p.body)||ids.has(p.slug)||!['headlines','policy','technology','science','opportunities','outlook'].includes(p.category))throw Error('历史条目安全检查失败');publishedDate(p.publishedAt);ids.add(p.slug)}
- if(state.records.length!==articles.length||new Set(state.records.map(r=>r.slug)).size!==articles.length||state.records.some(r=>!ids.has(r.slug)))throw Error('去重账本与历史资讯不一致');
- if(!status.checkedAt)throw Error('状态缺少检查时间');
+ const ledger=new Map(state.records.map(record=>[record.slug,record]));
+ const ids=new Set(),urls=new Set();for(const p of articles){
+  validateRecordUrl(p.url,p.sourceId);
+  for(const alternate of p.alternateSources||[]){validateRecordUrl(alternate.url,alternate.sourceId);publishedDate(alternate.publishedAt);}
+  if(p.demo!==false||!/^info-[a-f0-9]{20}$/.test(p.slug)||typeof p.title!=='string'||!p.title.trim()||!p.source||!p.publishedAt||!Number.isFinite(Date.parse(p.collectedAt))||!Array.isArray(p.body)||ids.has(p.slug)||!['headlines','policy','technology','science','opportunities','outlook'].includes(p.category))throw Error('历史条目安全检查失败');
+  const date=publishedDate(p.publishedAt);
+  if(p.datePrecision&&p.datePrecision!==date.datePrecision)throw Error('历史条目日期精度不一致');
+  if(p.doi&&p.url!==`https://doi.org/${p.doi}`)throw Error('书目 DOI 与原文链接不一致');
+  const entry=ledger.get(p.slug);
+  if(!entry||p.slug!==`info-${p.id}`||!Number.isFinite(Date.parse(p.firstIndexedAt))||entry.id!==p.id||entry.url!==p.url||entry.titleHash!==hash(p.title)||entry.publishedAt!==p.publishedAt||entry.firstIndexedAt!==p.firstIndexedAt)throw Error('去重账本与历史条目字段不一致');
+  const url=canonicalUrl(p.url);
+  if(urls.has(url))throw Error('历史中存在重复的规范原文链接');
+  urls.add(url);
+  ids.add(p.slug);
+ }
+ if(state.records.length!==articles.length||ledger.size!==articles.length)throw Error('去重账本与历史资讯不一致');
+ if(!Number.isFinite(Date.parse(status.checkedAt)))throw Error('状态缺少合法检查时间');
 }
 export async function restore(){
  const remote=git(['ls-remote','origin','refs/heads/content-data']);

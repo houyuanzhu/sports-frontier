@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs';
 const site=JSON.parse(fs.readFileSync('src/data/site.json','utf8'));
-const posts=JSON.parse(fs.readFileSync('src/data/articles.json','utf8'));
+const posts=JSON.parse(fs.readFileSync('src/data/articles.json','utf8')).filter(post=>post.editorial?.action!=='withdraw');
 const config=JSON.parse(fs.readFileSync('sources/config.json','utf8'));
 const repo=process.env.GITHUB_REPOSITORY?.split('/');
 const base=process.env.BASE_PATH??(repo&&repo[1]!==`${repo[0]}.github.io`?`/${repo[1]}`:'');
@@ -20,7 +20,7 @@ test('六栏目导航与归档、文章阅读',async({page},testInfo)=>{
  await page.goto(base+'/categories/');await expect(page.locator('.category-grid>a')).toHaveCount(6);
  for(const c of site.categories){await page.getByRole('navigation',{name:'主导航'}).getByRole('link',{name:c.name,exact:true}).click();await expect(page.locator('h1')).toContainText(c.name);await expect(page.locator('.post-row')).toHaveCount(posts.filter(p=>p.category===c.slug).length)}
  await page.goto(base+'/archive/');await expect(page.locator('.archive-category')).toHaveCount(posts.length);
- await page.goto(base+`/articles/${posts[0].slug}/`);await expect(page.locator('.notice')).toContainText(posts[0].demo?'演示内容':'官方信息索引');await expect(page.locator('.related>a')).toHaveCount(Math.min(2,posts.length-1));await page.screenshot({path:testInfo.outputPath('文章阅读.png'),fullPage:true});
+ await page.goto(base+`/articles/${posts[0].slug}/`);await expect(page.locator('.notice')).toContainText(posts[0].demo?'演示内容':posts[0].contentType==='research-index'?'论文书目索引':'官方信息索引');await expect(page.locator('.related>a')).toHaveCount(Math.min(2,posts.length-1));await page.screenshot({path:testInfo.outputPath('文章阅读.png'),fullPage:true});
  const health=await (await page.request.get(base+'/health.json')).json();expect(health.siteId).toBe(site.siteId);expect(health.autoPublish).toBe(config.autoPublish);
 });
 test('搜索建议、栏目筛选、清空与链接状态',async({page},testInfo)=>{
@@ -34,5 +34,5 @@ test('搜索建议、栏目筛选、清空与链接状态',async({page},testInfo
 });
 test('键盘入口与无脚本阅读兜底',async({page,browser})=>{
  await page.goto(base+'/');await page.keyboard.press('Tab');await expect(page.getByRole('link',{name:'跳至正文'})).toBeFocused();await page.keyboard.press('Enter');await expect(page.locator('#main')).toBeFocused();
- const context=await browser.newContext({javaScriptEnabled:false});const reader=await context.newPage();await reader.goto('http://127.0.0.1:4321'+base+`/articles/${posts[0].slug}/`);await expect(reader.locator('.article-body')).toContainText(posts[0].demo?'从体育问题出发':'官方信息索引');await reader.goto('http://127.0.0.1:4321'+base+'/search/');await expect(reader.locator('noscript p')).toContainText('搜索需要启用浏览器脚本');await context.close();
+ const context=await browser.newContext({javaScriptEnabled:false});const reader=await context.newPage();await reader.goto('http://127.0.0.1:4321'+base+`/articles/${posts[0].slug}/`);await expect(reader.locator('.article-body')).toContainText(posts[0].demo?'从体育问题出发':posts[0].contentType==='research-index'?'书目说明':'官方信息索引');await reader.goto('http://127.0.0.1:4321'+base+'/search/');await expect(reader.locator('noscript p')).toContainText('搜索需要启用浏览器脚本');await context.close();
 });

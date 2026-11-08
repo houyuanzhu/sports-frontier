@@ -5,7 +5,11 @@
     "url": "https://www.sport.gov.cn/n315/n20001395/index.html",
     "defaultCategory": "headlines",
     "phase": 1,
-    "enabled": true
+    "enabled": true,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "classificationBasis": "延用原审查范围，按公告文种与明确体育主题判定"
   },
   {
     "id": "sport-local",
@@ -14,7 +18,9 @@
     "defaultCategory": "headlines",
     "phase": 1,
     "enabled": false,
-    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口",
+    "method": "html",
+    "timezone": "Asia/Shanghai"
   },
   {
     "id": "sport-technology",
@@ -23,7 +29,9 @@
     "defaultCategory": "technology",
     "phase": 1,
     "enabled": false,
-    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口",
+    "method": "html",
+    "timezone": "Asia/Shanghai"
   },
   {
     "id": "sport-education-notices",
@@ -32,7 +40,9 @@
     "defaultCategory": "science",
     "phase": 2,
     "enabled": false,
-    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口",
+    "method": "html",
+    "timezone": "Asia/Shanghai"
   },
   {
     "id": "sport-popular-science",
@@ -41,7 +51,9 @@
     "defaultCategory": "science",
     "phase": 2,
     "enabled": false,
-    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口"
+    "disabledReason": "本轮云端返回403，停止自动接入，待来源方提供允许访问的入口",
+    "method": "html",
+    "timezone": "Asia/Shanghai"
   },
   {
     "id": "shanghai-policy",
@@ -52,7 +64,11 @@
     "enabled": true,
     "expectedSiteId": "3100000065",
     "articlePathPattern": "^https://tyj.sh.gov.cn/[a-z0-9]+/\\d{8}/[a-z0-9]+\\.html$",
-    "rightsMode": "仅索引官方公开元数据，链接原文，不转载文件正文"
+    "rightsMode": "仅索引官方公开元数据，链接原文，不转载文件正文",
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "classificationBasis": "延用原审查范围，按公告文种与明确体育主题判定"
   },
   {
     "id": "shanghai-notices",
@@ -63,6 +79,196 @@
     "enabled": true,
     "expectedSiteId": "3100000065",
     "articlePathPattern": "^https://tyj.sh.gov.cn/[a-z0-9]+/\\d{8}/[a-z0-9]+\\.html$",
-    "rightsMode": "仅索引官方公开元数据，排除个人名单与行政许可明细"
+    "rightsMode": "仅索引官方公开元数据，排除个人名单与行政许可明细",
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "classificationBasis": "延用原审查范围，按公告文种与明确体育主题判定"
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "maxAgeDays": 45,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "1100000015",
+    "region": "北京",
+    "publisherPattern": "^北京市体育局[一-鿿]*$|^北京市(社会体育管理中心|体育竞赛管理和国际交流中心)$|^北京市?[一-鿿]{1,8}区体育局$",
+    "rightsEvidence": "https://tyj.beijing.gov.cn/bjsports/wzsm/index.html",
+    "classificationBasis": "政府原发体育赛事、政策或科研通知",
+    "id": "beijing-sports",
+    "name": "北京市体育局·工作动态",
+    "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/index.html",
+    "defaultCategory": "headlines",
+    "articlePathPattern": "/bjsports/gzdt84/zwdt/\\d+/index\\.html$",
+    "pagination": {
+      "maxPages": 3,
+      "nextSelector": "a[title=\"下一页\"][tagname]",
+      "attribute": "tagname",
+      "pathPattern": "^/bjsports/gzdt84/zwdt/8a9ad286-\\d+\\.html$"
+    }
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "maxAgeDays": 45,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "1100000015",
+    "region": "北京",
+    "publisherPattern": "^北京市体育局[一-鿿]*$|^北京市(社会体育管理中心|体育竞赛管理和国际交流中心)$|^北京市?[一-鿿]{1,8}区体育局$",
+    "rightsEvidence": "https://tyj.beijing.gov.cn/bjsports/wzsm/index.html",
+    "classificationBasis": "政府原发体育赛事、政策或科研通知",
+    "id": "beijing-notices",
+    "name": "北京市体育局·通知公告",
+    "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/index.html",
+    "defaultCategory": "headlines",
+    "articlePathPattern": "/bjsports/zfxxgk_/tzgg40/\\d+/index\\.html$",
+    "pagination": {
+      "maxPages": 3,
+      "nextSelector": "a[title=\"下一页\"][tagname]",
+      "attribute": "tagname",
+      "pathPattern": "^/bjsports/zfxxgk_/tzgg40/5bdf6043-\\d+\\.html$"
+    }
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 18,
+    "maxAgeDays": 100,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "3500000055",
+    "region": "福建",
+    "publisherPattern": "^福建省体育局$|^福建省体育科学研究所$",
+    "upgradeAdvertisedHttp": true,
+    "articlePathPattern": "/zwgk/zfxxgkzl/gkml/[a-z]+/\\d{6}/t\\d{8}_\\d+\\.htm$",
+    "classificationBasis": "省级体育主管部门原发通知与案例",
+    "id": "fujian-sports",
+    "name": "福建省体育局·工作动态",
+    "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/",
+    "defaultCategory": "headlines"
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "maxAgeDays": 45,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "3500000055",
+    "region": "福建",
+    "publisherPattern": "^福建省体育局$|^福建省体育科学研究所$",
+    "upgradeAdvertisedHttp": true,
+    "articlePathPattern": "/zwgk/zfxxgkzl/gkml/[a-z]+/\\d{6}/t\\d{8}_\\d+\\.htm$",
+    "classificationBasis": "省级体育主管部门原发通知与案例",
+    "id": "fujian-events",
+    "name": "福建省体育局·竞技体育",
+    "url": "https://tyj.fujian.gov.cn/zwgk/gzdt/jjty/",
+    "defaultCategory": "headlines"
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "maxAgeDays": 45,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "3502000045",
+    "siteIdField": "SiteCode",
+    "region": "厦门",
+    "publisherPattern": "^厦门市体育局$|^厦门体育$",
+    "articlePathPattern": "/(tyxw|tzgg)/\\d{6}/t\\d{8}_\\d+\\.htm$",
+    "classificationBasis": "体育局原发赛事赛果及公告",
+    "id": "xiamen-news",
+    "name": "厦门市体育局·体育新闻",
+    "url": "https://sports.xm.gov.cn/tyxw/",
+    "defaultCategory": "headlines",
+    "pagination": {
+      "maxPages": 2,
+      "additionalPages": [
+        "/tyxw/index_1.htm"
+      ],
+      "pathPattern": "^/tyxw/index_1\\.htm$"
+    },
+    "bodySelector": ".xl-article-nr"
+  },
+  {
+    "enabled": true,
+    "phase": 3,
+    "method": "html",
+    "timezone": "Asia/Shanghai",
+    "maxDetails": 14,
+    "maxAgeDays": 45,
+    "classificationProfile": "strict",
+    "rightsMode": "仅索引原公开主体的标题、日期与链接，保留署名，全文与附件留在原站",
+    "expectedSiteId": "3502000045",
+    "siteIdField": "SiteCode",
+    "region": "厦门",
+    "publisherPattern": "^厦门市体育局$|^厦门体育$",
+    "articlePathPattern": "/(tyxw|tzgg)/\\d{6}/t\\d{8}_\\d+\\.htm$",
+    "classificationBasis": "体育局原发赛事赛果及公告",
+    "id": "xiamen-notices",
+    "name": "厦门市体育局·通知公告",
+    "url": "https://sports.xm.gov.cn/tzgg/",
+    "defaultCategory": "headlines",
+    "pagination": {
+      "maxPages": 2,
+      "additionalPages": [
+        "/tzgg/index_1.htm"
+      ],
+      "pathPattern": "^/tzgg/index_1\\.htm$"
+    },
+    "bodySelector": ".xl-article-nr"
+  },
+  {
+    "id": "crossref-sports-engineering",
+    "name": "Crossref · Sports Engineering",
+    "url": "https://api.crossref.org/journals/1369-7072/works",
+    "method": "crossref",
+    "journal": "Sports Engineering",
+    "issn": "1369-7072",
+    "recordHosts": [
+      "doi.org"
+    ],
+    "defaultCategory": "technology",
+    "classificationBasis": "核验运动工程专刊 ISSN、期刊名和文献类型后列为体育技术书目",
+    "phase": 3,
+    "enabled": true,
+    "maxAgeDays": 35,
+    "maxDetails": 8,
+    "rightsMode": "仅使用原题名、期刊、日期、DOI 等书目事实字段",
+    "rightsEvidence": "https://www.crossref.org/documentation/retrieve-metadata/"
+  },
+  {
+    "id": "crossref-sports-biomechanics",
+    "name": "Crossref · Sports Biomechanics",
+    "url": "https://api.crossref.org/journals/1476-3141/works",
+    "method": "crossref",
+    "journal": "Sports Biomechanics",
+    "issn": "1476-3141",
+    "recordHosts": [
+      "doi.org"
+    ],
+    "defaultCategory": "science",
+    "classificationBasis": "核验运动生物力学专刊 ISSN、期刊名和文献类型后列为运动科学书目",
+    "phase": 3,
+    "enabled": true,
+    "maxAgeDays": 35,
+    "maxDetails": 8,
+    "rightsMode": "仅使用原题名、期刊、日期、DOI 等书目事实字段",
+    "rightsEvidence": "https://www.crossref.org/documentation/retrieve-metadata/"
   }
 ]

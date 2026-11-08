@@ -14,7 +14,7 @@ for(const file of files.filter(f=>f.endsWith('.html'))){
  assert.ok($('title').text().includes(site.name));assert.ok($('head meta[name=description]').attr('content'));
  assert.equal($('meta[name=site-id]').attr('content'),site.siteId);
  assert.equal($('nav[aria-label="主导航"] a').length,7);
- if(site.demo)assert.match($('meta[name=robots]').attr('content'),/noindex/);
+ if(site.noindex||site.demo)assert.match($('meta[name=robots]').attr('content'),/noindex/);
  assert.ok(Buffer.byteLength(html)<100000,'HTML超过性能预算');
  assert.doesNotMatch(html,/\/categories\/(observation|ideas|practice)\//,'发现旧栏目链接');
  for(const el of $('a[href],link[href],script[src]').toArray()){

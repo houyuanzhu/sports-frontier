@@ -1,13 +1,9 @@
 {
-  "allowedHosts": [
-    "www.sport.gov.cn",
-    "tyj.sh.gov.cn"
-  ],
   "rightsMode": "metadata-only",
   "rightsEvidence": "https://www.sport.gov.cn/n323/n10459/c24206655/content.html",
-  "rightsReview": "仅保留公开标题、原公开主体、发布日期与链接，不转载正文、图片或附件；总局按公开答复标注原公开主体，上海仅索引官方政府信息公开元数据。不将元数据可访问性视为全文开放许可。",
+  "rightsReview": "政府入口索引原发事实字段。学术入口仅使用经核验的期刊书目。保留出处与原文链接，正文、摘要、图片及附件留在权利人站点。",
   "trustedPublisherPattern": "体育总局|体育局|科教司|政策法规司|办公厅|办公室|群体司|竞技体育司|青少司|体育科学|体育仲裁委员会|经济司|体育信息中心|上海体育",
-  "maxItemsPerSource": 8,
+  "maxItemsPerSource": 14,
   "maxAgeDays": 180,
   "requestGapMs": 750,
   "maxResponseBytes": 1500000,

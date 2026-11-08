@@ -1,8 +1,12 @@
 import articles from '../data/articles.json';
 import site from '../data/site.json';
+import corrections from '../../sources/corrections.json';
+import {canonicalUrl} from '../../scripts/ingest-core.mjs';
 export {site};
-export const contentTag = post => post.demo ? '演示' : '官方索引';
-export const posts = [...articles].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
+export const contentTag = post => post.demo ? '演示' : post.contentType==='research-index'?'论文书目':'官方索引';
+const changes=new Map(corrections.map(c=>[canonicalUrl(c.url),c]));
+export const allPosts = articles.map(post=>{const correction=post.demo?null:changes.get(canonicalUrl(post.url));return correction?{...post,editorial:correction}:post;}).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
+export const posts = allPosts.filter(post=>post.editorial?.action!=='withdraw');
 export const categoryName = slug => site.categories.find(c=>c.slug===slug)?.name || '未分类';
 export {dateText,monthKey} from './dates.mjs';
 export const url = path => `${import.meta.env.BASE_URL.replace(/\/$/,'')}/${path.replace(/^\//,'')}`;
