@@ -2,6 +2,166 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "c2c9aade8d076350c71c",
+      "slug": "info-c2c9aade8d076350c71c",
+      "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156691/index.html",
+      "titleHash": "eddc021fdfabb9650dad8171284e8f346b650df0f017af3b01ae98c46901ef25",
+      "publishedAt": "2026-11-06T17:13+08:00",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "90e4948d95f905f0d759",
+      "slug": "info-90e4948d95f905f0d759",
+      "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156042/index.html",
+      "titleHash": "6971df4d20abba2ee25f39f02f4dfd93035d40e155b469a2c9471bc00a719273",
+      "publishedAt": "2026-11-06T10:38+08:00",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "9b80dfe61c0090e48e02",
+      "slug": "info-9b80dfe61c0090e48e02",
+      "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156022/index.html",
+      "titleHash": "4c3f3d866661a2f2e82ab2d1b1a2939dc53b2dc7114dd32e6f9055b154d304a5",
+      "publishedAt": "2026-11-06T10:27+08:00",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "b5709d8e801c50a14e8e",
+      "slug": "info-b5709d8e801c50a14e8e",
+      "url": "https://doi.org/10.1080/14763141.2026.2759826",
+      "titleHash": "6731a92251ecc1dadccf23d3f0f43c9b8f8c39984d9cbace3ba900e6da7ad932",
+      "publishedAt": "2026-11-06",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "c82ef5951d189e9872d8",
+      "slug": "info-c82ef5951d189e9872d8",
+      "url": "https://doi.org/10.1080/14763141.2026.2758627",
+      "titleHash": "e1f8b305432b24e9284d813354501e22295b830b83e0be9e6697c223693263de",
+      "publishedAt": "2026-11-06",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "8e7a60afbbb7c41a4980",
+      "slug": "info-8e7a60afbbb7c41a4980",
+      "url": "https://doi.org/10.1080/14763141.2026.2691293",
+      "titleHash": "1cbbf061384658b931e7e75c6e8e9ae7e392e708a0758c04df36629d45e3e36d",
+      "publishedAt": "2026-11-03",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "5816f3cc2d8ccff87a1c",
+      "slug": "info-5816f3cc2d8ccff87a1c",
+      "url": "https://doi.org/10.1007/s12283-026-00579-y",
+      "titleHash": "74212e84030818feb64984e6ba1083ae1f4473d1abbbd7d29e99d420c48e229a",
+      "publishedAt": "2026-10-30",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "cd8110e485eea453efce",
+      "slug": "info-cd8110e485eea453efce",
+      "url": "https://doi.org/10.1080/14763141.2026.2752415",
+      "titleHash": "742dd85004c7b49ddd520097906635bc374cda33611d30104db448e022960a13",
+      "publishedAt": "2026-10-30",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "1154e76d08207435622f",
+      "slug": "info-1154e76d08207435622f",
+      "url": "https://doi.org/10.1080/14763141.2026.2743113",
+      "titleHash": "ec014c7e47f9b9383f7f9b908f9b89ce91d14257948f43d24476dd630f3a943c",
+      "publishedAt": "2026-10-28",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "97cbb8b0288433a6423a",
+      "slug": "info-97cbb8b0288433a6423a",
+      "url": "https://doi.org/10.1080/14763141.2026.2746454",
+      "titleHash": "783f694f13cc7efcf8ed8610834c9b2214008d23a448b748cbb018654f336aff",
+      "publishedAt": "2026-10-28",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "9ce5a2d365d7f44c2a96",
+      "slug": "info-9ce5a2d365d7f44c2a96",
+      "url": "https://doi.org/10.1080/14763141.2026.2744319",
+      "titleHash": "241a54d79fe489341809ca4f98dc44ceb1ad125f616c1f113ad6e41b1f859949",
+      "publishedAt": "2026-10-28",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "ba7dde577c979d1bedcd",
+      "slug": "info-ba7dde577c979d1bedcd",
+      "url": "https://doi.org/10.1080/14763141.2026.2748349",
+      "titleHash": "6d98eb0636cdeb698144a0aa62c85d853eb419c42cc195d6272d21e30e277afe",
+      "publishedAt": "2026-10-28",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "e923f428a5ddf390e51c",
+      "slug": "info-e923f428a5ddf390e51c",
+      "url": "https://doi.org/10.1007/s12283-026-00577-0",
+      "titleHash": "748b3ff9fd5f50eb6c8cd715417279df73211ec980d71d407c6fc25968c6da26",
+      "publishedAt": "2026-10-28",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "0624ffde157ccea29b11",
+      "slug": "info-0624ffde157ccea29b11",
+      "url": "https://doi.org/10.1007/s12283-026-00573-4",
+      "titleHash": "260c6ebbfc81f1e669c11d50bf38919ddf069a345113e55228837b7021c57af0",
+      "publishedAt": "2026-10-26",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "61bf76a9007ed3ad8028",
+      "slug": "info-61bf76a9007ed3ad8028",
+      "url": "https://doi.org/10.1007/s12283-026-00575-2",
+      "titleHash": "062ae82cbd7334a03897d999ecc262e12828d3089c8aabd5dd15feb6a63e22df",
+      "publishedAt": "2026-10-24",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "753f1ef39b13a2ba74b3",
+      "slug": "info-753f1ef39b13a2ba74b3",
+      "url": "https://doi.org/10.1007/s12283-026-00572-5",
+      "titleHash": "922af01ada0184784bcce4c3c2c45ec51813ff5af264731c96c8a1e1e193e6a5",
+      "publishedAt": "2026-10-24",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "96c03ecfc9c74e7ee3b6",
+      "slug": "info-96c03ecfc9c74e7ee3b6",
+      "url": "https://doi.org/10.1007/s12283-026-00570-7",
+      "titleHash": "08a9105d9a8cd2d6de7e0fdf0320a3fe76c866cbd4cc84f34429190ea916abe5",
+      "publishedAt": "2026-10-24",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "a3941332944a87158d0b",
+      "slug": "info-a3941332944a87158d0b",
+      "url": "https://doi.org/10.1007/s12283-026-00576-1",
+      "titleHash": "5884d930bdb3dd63c56ac7cb0c780bf3820e256c5facaa7f5a9c791b0834c8f3",
+      "publishedAt": "2026-10-24",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "5c2f094a6da1c4518250",
+      "slug": "info-5c2f094a6da1c4518250",
+      "url": "https://doi.org/10.1007/s12283-026-00574-3",
+      "titleHash": "81daf9f5c456fd0cdd097a28877debc2a781d492ee760a2283e2a880a4f16cf1",
+      "publishedAt": "2026-10-20",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
+      "id": "2f5fbcbc7813f837c528",
+      "slug": "info-2f5fbcbc7813f837c528",
+      "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744141603/index.html",
+      "titleHash": "0b7db7e848e965e85e17362cc760ae49fa123215bf5ce8fc0248c6d1eb55f90e",
+      "publishedAt": "2026-10-16T14:25+08:00",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
+    },
+    {
       "id": "e9393bbdb73b85ecbe56",
       "slug": "info-e9393bbdb73b85ecbe56",
       "url": "https://www.sport.gov.cn/n315/n20001395/c30107282/content.html",
@@ -16,6 +176,14 @@
       "titleHash": "d2a4af83b5951ee5199e396631651c9c7fe202496c8c3180d2e9bc03e8b0dd23",
       "publishedAt": "2026-09-16",
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
+    },
+    {
+      "id": "91f78529e21e5b7af137",
+      "slug": "info-91f78529e21e5b7af137",
+      "url": "https://tyj.fujian.gov.cn/zwgk/zfxxgkzl/gkml/gzdt/202608/t20260820_7201937.htm",
+      "titleHash": "0a61db45f5cebcaf6e3b14b34caa7f8468e2fed70bb11ab5d831c0aa2257b89b",
+      "publishedAt": "2026-08-20T17:57+08:00",
+      "firstIndexedAt": "2026-11-08T06:54:59.696Z"
     },
     {
       "id": "69d199c5f5da0b206b95",
@@ -50,5 +218,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-06T08:50:22.345Z"
+  "lastCheckedAt": "2026-11-08T06:54:59.696Z"
 }
