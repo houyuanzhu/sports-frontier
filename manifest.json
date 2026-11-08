@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-08T06:14:22.942Z",
-  "sourceCommit": "6cfcc3490ed677be0b729b0edb4fbd8b815cb619",
-  "baseDataSha": "3f023f6effb7844036228e5e7ce5940cb98d2826",
-  "mode": "update",
+  "mode": "rollback",
+  "sourceCommit": "4f45e54488b16c6f43c8112a44db00e5a6b563ae",
+  "baseDataSha": "69447588cb7cbe7ef33bbb29a1cba6b46348b342",
+  "rollbackRef": "c4625194822ce86dbac6f3bb982260142e5bb2e4",
+  "createdAt": "2026-11-08T06:16:14.946Z",
   "articleCount": 6
 }

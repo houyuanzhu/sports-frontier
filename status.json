@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-08T06:14:22.942Z",
-  "state": "partial",
+  "state": "rolled_back",
   "newCount": 0,
   "candidateCount": 0,
   "duplicateCount": 6,
@@ -10,7 +10,7 @@
   "latestCandidatePublishedAt": "2026-10-13",
   "storedCount": 6,
   "autoPublish": true,
-  "message": "检查完成，没有通过核验的新增资讯。",
+  "message": "已恢复所选历史数据快照，本次未采集新内容。",
   "sources": [
     {
       "sourceId": "sport-notices",
@@ -132,5 +132,6 @@
       ],
       "acceptedCount": 0
     }
-  ]
+  ],
+  "rolledBackAt": "2026-11-08T06:16:14.946Z"
 }
