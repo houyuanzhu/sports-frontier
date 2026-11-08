@@ -1,5 +1,5 @@
 import {sourceIssue,sourceHistory,collectionQuality,auditQueue} from './source-quality.mjs';
-import {readFile},writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createClient} from './source-client.mjs';
 import {collectSource} from './adapters/sport-html.mjs';
 import {collectResearch} from './adapters/crossref.mjs';
