@@ -78,3 +78,25 @@ test('首页正式发布与今日收录分开，历史简报同时标明三种�
  await expect(row.locator('time').last()).toContainText('网站首次收录');
  expect(await row.locator('time').first().getAttribute('datetime')).not.toBe(await row.locator('time').last().getAttribute('datetime'));
 });
+test('最新归档保留空刊，最近一期跳转到首个有收录的归档',async({page})=>{
+ await page.goto(base+'/daily/');
+ const issues=page.locator('.brief-edition');
+ const latestArchive=issues.first();
+ const latestWithPosts=issues.filter({hasText:/\d+ 条收录/}).first();
+ const archiveHref=await latestArchive.getAttribute('href');
+ const contentHref=await latestWithPosts.getAttribute('href');
+ const archiveIsEmpty=(await latestArchive.textContent()).includes('暂无新增');
+
+ await page.goto(base+'/');
+ const archiveLink=page.getByRole('link',{name:/最新归档日/});
+ const contentLink=page.getByRole('link',{name:'阅读最近一期'});
+ await expect(archiveLink).toHaveAttribute('href',archiveHref);
+ await expect(contentLink).toHaveAttribute('href',contentHref);
+ if(archiveIsEmpty){
+  expect(archiveHref).not.toBe(contentHref);
+  await expect(archiveLink).toContainText('暂无新增');
+  await archiveLink.click();
+  await expect(page.locator('.empty-state')).toContainText('暂无新增');
+  await expect(page.locator('.edition-item')).toHaveCount(0);
+ }
+});

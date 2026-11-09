@@ -12,7 +12,8 @@ const today=calendarDay(new Date());
 const important=posts.filter(post=>post.signoff&&recentImportant(post,today));
 const lead=important[0];
 const editions=buildEditions(posts,status);
-const latestEdition=editions[0];
+const latestArchive=editions[0];
+const latestContentEdition=editions.find(edition=>edition.count>0);
 const latestOriginal=posts[0];
 const age=post=>(Date.parse(today)-Date.parse(calendarDay(post.publishedAt)))/86400000;
 const routine=post=>/竞赛规程|比赛规程|报名通知|赛事补助/.test(post.title);
@@ -26,10 +27,11 @@ const tech=posts.find(post=>post.category==='technology'&&post.factNote&&!latest
 ---
 <Layout>
  <section class="intro sports-intro"><div><p class="eyebrow"><span class="kicker-rule"></span>体育专业情报平台 · 来源可核验</p><h1>以体育为中心，<br/>读懂<span>下一程。</span></h1></div><div class="intro-note"><p>{site.tagline}</p><span>从政策到科技，从研究到产业。<br/>在变化之中，寻找清晰的专业坐标。</span></div></section>
- <TodayIntake editions={editions}/>
+ <TodayIntake editions={editions} latestContentEdition={latestContentEdition}/>
  <div class="meta" aria-label="情报时间口径">
   <span>最近原始信息发布日期 {dateText(latestOriginal?.publishedAt,latestOriginal?.datePrecision!=='day')}</span>
-  <span>最近一期网站首次收录日 {dateText(latestEdition?.date)}</span>
+  {latestArchive&&<a href={url(`daily/${latestArchive.date}/`)}>最新归档日 {dateText(latestArchive.date)}{latestArchive.count===0?'（暂无新增）':''}</a>}
+  <span>最近一期网站首次收录日 {dateText(latestContentEdition?.date)}</span>
   <span>最近采集检查时间 {dateText(status.checkedAt,true)}（北京时间）</span>
  </div>
  <div class="section-line"><h2>重要体育资讯 <span>近 30 日 · 编辑签发</span></h2><a href={url('search/?type=important')}>重要资讯归档 ↗</a></div>
