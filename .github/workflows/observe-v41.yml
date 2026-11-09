@@ -1,0 +1,52 @@
+name: V4.1 七天定时运行观察
+on:
+  schedule:
+    - cron: '23 12 10-17 11 *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: v41-schedule-observation
+  cancel-in-progress: false
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - id: window
+        name: 检查北京观察窗口
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          today=$(TZ=Asia/Shanghai date +%F)
+          if [[ "$EVENT" == schedule && ( "$today" < 2026-11-10 || "$today" > 2026-11-24 ) ]]; then
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+            echo '已离开 2026 年本轮观察与迟到宽限窗口。' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.window.outputs.enabled == 'true'
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        if: steps.window.outputs.enabled == 'true'
+        with:
+          node-version: '22'
+      - name: 核验统计规则
+        if: steps.window.outputs.enabled == 'true'
+        run: node --test tests/cloud-observer.test.mjs
+      - name: 只读复查全部时段并合并历史证据
+        if: steps.window.outputs.enabled == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/observe-schedules-cloud.mjs
+      - name: 保存只读观测台账
+        if: steps.window.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: v41-schedule-observation
+          path: reports/cloud-schedule-observation/
+          if-no-files-found: error
+          retention-days: 60
