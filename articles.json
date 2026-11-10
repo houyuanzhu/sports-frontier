@@ -1,5 +1,99 @@
 [
   {
+    "slug": "info-12d444166214f27fabbd",
+    "id": "12d444166214f27fabbd",
+    "title": "2026年11月上海市国际国内体育赛事计划",
+    "summary": "来源：上海体育。本站仅整理公开标题与事实字段，完整内容请阅读官方原文。",
+    "category": "headlines",
+    "publishedAt": "2026-11-10",
+    "datePrecision": "day",
+    "publicationTimezone": "Asia/Shanghai",
+    "rawPublishedAt": "2026-11-10",
+    "source": "上海体育",
+    "sourceId": "shanghai-notices",
+    "sourceChannel": "上海市体育局·公告通知",
+    "url": "https://tyj.sh.gov.cn/ggtz/20261110/c400f034605f44499c2312fc408f9883.html",
+    "collectedAt": "2026-11-10T07:10:00.120Z",
+    "firstIndexedAt": "2026-11-10T07:10:00.120Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "track",
+    "classificationRule": "已核验体育栏目默认分类",
+    "contentType": "official-index",
+    "contentHash": "2f53eded618875a3976f294a625138754e8fb6d2985a16ce6b808d62acef10af",
+    "rightsMode": "metadata-only",
+    "opportunity": null,
+    "body": [
+      {
+        "heading": "官方信息索引",
+        "text": "本条仅记录官方公开标题、来源、日期和原文入口，不转载正文、图片或附件，也不生成政策解读、科研结论或趋势预测。"
+      }
+    ],
+    "region": null
+  },
+  {
+    "slug": "info-fc8140e7c4e931b18141",
+    "id": "fc8140e7c4e931b18141",
+    "title": "Does adding weighted tape effect tennis racket vibration and shock?",
+    "summary": "Sports Engineering 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "technology",
+    "publishedAt": "2026-11-10",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-10",
+    "source": "Sports Engineering",
+    "sourceId": "crossref-sports-engineering",
+    "sourceChannel": "Crossref · Sports Engineering",
+    "url": "https://doi.org/10.1007/s12283-026-00580-5",
+    "doi": "10.1007/s12283-026-00580-5",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-10T07:10:00.120Z",
+    "firstIndexedAt": "2026-11-10T07:10:00.120Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "orbit",
+    "classificationRule": "核验运动工程专刊 ISSN、期刊名和文献类型后列为体育技术书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
+    "slug": "info-1477b0d4bc41d7c6575e",
+    "id": "1477b0d4bc41d7c6575e",
+    "title": "The importance of the kinetic-chain base in the forehand stroke of (sub)elite wheelchair and able-bodied tennis players",
+    "summary": "Sports Biomechanics 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "science",
+    "publishedAt": "2026-11-09",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-09",
+    "source": "Sports Biomechanics",
+    "sourceId": "crossref-sports-biomechanics",
+    "sourceChannel": "Crossref · Sports Biomechanics",
+    "url": "https://doi.org/10.1080/14763141.2026.2695333",
+    "doi": "10.1080/14763141.2026.2695333",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-10T07:10:00.120Z",
+    "firstIndexedAt": "2026-11-10T07:10:00.120Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "lines",
+    "classificationRule": "核验运动生物力学专刊 ISSN、期刊名和文献类型后列为运动科学书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
     "slug": "info-c2c9aade8d076350c71c",
     "id": "c2c9aade8d076350c71c",
     "title": "2026年北京TOP游泳国际公开赛竞赛规程",

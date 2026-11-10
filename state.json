@@ -2,6 +2,30 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "12d444166214f27fabbd",
+      "slug": "info-12d444166214f27fabbd",
+      "url": "https://tyj.sh.gov.cn/ggtz/20261110/c400f034605f44499c2312fc408f9883.html",
+      "titleHash": "bc6921665ce3d06d6e142699bc359662b4b206df3f926a1b31a822b13ff1c0bd",
+      "publishedAt": "2026-11-10",
+      "firstIndexedAt": "2026-11-10T07:10:00.120Z"
+    },
+    {
+      "id": "fc8140e7c4e931b18141",
+      "slug": "info-fc8140e7c4e931b18141",
+      "url": "https://doi.org/10.1007/s12283-026-00580-5",
+      "titleHash": "c1a81f438adc0b0afb6725c01bf358fc532fb37f97c27a1916c8f3dc469480ab",
+      "publishedAt": "2026-11-10",
+      "firstIndexedAt": "2026-11-10T07:10:00.120Z"
+    },
+    {
+      "id": "1477b0d4bc41d7c6575e",
+      "slug": "info-1477b0d4bc41d7c6575e",
+      "url": "https://doi.org/10.1080/14763141.2026.2695333",
+      "titleHash": "d8078d10069c8c1c8acbbda3cb826a949ab140ec8aff978cfe7042393ebc93fd",
+      "publishedAt": "2026-11-09",
+      "firstIndexedAt": "2026-11-10T07:10:00.120Z"
+    },
+    {
       "id": "c2c9aade8d076350c71c",
       "slug": "info-c2c9aade8d076350c71c",
       "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/tzgg40/744156691/index.html",
@@ -218,5 +242,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-09T12:05:58.296Z"
+  "lastCheckedAt": "2026-11-10T07:10:00.120Z"
 }
