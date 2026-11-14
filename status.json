@@ -1,39 +1,30 @@
 {
-  "checkedAt": "2026-11-14T06:11:23.968Z",
-  "finishedAt": "2026-11-14T06:12:57.322Z",
-  "collectionMode": "normal",
+  "checkedAt": "2026-11-14T10:53:54.833Z",
+  "finishedAt": "2026-11-14T10:53:55.376Z",
+  "collectionMode": "recovery",
   "recoveryAttempts": {
-    "xiamen-news": "2026-11-13",
-    "xiamen-notices": "2026-11-13"
+    "xiamen-news": "2026-11-14",
+    "xiamen-notices": "2026-11-14"
   },
   "scannedSourceIds": [
-    "sport-notices",
-    "shanghai-policy",
-    "shanghai-notices",
-    "beijing-sports",
-    "beijing-notices",
-    "fujian-sports",
-    "fujian-events",
     "xiamen-news",
-    "xiamen-notices",
-    "crossref-sports-engineering",
-    "crossref-sports-biomechanics"
+    "xiamen-notices"
   ],
-  "runId": "43565071443",
-  "schedule": "10 0 * * *",
+  "runId": "43587405602",
+  "schedule": "37 3 * * *",
   "state": "partial",
-  "newCount": 1,
-  "candidateCount": 1,
-  "duplicateCount": 26,
+  "newCount": 0,
+  "candidateCount": 0,
+  "duplicateCount": 0,
   "heldCount": 0,
   "reviewCount": 0,
-  "attempts": 114,
-  "retries": 2,
+  "attempts": 1,
+  "retries": 0,
   "lastContentPublishedAt": "2026-11-13",
-  "latestCandidatePublishedAt": "2026-11-13",
+  "latestCandidatePublishedAt": null,
   "storedCount": 31,
   "autoPublish": true,
-  "message": "本次核验新增 1 条公开信息索引。",
+  "message": "检查完成，没有通过核验的新增资讯。",
   "sources": [
     {
       "sourceId": "sport-notices",
@@ -1130,7 +1121,7 @@
       "name": "厦门市体育局·体育新闻",
       "url": "https://sports.xm.gov.cn/tyxw/",
       "status": "failed",
-      "checkedAt": "2026-11-14T06:11:23.968Z",
+      "checkedAt": "2026-11-14T10:53:54.833Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1141,14 +1132,14 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-14T06:12:57.322Z"
+      "lastAttemptAt": "2026-11-14T10:53:55.376Z"
     },
     {
       "sourceId": "xiamen-notices",
       "name": "厦门市体育局·通知公告",
       "url": "https://sports.xm.gov.cn/tzgg/",
       "status": "failed",
-      "checkedAt": "2026-11-14T06:11:23.968Z",
+      "checkedAt": "2026-11-14T10:53:54.833Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1159,7 +1150,7 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-14T06:12:57.322Z"
+      "lastAttemptAt": "2026-11-14T10:53:55.376Z"
     },
     {
       "sourceId": "crossref-sports-engineering",
@@ -1894,14 +1885,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-14T10:53:55.376Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 17,
+      "attempts": 18,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 511476991,
+      "failureMs": 528335045,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -2008,14 +2005,20 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-14T10:53:55.376Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
-      "attempts": 17,
+      "attempts": 18,
       "successes": 0,
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 511476991,
+      "failureMs": 528335045,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -2190,14 +2193,14 @@
   },
   "quality": {
     "duplicateCandidates": {
-      "numerator": 26,
-      "denominator": 27
+      "numerator": 0,
+      "denominator": 0
     },
     "candidateExclusion": {
-      "numerator": 81,
-      "denominator": 108
+      "numerator": 0,
+      "denominator": 0
     },
-    "exclusions": 81,
+    "exclusions": 0,
     "publishedRecordErrors": {
       "numerator": 0,
       "denominator": 27
@@ -2245,10 +2248,10 @@
       "runId": "43417646751"
     },
     "2026-11-14": {
-      "checkedAt": "2026-11-14T06:11:23.968Z",
+      "checkedAt": "2026-11-14T10:53:54.833Z",
       "state": "partial",
-      "newCount": 1,
-      "runId": "43565071443"
+      "newCount": 0,
+      "runId": "43587405602"
     }
   },
   "auditQueue": [
