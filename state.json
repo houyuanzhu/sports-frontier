@@ -2,6 +2,14 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "3abc924d1aa5ec51bfc9",
+      "slug": "info-3abc924d1aa5ec51bfc9",
+      "url": "https://doi.org/10.1080/14763141.2026.2762024",
+      "titleHash": "a941eb64b4054429340ff50f47fbc2f4100c7f1455321d7920b79a5ee1302419",
+      "publishedAt": "2026-11-13",
+      "firstIndexedAt": "2026-11-14T06:11:23.968Z"
+    },
+    {
       "id": "12d444166214f27fabbd",
       "slug": "info-12d444166214f27fabbd",
       "url": "https://tyj.sh.gov.cn/ggtz/20261110/c400f034605f44499c2312fc408f9883.html",
@@ -242,5 +250,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-13T11:31:06.864Z"
+  "lastCheckedAt": "2026-11-14T06:11:23.968Z"
 }

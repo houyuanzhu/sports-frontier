@@ -1,5 +1,36 @@
 [
   {
+    "slug": "info-3abc924d1aa5ec51bfc9",
+    "id": "3abc924d1aa5ec51bfc9",
+    "title": "Differences in segmental trunk motion during back extension and rotation in gymnasts with a history of low back pain",
+    "summary": "Sports Biomechanics 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "science",
+    "publishedAt": "2026-11-13",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-13",
+    "source": "Sports Biomechanics",
+    "sourceId": "crossref-sports-biomechanics",
+    "sourceChannel": "Crossref · Sports Biomechanics",
+    "url": "https://doi.org/10.1080/14763141.2026.2762024",
+    "doi": "10.1080/14763141.2026.2762024",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-14T06:11:23.968Z",
+    "firstIndexedAt": "2026-11-14T06:11:23.968Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "lines",
+    "classificationRule": "核验运动生物力学专刊 ISSN、期刊名和文献类型后列为运动科学书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
     "slug": "info-12d444166214f27fabbd",
     "id": "12d444166214f27fabbd",
     "title": "2026年11月上海市国际国内体育赛事计划",
