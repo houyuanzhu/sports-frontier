@@ -1,5 +1,37 @@
 [
   {
+    "slug": "info-6a591433269521328a94",
+    "id": "6a591433269521328a94",
+    "title": "双奥健儿捷报传 首都全民健身绽风采——北京代表队征战第二届全国全民健身大赛总决赛斩获多项桂冠",
+    "summary": "来源：北京市社会体育管理中心。本站仅整理公开标题与事实字段，完整内容请阅读官方原文。",
+    "category": "headlines",
+    "publishedAt": "2026-11-16T11:13+08:00",
+    "datePrecision": "minute",
+    "publicationTimezone": "Asia/Shanghai",
+    "rawPublishedAt": "2026-11-16 11:13",
+    "source": "北京市社会体育管理中心",
+    "sourceId": "beijing-sports",
+    "sourceChannel": "北京市体育局·工作动态",
+    "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744161552/index.html",
+    "collectedAt": "2026-11-16T06:18:23.040Z",
+    "firstIndexedAt": "2026-11-16T06:18:23.040Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "track",
+    "classificationRule": "官方体育赛事、赛果或竞赛通知",
+    "contentType": "official-index",
+    "contentHash": "1820391e2e77a54cd45c5e3b28663b924073b99e630d6144d19ae85c7dc989d3",
+    "rightsMode": "metadata-only",
+    "opportunity": null,
+    "body": [
+      {
+        "heading": "官方信息索引",
+        "text": "本条仅记录官方公开标题、来源、日期和原文入口，不转载正文、图片或附件，也不生成政策解读、科研结论或趋势预测。"
+      }
+    ],
+    "region": "北京"
+  },
+  {
     "slug": "info-3abc924d1aa5ec51bfc9",
     "id": "3abc924d1aa5ec51bfc9",
     "title": "Differences in segmental trunk motion during back extension and rotation in gymnasts with a history of low back pain",
