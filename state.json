@@ -2,6 +2,14 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "aadf950d4598b1f6047f",
+      "slug": "info-aadf950d4598b1f6047f",
+      "url": "https://doi.org/10.1007/s12283-026-00581-4",
+      "titleHash": "cf78bdf74f07ce29806968176ab52c500bd0c289f50faed437aed835d34febe0",
+      "publishedAt": "2026-11-18",
+      "firstIndexedAt": "2026-11-19T07:16:42.989Z"
+    },
+    {
       "id": "6a591433269521328a94",
       "slug": "info-6a591433269521328a94",
       "url": "https://tyj.beijing.gov.cn/bjsports/gzdt84/zwdt/744161552/index.html",
@@ -258,5 +266,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-18T12:13:23.762Z"
+  "lastCheckedAt": "2026-11-19T07:16:42.989Z"
 }

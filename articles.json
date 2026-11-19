@@ -1,5 +1,36 @@
 [
   {
+    "slug": "info-aadf950d4598b1f6047f",
+    "id": "aadf950d4598b1f6047f",
+    "title": "Camera-based race bicycle dimensions verification",
+    "summary": "Sports Engineering 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "technology",
+    "publishedAt": "2026-11-18",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-18",
+    "source": "Sports Engineering",
+    "sourceId": "crossref-sports-engineering",
+    "sourceChannel": "Crossref · Sports Engineering",
+    "url": "https://doi.org/10.1007/s12283-026-00581-4",
+    "doi": "10.1007/s12283-026-00581-4",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-19T07:16:42.989Z",
+    "firstIndexedAt": "2026-11-19T07:16:42.989Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "orbit",
+    "classificationRule": "核验运动工程专刊 ISSN、期刊名和文献类型后列为体育技术书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
     "slug": "info-6a591433269521328a94",
     "id": "6a591433269521328a94",
     "title": "双奥健儿捷报传 首都全民健身绽风采——北京代表队征战第二届全国全民健身大赛总决赛斩获多项桂冠",
