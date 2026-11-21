@@ -2,6 +2,22 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "2d4446289aa39f3a217f",
+      "slug": "info-2d4446289aa39f3a217f",
+      "url": "https://doi.org/10.1080/14763141.2026.2762026",
+      "titleHash": "f7af5bb97f473b7d5cb4447d93606951b94191948793c84803179eeddcf1faa9",
+      "publishedAt": "2026-11-20",
+      "firstIndexedAt": "2026-11-21T06:58:31.991Z"
+    },
+    {
+      "id": "fa76365e2f66305d7ae7",
+      "slug": "info-fa76365e2f66305d7ae7",
+      "url": "https://doi.org/10.1080/14763141.2026.2763622",
+      "titleHash": "272dba3f43aab52514015d5a928a7a2ecb2a0e01e6d25c176319cd04687d21e2",
+      "publishedAt": "2026-11-20",
+      "firstIndexedAt": "2026-11-21T06:58:31.991Z"
+    },
+    {
       "id": "aadf950d4598b1f6047f",
       "slug": "info-aadf950d4598b1f6047f",
       "url": "https://doi.org/10.1007/s12283-026-00581-4",
@@ -266,5 +282,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-20T12:09:20.388Z"
+  "lastCheckedAt": "2026-11-21T06:58:31.991Z"
 }

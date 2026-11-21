@@ -1,5 +1,67 @@
 [
   {
+    "slug": "info-2d4446289aa39f3a217f",
+    "id": "2d4446289aa39f3a217f",
+    "title": "Coach-observable lower extremity kinematic factors associated with pitch velocity in collegiate fastpitch softball",
+    "summary": "Sports Biomechanics 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "science",
+    "publishedAt": "2026-11-20",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-20",
+    "source": "Sports Biomechanics",
+    "sourceId": "crossref-sports-biomechanics",
+    "sourceChannel": "Crossref · Sports Biomechanics",
+    "url": "https://doi.org/10.1080/14763141.2026.2762026",
+    "doi": "10.1080/14763141.2026.2762026",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-21T06:58:31.991Z",
+    "firstIndexedAt": "2026-11-21T06:58:31.991Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "lines",
+    "classificationRule": "核验运动生物力学专刊 ISSN、期刊名和文献类型后列为运动科学书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
+    "slug": "info-fa76365e2f66305d7ae7",
+    "id": "fa76365e2f66305d7ae7",
+    "title": "History-dependent force production during functional multi-digit finger flexion: evidence from a climbing-relevant half-crimp task",
+    "summary": "Sports Biomechanics 论文书目。出版日期和 DOI 来自 Crossref。",
+    "category": "science",
+    "publishedAt": "2026-11-20",
+    "datePrecision": "day",
+    "publicationTimezone": null,
+    "rawPublishedAt": "2026-11-20",
+    "source": "Sports Biomechanics",
+    "sourceId": "crossref-sports-biomechanics",
+    "sourceChannel": "Crossref · Sports Biomechanics",
+    "url": "https://doi.org/10.1080/14763141.2026.2763622",
+    "doi": "10.1080/14763141.2026.2763622",
+    "dateField": "published-online",
+    "collectedAt": "2026-11-21T06:58:31.991Z",
+    "firstIndexedAt": "2026-11-21T06:58:31.991Z",
+    "demo": false,
+    "minutes": 1,
+    "art": "lines",
+    "classificationRule": "核验运动生物力学专刊 ISSN、期刊名和文献类型后列为运动科学书目",
+    "contentType": "research-index",
+    "rightsMode": "bibliographic-only",
+    "body": [
+      {
+        "heading": "书目说明",
+        "text": "本条提供原始英文题名、期刊、出版日期与 DOI。研究设计、证据强度和实际适用性需查阅论文并独立判断。"
+      }
+    ]
+  },
+  {
     "slug": "info-aadf950d4598b1f6047f",
     "id": "aadf950d4598b1f6047f",
     "title": "Camera-based race bicycle dimensions verification",
