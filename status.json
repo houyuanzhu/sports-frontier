@@ -1,41 +1,32 @@
 {
-  "checkedAt": "2026-11-24T09:47:04.360Z",
-  "finishedAt": "2026-11-24T09:48:39.906Z",
-  "collectionMode": "normal",
+  "checkedAt": "2026-11-24T14:14:44.906Z",
+  "finishedAt": "2026-11-24T14:14:45.888Z",
+  "collectionMode": "recovery",
   "recoveryAttempts": {
-    "xiamen-news": "2026-11-23",
-    "xiamen-notices": "2026-11-23",
+    "xiamen-news": "2026-11-24",
+    "xiamen-notices": "2026-11-24",
     "beijing-sports": "2026-11-21",
     "beijing-notices": "2026-11-21"
   },
   "scannedSourceIds": [
-    "sport-notices",
-    "shanghai-policy",
-    "shanghai-notices",
-    "beijing-sports",
-    "beijing-notices",
-    "fujian-sports",
-    "fujian-events",
     "xiamen-news",
-    "xiamen-notices",
-    "crossref-sports-engineering",
-    "crossref-sports-biomechanics"
+    "xiamen-notices"
   ],
-  "runId": "45368402673",
-  "schedule": "10 0 * * *",
+  "runId": "45411851939",
+  "schedule": "37 3 * * *",
   "state": "partial",
-  "newCount": 1,
-  "candidateCount": 1,
-  "duplicateCount": 23,
+  "newCount": 0,
+  "candidateCount": 0,
+  "duplicateCount": 0,
   "heldCount": 0,
-  "reviewCount": 1,
-  "attempts": 115,
-  "retries": 3,
+  "reviewCount": 0,
+  "attempts": 1,
+  "retries": 0,
   "lastContentPublishedAt": "2026-11-23",
-  "latestCandidatePublishedAt": "2026-11-23",
+  "latestCandidatePublishedAt": null,
   "storedCount": 36,
   "autoPublish": true,
-  "message": "本次核验新增 1 条公开信息索引。",
+  "message": "检查完成，没有通过核验的新增资讯。",
   "sources": [
     {
       "sourceId": "sport-notices",
@@ -1165,7 +1156,7 @@
       "name": "厦门市体育局·体育新闻",
       "url": "https://sports.xm.gov.cn/tyxw/",
       "status": "failed",
-      "checkedAt": "2026-11-24T09:47:04.360Z",
+      "checkedAt": "2026-11-24T14:14:44.906Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1176,14 +1167,14 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-24T09:48:39.906Z"
+      "lastAttemptAt": "2026-11-24T14:14:45.888Z"
     },
     {
       "sourceId": "xiamen-notices",
       "name": "厦门市体育局·通知公告",
       "url": "https://sports.xm.gov.cn/tzgg/",
       "status": "failed",
-      "checkedAt": "2026-11-24T09:47:04.360Z",
+      "checkedAt": "2026-11-24T14:14:44.906Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1194,7 +1185,7 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-24T09:48:39.906Z"
+      "lastAttemptAt": "2026-11-24T14:14:45.888Z"
     },
     {
       "sourceId": "crossref-sports-engineering",
@@ -2273,12 +2264,6 @@
     "xiamen-news": {
       "recent": [
         {
-          "at": "2026-11-09T06:41:26.108Z",
-          "state": "failed",
-          "accepted": 0,
-          "new": 0
-        },
-        {
           "at": "2026-11-09T12:05:59.304Z",
           "state": "failed",
           "accepted": 0,
@@ -2451,6 +2436,12 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-24T14:14:45.888Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
       "attempts": 30,
@@ -2458,19 +2449,13 @@
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 1388419575,
+      "failureMs": 1404385557,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
     "xiamen-notices": {
       "recent": [
         {
-          "at": "2026-11-09T06:41:26.108Z",
-          "state": "failed",
-          "accepted": 0,
-          "new": 0
-        },
-        {
           "at": "2026-11-09T12:05:59.304Z",
           "state": "failed",
           "accepted": 0,
@@ -2643,6 +2628,12 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-24T14:14:45.888Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
       "attempts": 30,
@@ -2650,7 +2641,7 @@
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 1388419575,
+      "failureMs": 1404385557,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -2945,14 +2936,14 @@
   },
   "quality": {
     "duplicateCandidates": {
-      "numerator": 23,
-      "denominator": 24
+      "numerator": 0,
+      "denominator": 0
     },
     "candidateExclusion": {
-      "numerator": 84,
-      "denominator": 108
+      "numerator": 0,
+      "denominator": 0
     },
-    "exclusions": 84,
+    "exclusions": 0,
     "publishedRecordErrors": {
       "numerator": 0,
       "denominator": 27
@@ -3060,10 +3051,10 @@
       "runId": "45185817872"
     },
     "2026-11-24": {
-      "checkedAt": "2026-11-24T09:47:04.360Z",
+      "checkedAt": "2026-11-24T14:14:44.906Z",
       "state": "partial",
-      "newCount": 1,
-      "runId": "45368402673"
+      "newCount": 0,
+      "runId": "45411851939"
     }
   },
   "auditQueue": [
