@@ -2,6 +2,14 @@
   "schemaVersion": 1,
   "records": [
     {
+      "id": "26eb44bf624b13b95043",
+      "slug": "info-26eb44bf624b13b95043",
+      "url": "https://doi.org/10.1080/14763141.2026.2763620",
+      "titleHash": "cec22923344aa2d9467a84c54f0f3e4c8324a07e10644b8af65dac6409eb2158",
+      "publishedAt": "2026-11-23",
+      "firstIndexedAt": "2026-11-24T09:47:04.360Z"
+    },
+    {
       "id": "2d4446289aa39f3a217f",
       "slug": "info-2d4446289aa39f3a217f",
       "url": "https://doi.org/10.1080/14763141.2026.2762026",
@@ -282,5 +290,5 @@
       "firstIndexedAt": "2026-11-06T08:50:22.345Z"
     }
   ],
-  "lastCheckedAt": "2026-11-23T13:38:08.815Z"
+  "lastCheckedAt": "2026-11-24T09:47:04.360Z"
 }
