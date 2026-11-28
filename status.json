@@ -1,38 +1,29 @@
 {
-  "checkedAt": "2026-11-28T07:38:47.424Z",
-  "finishedAt": "2026-11-28T07:40:26.400Z",
-  "collectionMode": "normal",
+  "checkedAt": "2026-11-28T12:19:00.444Z",
+  "finishedAt": "2026-11-28T12:19:01.187Z",
+  "collectionMode": "recovery",
   "recoveryAttempts": {
-    "xiamen-news": "2026-11-27",
-    "xiamen-notices": "2026-11-27",
+    "xiamen-news": "2026-11-28",
+    "xiamen-notices": "2026-11-28",
     "beijing-sports": "2026-11-21",
     "beijing-notices": "2026-11-21"
   },
   "scannedSourceIds": [
-    "sport-notices",
-    "shanghai-policy",
-    "shanghai-notices",
-    "beijing-sports",
-    "beijing-notices",
-    "fujian-sports",
-    "fujian-events",
     "xiamen-news",
-    "xiamen-notices",
-    "crossref-sports-engineering",
-    "crossref-sports-biomechanics"
+    "xiamen-notices"
   ],
-  "runId": "46122142211",
-  "schedule": "10 0 * * *",
+  "runId": "46143990281",
+  "schedule": "37 3 * * *",
   "state": "partial",
   "newCount": 0,
   "candidateCount": 0,
-  "duplicateCount": 23,
+  "duplicateCount": 0,
   "heldCount": 0,
   "reviewCount": 0,
-  "attempts": 116,
-  "retries": 4,
+  "attempts": 1,
+  "retries": 0,
   "lastContentPublishedAt": "2026-11-23",
-  "latestCandidatePublishedAt": "2026-11-23",
+  "latestCandidatePublishedAt": null,
   "storedCount": 36,
   "autoPublish": true,
   "message": "检查完成，没有通过核验的新增资讯。",
@@ -1176,7 +1167,7 @@
       "name": "厦门市体育局·体育新闻",
       "url": "https://sports.xm.gov.cn/tyxw/",
       "status": "failed",
-      "checkedAt": "2026-11-28T07:38:47.424Z",
+      "checkedAt": "2026-11-28T12:19:00.444Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1187,14 +1178,14 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-28T07:40:26.400Z"
+      "lastAttemptAt": "2026-11-28T12:19:01.187Z"
     },
     {
       "sourceId": "xiamen-notices",
       "name": "厦门市体育局·通知公告",
       "url": "https://sports.xm.gov.cn/tzgg/",
       "status": "failed",
-      "checkedAt": "2026-11-28T07:38:47.424Z",
+      "checkedAt": "2026-11-28T12:19:00.444Z",
       "skipped": [],
       "error": "fetch failed",
       "issue": {
@@ -1205,7 +1196,7 @@
         "message": "fetch failed"
       },
       "acceptedCount": 0,
-      "lastAttemptAt": "2026-11-28T07:40:26.400Z"
+      "lastAttemptAt": "2026-11-28T12:19:01.187Z"
     },
     {
       "sourceId": "crossref-sports-engineering",
@@ -2452,12 +2443,6 @@
     "xiamen-news": {
       "recent": [
         {
-          "at": "2026-11-13T06:35:17.961Z",
-          "state": "failed",
-          "accepted": 0,
-          "new": 0
-        },
-        {
           "at": "2026-11-13T11:31:08.113Z",
           "state": "failed",
           "accepted": 0,
@@ -2630,6 +2615,12 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-28T12:19:01.187Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
       "attempts": 30,
@@ -2637,19 +2628,13 @@
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 1726326069,
+      "failureMs": 1743040856,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
     "xiamen-notices": {
       "recent": [
         {
-          "at": "2026-11-13T06:35:17.961Z",
-          "state": "failed",
-          "accepted": 0,
-          "new": 0
-        },
-        {
           "at": "2026-11-13T11:31:08.113Z",
           "state": "failed",
           "accepted": 0,
@@ -2822,6 +2807,12 @@
           "state": "failed",
           "accepted": 0,
           "new": 0
+        },
+        {
+          "at": "2026-11-28T12:19:01.187Z",
+          "state": "failed",
+          "accepted": 0,
+          "new": 0
         }
       ],
       "attempts": 30,
@@ -2829,7 +2820,7 @@
       "partial": 0,
       "lastSuccessAt": null,
       "failureSince": "2026-11-08T08:08:20.331Z",
-      "failureMs": 1726326069,
+      "failureMs": 1743040856,
       "publishedCount": 0,
       "consecutiveSuccesses": 0
     },
@@ -3172,14 +3163,14 @@
   },
   "quality": {
     "duplicateCandidates": {
-      "numerator": 23,
-      "denominator": 23
+      "numerator": 0,
+      "denominator": 0
     },
     "candidateExclusion": {
-      "numerator": 85,
-      "denominator": 108
+      "numerator": 0,
+      "denominator": 0
     },
-    "exclusions": 85,
+    "exclusions": 0,
     "publishedRecordErrors": {
       "numerator": 0,
       "denominator": 27
@@ -3311,10 +3302,10 @@
       "runId": "46004075574"
     },
     "2026-11-28": {
-      "checkedAt": "2026-11-28T07:38:47.424Z",
+      "checkedAt": "2026-11-28T12:19:00.444Z",
       "state": "partial",
       "newCount": 0,
-      "runId": "46122142211"
+      "runId": "46143990281"
     }
   },
   "auditQueue": [
